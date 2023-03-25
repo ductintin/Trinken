@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Categories implements Serializable {
-    @SerializedName("category_id")
+    @SerializedName("id")
     private int category_id;
-    @SerializedName("category_name")
+    @SerializedName("name")
     private String category_name;
 
     public Categories() {
