@@ -18,14 +18,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.Toolbar
-                app:title="Trinken"
-                android:id="@+id/toolBarHome"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:collapseIcon="@mipmap/ic_launcher">
 
-            </androidx.appcompat.widget.Toolbar>
+            <include layout="@layout/toolbar"></include>
+
+
 
             <ScrollView
                 android:layout_above="@id/toolBarHome"
@@ -124,6 +120,8 @@
 
             </ScrollView>
         </LinearLayout>
+
+<!--        <include layout="@layout/navigation"></include>-->
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation"

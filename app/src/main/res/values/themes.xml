@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.Trinken" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/black</item>
-        <item name="android:windowBackground">@color/white</item>
-        <item name="colorPrimaryVariant">#CBDCCB</item>
+        <!--<item name="colorPrimary">#AB3D8361</item>-->
+        <item name="android:windowBackground">@color/dark_green</item>
+        <item name="colorPrimaryVariant">@color/dark_green</item>
         <item name="colorOnPrimary">#AB3D8361</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
