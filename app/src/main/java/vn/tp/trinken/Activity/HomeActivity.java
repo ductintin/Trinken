@@ -95,6 +95,9 @@ public class HomeActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
 
                     categories = response.body();
+
+//                    Category category = new Category(1,"Juice","Juice", "@drawable/juice.png");
+//                    categories.add(category);
                     Log.d("API",categories.toString());
                     categoryAdapter = new CategoryAdapter(HomeActivity.this, categories);
                     recyclerView.setHasFixedSize(true);
