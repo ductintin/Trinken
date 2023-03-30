@@ -2,7 +2,9 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/acme</item>
+        <item>@font/anton</item>
         <item>@font/font1</item>
+        <item>@font/muli_bold</item>
         <item>@font/poppins_bold</item>
     </array>
 </resources>

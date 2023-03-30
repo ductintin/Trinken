@@ -35,10 +35,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:text="Log in"
+            android:text="HELLO"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="30sp">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Sign into your account"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp">
 
         </TextView>
 
@@ -58,9 +69,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@drawable/item_login"
+            android:textColorHint="#0F9D58"
             android:hint="Username"
             android:inputType="text"
-            android:padding="10dp">
+            android:padding="15dp"
+            android:ems="15"
+            android:textSize="16sp">
 
         </EditText>
 
@@ -72,16 +86,43 @@
             android:textColor="@color/dark_green"
             android:textStyle="bold"></TextView>
 
-        <EditText
+<!--        <EditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:background="@drawable/item_login"-->
+<!--            android:hint="Password"-->
+<!--            android:inputType="textPassword"-->
+<!--            android:padding="10dp">-->
+
+<!--        </EditText>-->
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/item_login"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:padding="10dp">
+            android:textColorHint="#0F9D58"
+            app:hintTextAppearance="@style/TextAppearance.AppCompat.Large"
+            android:hint="Enter your password..."
 
-        </EditText>
+            app:passwordToggleEnabled="true"
+            app:boxStrokeWidth="0dp">
+
+
+        <!--Using the TextInputEditText,which is
+            same as the edit text,but remember-->
+        <!--that we need to use TextInputEditText
+            with TextInputLayout-->
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:background="@drawable/item_login"
+            android:inputType="textPassword"
+            android:ems="15"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 
         <TextView
             android:layout_width="wrap_content"
