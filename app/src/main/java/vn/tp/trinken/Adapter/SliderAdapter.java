@@ -72,7 +72,14 @@ public class SliderAdapter extends PagerAdapter {
         appName.setText(modal.getTitle());
         title.setText(modal.getHeading());
         subTitle.setText(modal.getSubTitle());
-        Picasso.get().load(modal.getImgUrl()).into(imageView);
+        if(position==0){
+            int resourceId = context.getResources().getIdentifier("courier", "drawable",
+                    context.getPackageName());
+            imageView.setImageResource(resourceId);
+        }else{
+            Picasso.get().load(modal.getImgUrl()).into(imageView);
+        }
+
 
         // below line is to set background
         // drawable to our each item

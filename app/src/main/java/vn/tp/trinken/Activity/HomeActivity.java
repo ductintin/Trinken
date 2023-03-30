@@ -51,8 +51,12 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_Trinken_Home);
 
         setContentView(R.layout.activity_home);
+
+//        Window window = getWindow();
+//        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         AnhXa();
 
         ActionBar();

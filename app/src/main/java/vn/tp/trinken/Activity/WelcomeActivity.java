@@ -4,8 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import vn.tp.trinken.R;
+import vn.tp.trinken.Activity.*;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,13 +31,14 @@ public class WelcomeActivity extends AppCompatActivity {
 
     Button btnSkip;
 
+    private int last_position = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         // initializing all our views.
-        viewPager = findViewById(R.id.idViewPager);
-        dotsLL = findViewById(R.id.idLLDots);
+        AnhXa();
 
         // in below line we are creating a new array list.
         sliderModalArrayList = new ArrayList<>();
@@ -59,6 +65,25 @@ public class WelcomeActivity extends AppCompatActivity {
         // below line is use to call on
         // page change listener method.
         viewPager.addOnPageChangeListener(viewListener);
+        btnSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                last_position = viewPager.getCurrentItem();
+                if(last_position == size - 1){
+                    Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                }else{
+                    viewPager.setCurrentItem(last_position + 1,true);
+                }
+
+            }
+        });
+    }
+
+    private void AnhXa(){
+        viewPager = findViewById(R.id.idViewPager);
+        dotsLL = findViewById(R.id.idLLDots);
+        btnSkip = findViewById(R.id.idBtnSkip);
     }
 
     private void addDots(int size, int pos) {
@@ -102,6 +127,13 @@ public class WelcomeActivity extends AppCompatActivity {
             // we are calling our dots method to
             // change the position of selected dots.
             addDots(size, position);
+
+            //change the content of skip button
+            if(position == size - 1){
+                btnSkip.setText("Let's start!");
+            }else {
+                btnSkip.setText("Next");
+            }
         }
 
         @Override

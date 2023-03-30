@@ -13,5 +13,13 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorOnPrimary</item>
         <!-- Customize your theme here. -->
+
+        <item name="android:windowLightStatusBar">@color/black</item>
     </style>
+
+    <style name="Theme.Trinken.Home" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">#ffffff</item>
+    </style>
+
+
 </resources>
