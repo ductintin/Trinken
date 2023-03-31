@@ -3,6 +3,7 @@ package vn.tp.trinken.Model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Products implements Serializable {
 
@@ -20,6 +21,8 @@ public class Products implements Serializable {
     private String image;
     @SerializedName("quantity")
     private int quantity;
+
+    private List<Assets> assets;
 
     public Products() {
     }

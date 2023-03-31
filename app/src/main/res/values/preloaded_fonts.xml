@@ -3,6 +3,8 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/acme</item>
         <item>@font/anton</item>
+        <item>@font/bangers</item>
+        <item>@font/barlow_semi_condensed_bold</item>
         <item>@font/font1</item>
         <item>@font/muli_bold</item>
         <item>@font/poppins_bold</item>

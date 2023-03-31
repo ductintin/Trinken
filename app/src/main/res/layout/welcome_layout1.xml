@@ -9,7 +9,6 @@
     android:background="@color/orange"
     android:id="@+id/layout">
 
-
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
@@ -104,8 +103,22 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="403dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:orientation="vertical"
+        android:background="@drawable/courier_layout"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout1"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+       >
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="668dp"
+        android:layout_height="412dp"
         android:background="@drawable/welcome_1"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -114,6 +127,8 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
 
     </LinearLayout>
+
+
 
     <ImageView
         android:id="@+id/image"
@@ -124,6 +139,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
-        tools:srcCompat="@drawable/courier"
-        android:background="@drawable/courier_layout"></ImageView>
+        tools:srcCompat="@drawable/shipper"
+        ></ImageView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

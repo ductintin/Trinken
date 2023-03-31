@@ -44,9 +44,9 @@ public class WelcomeActivity extends AppCompatActivity {
         sliderModalArrayList = new ArrayList<>();
 
         // on below 3 lines we are adding data to our array list.
-        sliderModalArrayList.add(new SliderModal("Trinken", "DISCOVERY", "@drawable/courier",  "YOUR FAVORITE DRINK"));
-        sliderModalArrayList.add(new SliderModal("Trinken", "CHOOSE", "https://images.unsplash.com/photo-1610783131813-475d08664ef6?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMnx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",  "HE DRINK YOU LOVE"));
-        sliderModalArrayList.add(new SliderModal("Trinken", "DELIVERY", "https://images.unsplash.com/photo-1610832958506-aa56368176cf?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxN3x8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60","ENJOY THE DRINK"));
+        sliderModalArrayList.add(new SliderModal("Trinken", "DISCOVERY", "delivery",  "YOUR FAVORITE DRINK"));
+        sliderModalArrayList.add(new SliderModal("Trinken", "CHOOSE", "welcome_img2",  "HE DRINK YOU LOVE"));
+        sliderModalArrayList.add(new SliderModal("Trinken", "DELIVERY", "shipper","ENJOY THE DRINK"));
 
         // below line is use to add our array list to adapter class.
         adapter = new SliderAdapter(WelcomeActivity.this, sliderModalArrayList);
@@ -111,7 +111,9 @@ public class WelcomeActivity extends AppCompatActivity {
         if (dots.length > 0) {
             // this line is called when the dots
             // inside linear layout are selected
-            dots[pos].setTextColor(getResources().getColor(R.color.purple_200));
+            dots[pos].setTextColor(getResources().getColor(R.color.orange));
+            dots[pos].setText(Html.fromHtml("_"));
+            dots[pos].setTextSize(50);
         }
     }
 

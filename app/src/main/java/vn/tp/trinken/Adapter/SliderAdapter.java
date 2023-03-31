@@ -72,13 +72,12 @@ public class SliderAdapter extends PagerAdapter {
         appName.setText(modal.getTitle());
         title.setText(modal.getHeading());
         subTitle.setText(modal.getSubTitle());
-        if(position==0){
-            int resourceId = context.getResources().getIdentifier("courier", "drawable",
+        int resourceId = context.getResources().getIdentifier(modal.getImgUrl(), "drawable",
                     context.getPackageName());
-            imageView.setImageResource(resourceId);
-        }else{
-            Picasso.get().load(modal.getImgUrl()).into(imageView);
-        }
+        imageView.setImageResource(resourceId);
+
+        //Picasso.get().load(modal.getImgUrl()).into(imageView);
+
 
 
         // below line is to set background

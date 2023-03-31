@@ -3,6 +3,7 @@ package vn.tp.trinken.Model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Users implements Serializable {
     @SerializedName("user_id")
@@ -24,7 +25,63 @@ public class Users implements Serializable {
     @SerializedName("role_id")
     private int role_id;
 
-    public Users(int user_id, String user_name, String password, String first_name, String last_name, String email, String phone_number, String address, int role_id) {
+    private String image;
+    private Boolean active;
+    private Date createdAt;
+    private Date updatedAt;
+    private Date last_login;
+
+    private String gender;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Date getLast_login() {
+        return last_login;
+    }
+
+    public void setLast_login(Date last_login) {
+        this.last_login = last_login;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Users(int user_id, String user_name, String password, String first_name, String last_name, String email, String phone_number, String address, int role_id, String image, Boolean active, Date createdAt, Date updatedAt, Date last_login, String gender) {
         this.user_id = user_id;
         this.user_name = user_name;
         this.password = password;
@@ -34,9 +91,19 @@ public class Users implements Serializable {
         this.phone_number = phone_number;
         this.address = address;
         this.role_id = role_id;
+        this.image = image;
+        this.active = active;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.last_login = last_login;
+        this.gender = gender;
     }
 
     public Users() {
+    }
+
+    public Users(int user_id) {
+        this.user_id = user_id;
     }
 
     public int getUser_id() {
@@ -110,4 +177,6 @@ public class Users implements Serializable {
     public void setRole_id(int role_id) {
         this.role_id = role_id;
     }
+
+
 }

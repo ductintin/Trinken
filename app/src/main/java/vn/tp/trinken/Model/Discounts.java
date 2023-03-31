@@ -19,6 +19,26 @@ public class Discounts implements Serializable {
     @SerializedName("end_date")
     private Date end_date;
 
+    private int status;
+
+    public Discounts(int discount_id, String discount_code, String discount_type, int discount_value, Date start_date, Date end_date, int status) {
+        this.discount_id = discount_id;
+        this.discount_code = discount_code;
+        this.discount_type = discount_type;
+        this.discount_value = discount_value;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     public int getDiscount_id() {
         return discount_id;
     }
@@ -67,14 +87,6 @@ public class Discounts implements Serializable {
         this.end_date = end_date;
     }
 
-    public Discounts(int discount_id, String discount_code, String discount_type, int discount_value, Date start_date, Date end_date) {
-        this.discount_id = discount_id;
-        this.discount_code = discount_code;
-        this.discount_type = discount_type;
-        this.discount_value = discount_value;
-        this.start_date = start_date;
-        this.end_date = end_date;
-    }
 
     public Discounts() {
     }
