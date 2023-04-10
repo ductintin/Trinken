@@ -3,19 +3,64 @@ package vn.tp.trinken.Model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Categories implements Serializable {
-    @SerializedName("category_id")
+    @SerializedName("id")
     private int category_id;
-    @SerializedName("category_name")
+    @SerializedName("name")
     private String category_name;
+
+    private String image;
+
+    private boolean active;
+
+    private Date createdAt;
+
+    private Date updatedAt;
 
     public Categories() {
     }
 
-    public Categories(int category_id, String category_name) {
+    public Categories(int category_id, String category_name, String image, boolean active, Date createdAt, Date updatedAt) {
         this.category_id = category_id;
         this.category_name = category_name;
+        this.image = image;
+        this.active = active;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public int getCategory_id() {

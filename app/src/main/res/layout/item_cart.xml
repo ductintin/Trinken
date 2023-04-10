@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cartItemCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        android:layout_margin="2dp"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/cartItemImage"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/google">
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <LinearLayout
+                android:layout_width="203dp"
+                android:layout_height="85dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvMealName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textAlignment="center" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnMealDec"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:backgroundTint = "#ff5e00"
+                        android:textSize="30sp"
+                        android:padding="0dp"/>
+
+                    <EditText
+                        android:id="@+id/edtMealAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="20">
+
+                    </EditText>
+
+                    <Button
+                        android:id="@+id/btnMealInc"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="+"
+                        android:backgroundTint = "#ff5e00"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/tvMealPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gia"
+                    android:textAlignment="textEnd"
+                    android:textColor="#ff5e00"
+                    android:layout_weight="1"
+                    android:padding="5dp"></TextView>
+
+                <TextView
+                    android:id="@+id/tvMealTotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thanh tien"
+                    android:gravity="end|bottom"
+
+                    android:textColor="#ff5e00"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    ></TextView>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

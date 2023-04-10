@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Trinken</string>
+    <string name="app_slogan">Discovery your favorite beverage</string>
+    <string name="product_name">Product name</string>
+    <string name="product_description">Description</string>
+    <string name="product_star">Reviews</string>
+    <string name="product_price">Price</string>
+
 </resources>

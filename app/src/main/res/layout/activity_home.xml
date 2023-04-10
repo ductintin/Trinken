@@ -14,58 +14,144 @@
 
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.Toolbar
-                app:title="Trang chính"
-                android:id="@+id/toolBarHome"
-                android:background="@color/pastel_red"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
 
-            </androidx.appcompat.widget.Toolbar>
-            
-            <ViewFlipper
-                android:id="@+id/viewFlipperHome"
+            <include layout="@layout/toolbar"></include>
+
+
+            <ScrollView
+                android:id="@+id/scrollView"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
-                
-            </ViewFlipper>
-            
-            <LinearLayout
-                android:orientation="vertical"
-                android:background="@color/pastel_nude"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sản phẩm mới nhất"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:textColor="@color/pastel_red"
-                    />
-                <androidx.recyclerview.widget.RecyclerView
+                android:layout_height="match_parent"
+                android:layout_above="@id/toolBarHome"
+                android:layout_below="@id/navigation"
+
+                >
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/rcNewProduct"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                </androidx.recyclerview.widget.RecyclerView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="50dp"
+                        android:fontFamily="@font/font1"
+                        android:text="@string/app_slogan"
+                        android:textColor="@color/dark_green"
+                        android:textSize="40sp"
+                        android:textStyle="bold"
 
-            </LinearLayout>
+                        />
+
+                    <!--<androidx.appcompat.widget.SearchView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/search_menu"
+                        android:iconifiedByDefault="false"
+                        android:queryHint="Search here">
+
+                    </androidx.appcompat.widget.SearchView>-->
+
+                    <ViewFlipper
+                        android:id="@+id/viewFlipperHome"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="20dp">
+
+                    </ViewFlipper>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="20dp"
+                            android:text="Categories"
+                            android:textColor="@color/dark_green"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <androidx.core.widget.NestedScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            >
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rcNewProduct"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                >
+
+                            </androidx.recyclerview.widget.RecyclerView>
+                        </androidx.core.widget.NestedScrollView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="20dp"
+                            android:text="Hot products"
+                            android:textColor="@color/dark_green"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rcHotProduct"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </ScrollView>
         </LinearLayout>
+
+        <!--        <include layout="@layout/navigation"></include>-->
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start">
-            
+
             <ListView
                 android:id="@+id/listView"
                 android:layout_width="wrap_content"
@@ -75,6 +161,7 @@
 
         </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
