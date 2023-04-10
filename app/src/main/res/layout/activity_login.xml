@@ -147,7 +147,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/dark_green"
-            android:padding="15dp"
             android:text="Login"
             android:textAlignment="center"
             android:textColor="@color/white"

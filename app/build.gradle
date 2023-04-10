@@ -50,5 +50,11 @@ dependencies {
 
     implementation 'com.google.android.material:material:<version>'
 
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    implementation 'org.greenrobot:eventbus:3.0.0'
 
 }

@@ -16,7 +16,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 

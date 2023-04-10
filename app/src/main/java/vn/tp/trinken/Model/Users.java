@@ -25,6 +25,15 @@ public class Users implements Serializable {
     @SerializedName("role_id")
     private int role_id;
 
+    public Users(int user_id, String first_name, String last_name, String phone_number, String address, String gender) {
+        this.user_id = user_id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.phone_number = phone_number;
+        this.address = address;
+        this.gender = gender;
+    }
+
     private String image;
     private Boolean active;
     private Date createdAt;
@@ -35,6 +44,17 @@ public class Users implements Serializable {
 
     public String getImage() {
         return image;
+    }
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", last_name='" + phone_number + '\'' +
+                ", last_name='" + address + '\'' +
+                ", last_name='" + gender + '\'' +
+                '}';
     }
 
     public void setImage(String image) {
@@ -177,6 +197,8 @@ public class Users implements Serializable {
     public void setRole_id(int role_id) {
         this.role_id = role_id;
     }
+
+
 
 
 }
