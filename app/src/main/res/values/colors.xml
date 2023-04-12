@@ -22,5 +22,11 @@
     <color name="gray">#F5F5F5</color>
     <color name="dark">#1AIAID</color>
 
+    <color name="bgBottomNavigation">#fe485a</color>
+
+    <color name="colorPrimary">#7b4bff</color>
+    <color name="colorPrimaryDark">#6539ba</color>
+    <color name="colorAccent">#FF4081</color>
+
 
 </resources>
