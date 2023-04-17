@@ -3,6 +3,9 @@ package vn.tp.trinken.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import vn.tp.trinken.*;
 import vn.tp.trinken.Fragment.*;
@@ -21,9 +24,11 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
     CartFragment cartFragment = new CartFragment();
     NotificationFragment notificationFragment = new NotificationFragment();
     ProfileFragment profileFragment = new ProfileFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_Trinken_Home);
         setContentView(R.layout.activity_index);
 
         bottomNavigationView
@@ -79,4 +84,5 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);
     }
+
 }

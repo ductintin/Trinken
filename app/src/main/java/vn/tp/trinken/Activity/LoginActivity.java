@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("User",user);
-                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
                             if(last_login == "null"){
                                 intent = new Intent(LoginActivity.this,WelcomeActivity.class);
                             }
