@@ -11,7 +11,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +21,15 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ViewFlipper;
 
+import vn.tp.trinken.Model.*;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import me.relex.circleindicator.CircleIndicator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,6 +39,8 @@ import vn.tp.trinken.Activity.HomeActivity;
 import vn.tp.trinken.Adapter.CategoryAdapter;
 import vn.tp.trinken.Model.Category;
 import vn.tp.trinken.R;
+
+import vn.tp.trinken.Adapter.*;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,19 +58,32 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    DrawerLayout drawerLayout;
     Toolbar toolbar;
-    ViewFlipper viewFlipper;
     RecyclerView recyclerView;
-    NavigationView navigationView;
-    ListView listView;
+    BottomNavigationView bottomNavigationView;
     SearchView searchView;
 
     CategoryAdapter categoryAdapter;
     APIService apiService;
-    List<Category> categories;
+    List<Category> categories = new ArrayList<>();
 
     View view;
+
+    private ViewPager viewPager;
+    private CircleIndicator circleIndicator;
+    private List<Images> imagesList;
+
+    private Handler handler = new Handler();
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            if(viewPager.getCurrentItem() == imagesList.size()-1){
+                viewPager.setCurrentItem(0);
+            }else{
+                viewPager.setCurrentItem(viewPager.getCurrentItem());
+            }
+        }
+    };
 
     public HomeFragment() {
         // Required empty public constructor
@@ -101,6 +122,33 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
         AnhXa();
+        getCategories();
+
+        imagesList = getListImages();
+        ImagesViewPageAdapter adapter = new ImagesViewPageAdapter(imagesList);
+        viewPager.setAdapter(adapter);
+
+        circleIndicator.setViewPager(viewPager);
+        adapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
+        handler.postDelayed(runnable, 3000);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                handler.removeCallbacks(runnable);
+                handler.postDelayed(runnable, 3000);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         return view;
     }
 
@@ -110,26 +158,32 @@ public class HomeFragment extends Fragment {
     }
 
     private void AnhXa(){
-        drawerLayout = view.findViewById(R.id.drawerLayout);
         toolbar = view.findViewById(R.id.toolBarHome);
-        viewFlipper = view.findViewById(R.id.viewFlipperHome);
+        viewPager = view.findViewById(R.id.viewPagerHome);
         recyclerView = view.findViewById(R.id.rcNewProduct);
-        navigationView = view.findViewById(R.id.navigation);
-        listView = view.findViewById(R.id.listView);
-
+        bottomNavigationView = view.findViewById(R.id.bottomNavigationView);
+        circleIndicator = view.findViewById(R.id.circle_indicator);
     }
 
+    private List<Images> getListImages() {
+
+        List<Images> list = new ArrayList<>();
+        list.add(new Images(R.drawable.ban1));
+        list.add(new Images(R.drawable.ban2));
+        list.add(new Images(R.drawable.ban1));
+        list.add(new Images(R.drawable.ban2));
+        list.add(new Images(R.drawable.ban1));
+
+        return list;
+
+    }
     private void getCategories(){
         apiService = RetrofitClient.getRetrofit().create(APIService.class);
         apiService.getCategoryAll().enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
                 if(response.isSuccessful()){
-
                     categories = response.body();
-
-//                    Category category = new Category(1,"Juice","Juice", "@drawable/juice.png");
-//                    categories.add(category);
                     Log.d("API",categories.toString());
                     categoryAdapter = new CategoryAdapter(getActivity().getApplicationContext(), categories);
                     recyclerView.setHasFixedSize(true);
@@ -150,5 +204,17 @@ public class HomeFragment extends Fragment {
                 Log.d("logg", t.getMessage());
             }
         });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        handler.removeCallbacks(runnable);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        handler.postDelayed(runnable, 3000);
     }
 }

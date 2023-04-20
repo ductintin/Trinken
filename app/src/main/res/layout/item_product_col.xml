@@ -41,7 +41,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/welcome_img2" />
+                app:srcCompat="@drawable/coke" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -81,12 +81,18 @@
 
                         ></TextView>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$">
+
+                    </TextView>
+
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/plus_icon"
                         android:background="@null"
-
                         android:layout_weight="1"
                         >
 
