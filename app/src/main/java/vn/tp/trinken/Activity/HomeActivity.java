@@ -19,7 +19,6 @@ import vn.tp.trinken.R;
 import vn.tp.trinken.Model.*;
 import vn.tp.trinken.API.*;
 import vn.tp.trinken.Adapter.*;
-import vn.tp.trinken.Contants.*;
 import vn.tp.trinken.Fragment.*;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -95,12 +94,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void AnhXa(){
-        drawerLayout = findViewById(R.id.drawerLayout);
         toolbar = findViewById(R.id.toolBarHome);
-        viewFlipper = findViewById(R.id.viewFlipperHome);
+        viewFlipper = findViewById(R.id.viewPagerHome);
         recyclerView = findViewById(R.id.rcNewProduct);
-        navigationView = findViewById(R.id.navigation);
-        listView = findViewById(R.id.listView);
+        navigationView = findViewById(R.id.bottomNavigationView);
 
     }
 

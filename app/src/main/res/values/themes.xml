@@ -14,11 +14,13 @@
         <item name="android:statusBarColor">?attr/colorOnPrimary</item>
         <!-- Customize your theme here. -->
 
-        <item name="android:windowLightStatusBar">@color/black</item>
     </style>
 
     <style name="Theme.Trinken.Home" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:statusBarColor">#ffffff</item>
+        <item name="android:statusBarColor">#00FFFFFF</item>
+        <item name="subtitleTextColor">@color/dark_green</item>
+        <item name="colorOnPrimary">@color/dark_green</item>
+        <item name="colorPrimaryDark">#00FFFFFF</item>
     </style>
 
 

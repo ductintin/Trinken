@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".Activity.HomeActivity">
 
-    <androidx.drawerlayout.widget.DrawerLayout
+    <!--<androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -18,8 +18,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
-            <include layout="@layout/toolbar"></include>
 
 
             <ScrollView
@@ -49,7 +47,7 @@
 
                         />
 
-                    <!--<androidx.appcompat.widget.SearchView
+                    &lt;!&ndash;<androidx.appcompat.widget.SearchView
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_alignParentTop="true"
@@ -60,15 +58,24 @@
                         android:iconifiedByDefault="false"
                         android:queryHint="Search here">
 
-                    </androidx.appcompat.widget.SearchView>-->
+                    </androidx.appcompat.widget.SearchView>&ndash;&gt;
 
-                    <ViewFlipper
-                        android:id="@+id/viewFlipperHome"
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/viewPagerHome"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:layout_marginTop="20dp">
 
-                    </ViewFlipper>
+                    </androidx.viewpager.widget.ViewPager>
+                    <me.relex.circleindicator.CircleIndicator
+                        android:id="@+id/circle_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:layout_gravity="center_horizontal"
+                        app:ci_drawable="@color/black"
+                        android:translationY="-40dp">
+                    </me.relex.circleindicator.CircleIndicator>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -144,7 +151,7 @@
             </ScrollView>
         </LinearLayout>
 
-        <!--        <include layout="@layout/navigation"></include>-->
+        &lt;!&ndash;        <include layout="@layout/navigation"></include>&ndash;&gt;
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation"
@@ -160,7 +167,7 @@
             </ListView>
 
         </com.google.android.material.navigation.NavigationView>
-    </androidx.drawerlayout.widget.DrawerLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -12,7 +12,7 @@ import retrofit2.http.POST;
 import vn.tp.trinken.Model.*;
 public interface APIService {
 
-    @GET("categories.php")
+    @GET("category/get-all")
     Call<List<Category>> getCategoryAll();
 
     @FormUrlEncoded

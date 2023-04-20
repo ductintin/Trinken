@@ -4,11 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import org.w3c.dom.Text;
 
@@ -38,9 +41,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         public TextView cate_name;
+        public ImageView cate_img;
+        public int cate_id;
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             cate_name = (TextView) itemView.findViewById(R.id.name_cate);
+            cate_img = (ImageView) itemView.findViewById(R.id.image_cate);
+            cate_id = 0;
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -53,7 +61,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.MyViewHolder holder, int position) {
         Category category = categories.get(position);
-        holder.cate_name.setText(category.getName());
+        holder.cate_name.setText(category.getCategoryName());
+        holder.cate_id = category.getId();
+        Glide.with(context).load(category.getImage()).into(holder.cate_img);
     }
 
     @Override
