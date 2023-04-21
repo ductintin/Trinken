@@ -70,7 +70,7 @@ public class WelcomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 last_position = viewPager.getCurrentItem();
                 if(last_position == size - 1){
-                    Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(WelcomeActivity.this, IndexActivity.class);
                     startActivity(intent);
                 }else{
                     viewPager.setCurrentItem(last_position + 1,true);

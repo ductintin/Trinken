@@ -4,11 +4,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -18,13 +15,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.ViewFlipper;
+import android.widget.Toast;
 
 import vn.tp.trinken.Model.*;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +30,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import vn.tp.trinken.API.APIService;
 import vn.tp.trinken.API.RetrofitClient;
-import vn.tp.trinken.Activity.HomeActivity;
 import vn.tp.trinken.Adapter.CategoryAdapter;
 import vn.tp.trinken.Model.Category;
 import vn.tp.trinken.R;
@@ -59,13 +53,17 @@ public class HomeFragment extends Fragment {
     private String mParam2;
 
     Toolbar toolbar;
-    RecyclerView recyclerView;
+    RecyclerView rcCategory, rcHotProduct;
     BottomNavigationView bottomNavigationView;
     SearchView searchView;
 
     CategoryAdapter categoryAdapter;
+
+    ProductAdapter productAdapter;
+
     APIService apiService;
     List<Category> categories = new ArrayList<>();
+    List<Products> products = new ArrayList<>();
 
     View view;
 
@@ -78,9 +76,9 @@ public class HomeFragment extends Fragment {
         @Override
         public void run() {
             if(viewPager.getCurrentItem() == imagesList.size()-1){
-                viewPager.setCurrentItem(0);
+                viewPager.setCurrentItem(0, true);
             }else{
-                viewPager.setCurrentItem(viewPager.getCurrentItem());
+                viewPager.setCurrentItem(viewPager.getCurrentItem()+1, true);
             }
         }
     };
@@ -123,6 +121,7 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         AnhXa();
         getCategories();
+        loadActiveProduct();
 
         imagesList = getListImages();
         ImagesViewPageAdapter adapter = new ImagesViewPageAdapter(imagesList);
@@ -160,7 +159,8 @@ public class HomeFragment extends Fragment {
     private void AnhXa(){
         toolbar = view.findViewById(R.id.toolBarHome);
         viewPager = view.findViewById(R.id.viewPagerHome);
-        recyclerView = view.findViewById(R.id.rcNewProduct);
+        rcCategory = view.findViewById(R.id.rcCategory);
+        rcHotProduct = view.findViewById(R.id.rcHotProduct);
         bottomNavigationView = view.findViewById(R.id.bottomNavigationView);
         circleIndicator = view.findViewById(R.id.circle_indicator);
     }
@@ -186,16 +186,20 @@ public class HomeFragment extends Fragment {
                     categories = response.body();
                     Log.d("API",categories.toString());
                     categoryAdapter = new CategoryAdapter(getActivity().getApplicationContext(), categories);
-                    recyclerView.setHasFixedSize(true);
+                    rcCategory.setHasFixedSize(true);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext()
                             ,LinearLayoutManager.HORIZONTAL, false);
-                    recyclerView.setLayoutManager(layoutManager);
+                    rcCategory.setLayoutManager(layoutManager);
 
                     categoryAdapter.notifyDataSetChanged();
-                    recyclerView.setAdapter(categoryAdapter);
+                    rcCategory.setAdapter(categoryAdapter);
 
                 }else{
                     int status_code = response.code();
+                    switch (status_code){
+                        case 204:
+                            Toast.makeText(getActivity().getApplicationContext(), "There is no category", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
@@ -206,6 +210,38 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    public void loadActiveProduct(){
+        apiService = RetrofitClient.getRetrofit().create(APIService.class);
+        apiService.getAllActiveProduct().enqueue(new Callback<List<Products>>() {
+            @Override
+            public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
+                if(response.isSuccessful()){
+                   try {
+                       products = response.body();
+                       productAdapter = new ProductAdapter(getActivity().getApplicationContext(), products, R.layout.item_product_col);
+                       rcHotProduct.setHasFixedSize(true);
+                       GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 2);
+                       rcHotProduct.setLayoutManager(gridLayoutManager);
+                       productAdapter.notifyDataSetChanged();
+                       rcHotProduct.setAdapter(productAdapter);
+                   }catch (Exception e){
+                       e.printStackTrace();
+                   }
+                }else{
+                    int status_code = response.code();
+                    switch (status_code){
+                        case 204:
+                            Toast.makeText(getActivity().getApplicationContext(), "There is no product", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Products>> call, Throwable t) {
+                Log.d("logg", t.getMessage());
+            }
+        });
+    }
     @Override
     public void onPause() {
         super.onPause();
