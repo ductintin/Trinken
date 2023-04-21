@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Order_Status implements Serializable {
-    @SerializedName("status_id")
+    @SerializedName("id")
     private int status_id;
-    @SerializedName("status_name")
+    @SerializedName("order_status_name")
     private String status_name;
 
     public Order_Status(int status_id, String status_name) {

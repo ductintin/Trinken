@@ -3,7 +3,7 @@ package vn.tp.trinken.Model;
 import com.google.gson.annotations.SerializedName;
 
 public class Payment_Methods {
-    @SerializedName("payment_method_id")
+    @SerializedName("id")
     private int payment_method_id;
     @SerializedName("payment_method_name")
     private String payment_method_name;

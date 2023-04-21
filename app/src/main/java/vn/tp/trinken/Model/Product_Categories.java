@@ -4,6 +4,12 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
 public class Product_Categories implements Serializable {
     @SerializedName("product_id")
     private int product_id;

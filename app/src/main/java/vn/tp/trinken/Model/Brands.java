@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Brands implements Serializable {
-    @SerializedName("brand_id")
+    @SerializedName("id")
     private int brand_id;
     @SerializedName("brand_name")
     private String brand_name;

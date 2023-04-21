@@ -59,7 +59,7 @@ public class SharedPrefManager {
         editor.putString(KEY_ADDRESS, user.getAddress());
         editor.putString(KEY_CREATEDAT, String.valueOf(user.getCreatedAt()));
         editor.putString(KEY_UPDATEDAT, String.valueOf(user.getUpdatedAt()));
-        editor.putString(KEY_LASTLOGIN, String.valueOf(user.getLast_login()));
+        editor.putString(KEY_LASTLOGIN, String.valueOf(user.getLastLogin()));
         editor.apply();
     }
     public boolean isLoggedIn(){
@@ -77,15 +77,15 @@ public class SharedPrefManager {
                 sharedPreferences.getString(KEY_FIRSTNAME,null),
                 sharedPreferences.getString(KEY_LASTNAME,null),
                 sharedPreferences.getString(KEY_EMAIL,null),
+                sharedPreferences.getString(KEY_GENDER,null),
                 sharedPreferences.getString(KEY_PHONE,null),
                 sharedPreferences.getString(KEY_ADDRESS,null),
-                sharedPreferences.getInt(KEY_ROLEID,-1),
                 sharedPreferences.getString(KEY_IMAGES,null),
                 true,
                 gson.fromJson(sharedPreferences.getString(KEY_CREATEDAT,null), type),
                 gson.fromJson(sharedPreferences.getString(KEY_UPDATEDAT,null), type),
-                gson.fromJson(sharedPreferences.getString(KEY_LASTNAME,null), type),
-                sharedPreferences.getString(KEY_GENDER,null)
+                gson.fromJson(sharedPreferences.getString(KEY_LASTLOGIN,null), type),
+                sharedPreferences.getInt(KEY_ROLEID,-1)
         );
     }
     public void logout(){

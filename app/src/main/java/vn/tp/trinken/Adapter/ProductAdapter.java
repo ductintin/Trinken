@@ -67,11 +67,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                 intent.putExtras(bundle);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Log.d("Intent product", ""+ bundle.getInt("selectedProduct"));
-                context.startActivity(intent);
+                context.getApplicationContext().startActivity(intent);
             }
         });
 
     }
+
 
     @Override
     public int getItemCount() {

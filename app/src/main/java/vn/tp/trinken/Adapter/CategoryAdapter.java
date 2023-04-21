@@ -22,9 +22,9 @@ import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
     Context context;
-    List<Category> categories;
+    List<Categories> categories;
 
-    public CategoryAdapter(Context context, List<Category> categories){
+    public CategoryAdapter(Context context, List<Categories> categories){
         this.context = context;
         this.categories = categories;
     }
@@ -60,7 +60,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.MyViewHolder holder, int position) {
-        Category category = categories.get(position);
+        Categories category = categories.get(position);
         holder.cate_name.setText(category.getCategoryName());
         holder.cate_id = category.getId();
         Glide.with(context).load(category.getImage()).into(holder.cate_img);

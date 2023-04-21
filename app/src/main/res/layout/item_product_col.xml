@@ -34,7 +34,8 @@
                 android:id="@+id/imageProduct"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:elevation="3dp"
+                android:paddingTop="10dp"
+                android:elevation="20dp"
                 android:src="@color/white"
                 android:transformPivotX="1dp"
                 android:translationZ="20dp"
@@ -59,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:text="Name"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/imageProduct"
                     app:layout_constraintStart_toStartOf="@+id/imageProduct"
                     app:layout_constraintTop_toBottomOf="@+id/imageProduct"></TextView>
@@ -69,35 +70,42 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="3">
+                    android:gravity="center"
+                    >
                     <TextView
                         android:id="@+id/tvProductPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Price"
                         android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:layout_weight="2"
-
+                        android:textColor="@color/white"
+                        android:layout_gravity="center"
                         ></TextView>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:text="$">
 
                     </TextView>
 
-                    <ImageButton
-                        android:id="@+id/imgbtnAddProduct"
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end">
+
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/plus_icon"
-                        android:background="@null"
-                        android:layout_weight="1"
-                        >
+                        android:scaleX="1.5"
+                        android:scaleY="1.5"
+                        android:src="@drawable/ic_add_circle">
 
-                    </ImageButton>
+                    </ImageView>
                 </LinearLayout>
 
             </LinearLayout>
