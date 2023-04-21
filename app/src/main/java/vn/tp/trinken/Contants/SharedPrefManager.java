@@ -23,14 +23,16 @@ public class SharedPrefManager {
     private static final String KEY_CART = "keycartitems";
     private static final String KEY_FIRSTNAME = "keyfirstname";
     private static final String KEY_LASTNAME = "keylastname";
-    private static final String KEY_ROLEID = "keyphone";
-    private static final String KEY_PHONE= "keyroleid";
+    private static final String KEY_ROLE = "keyrole";
+    private static final String KEY_PHONE= "keyphone";
     private static final String KEY_LASTLOGIN = "keylastlogin";
     private static final String KEY_CREATEDAT = "keycreatedat";
     private static final String KEY_UPDATEDAT = "keyupdatedat";
     private static final String KEY_ADDRESS = "keyaddress";
 
     Gson gson = new Gson();
+    Type typeDate = new TypeToken< ArrayList < Date >>() {}.getType();
+    Type typeRole = new TypeToken< ArrayList < Roles >>() {}.getType();
 
     private static SharedPrefManager mInstance;
     private static Context ctx;
@@ -52,14 +54,14 @@ public class SharedPrefManager {
         editor.putString(KEY_EMAIL, user.getEmail());
         editor.putString(KEY_GENDER, user.getGender());
         editor.putString(KEY_IMAGES, user.getImage());
-        editor.putInt(KEY_ROLEID, user.getRole_id());
+        editor.putString(KEY_ROLE, String.valueOf(user.getRoles()));
         editor.putString(KEY_FIRSTNAME, user.getFirst_name());
         editor.putString(KEY_LASTNAME, user.getLast_name());
         editor.putString(KEY_PHONE, user.getPhone_number());
         editor.putString(KEY_ADDRESS, user.getAddress());
         editor.putString(KEY_CREATEDAT, String.valueOf(user.getCreatedAt()));
         editor.putString(KEY_UPDATEDAT, String.valueOf(user.getUpdatedAt()));
-        editor.putString(KEY_LASTLOGIN, String.valueOf(user.getLastLogin()));
+        editor.putString(KEY_LASTLOGIN, String.valueOf(user.getLast_login()));
         editor.apply();
     }
     public boolean isLoggedIn(){
@@ -68,7 +70,7 @@ public class SharedPrefManager {
     }
     public Users getUser(){
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
-        Type type = new TypeToken< ArrayList < Date >>() {}.getType();
+
 
         return new Users(
                 sharedPreferences.getInt(KEY_ID,-1),
@@ -77,15 +79,15 @@ public class SharedPrefManager {
                 sharedPreferences.getString(KEY_FIRSTNAME,null),
                 sharedPreferences.getString(KEY_LASTNAME,null),
                 sharedPreferences.getString(KEY_EMAIL,null),
-                sharedPreferences.getString(KEY_GENDER,null),
                 sharedPreferences.getString(KEY_PHONE,null),
                 sharedPreferences.getString(KEY_ADDRESS,null),
+                gson.fromJson(sharedPreferences.getString(KEY_ROLE,null), typeRole),
                 sharedPreferences.getString(KEY_IMAGES,null),
                 true,
-                gson.fromJson(sharedPreferences.getString(KEY_CREATEDAT,null), type),
-                gson.fromJson(sharedPreferences.getString(KEY_UPDATEDAT,null), type),
-                gson.fromJson(sharedPreferences.getString(KEY_LASTLOGIN,null), type),
-                sharedPreferences.getInt(KEY_ROLEID,-1)
+                gson.fromJson(sharedPreferences.getString(KEY_CREATEDAT,null), typeDate),
+                gson.fromJson(sharedPreferences.getString(KEY_UPDATEDAT,null), typeDate),
+                gson.fromJson(sharedPreferences.getString(KEY_LASTLOGIN,null), typeDate),
+                sharedPreferences.getString(KEY_GENDER,null)
         );
     }
     public void logout(){

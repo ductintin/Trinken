@@ -19,7 +19,7 @@ public class SliderModal {
 
     private String imgUrl;
 
-    private int backgroundDrawable;
+    private String backgroundDrawable;
 
     private String subTitle;
 
