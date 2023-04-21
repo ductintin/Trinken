@@ -3,10 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="300"
-        android:title="Cart"
+        android:id="@+id/toolBarCart"
+        android:icon="@drawable/ic_action_shopping_cart"
         app:showAsAction="ifRoom"
+        android:title="Cart"
         />
+
+    <item
+        android:id="@+id/toolBarProfile"
+        app:showAsAction="ifRoom"
+        android:title="Profile"
+        android:icon="@drawable/ic_action_person_pin"
+        ></item>
+
 
 </menu>

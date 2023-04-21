@@ -28,5 +28,7 @@
     <color name="colorPrimaryDark">#6539ba</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="transparent">#00FFFFFF</color>
+
 
 </resources>

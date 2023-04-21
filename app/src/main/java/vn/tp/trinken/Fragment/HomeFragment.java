@@ -4,35 +4,37 @@ import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.ViewFlipper;
+import android.widget.Toast;
 
-import com.google.android.material.navigation.NavigationView;
+import vn.tp.trinken.Model.*;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import me.relex.circleindicator.CircleIndicator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import vn.tp.trinken.API.APIService;
 import vn.tp.trinken.API.RetrofitClient;
-import vn.tp.trinken.Activity.HomeActivity;
 import vn.tp.trinken.Adapter.CategoryAdapter;
 import vn.tp.trinken.Model.Category;
 import vn.tp.trinken.R;
+
+import vn.tp.trinken.Adapter.*;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,19 +52,36 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    DrawerLayout drawerLayout;
     Toolbar toolbar;
-    ViewFlipper viewFlipper;
-    RecyclerView recyclerView;
-    NavigationView navigationView;
-    ListView listView;
+    RecyclerView rcCategory, rcHotProduct;
+    BottomNavigationView bottomNavigationView;
     SearchView searchView;
 
     CategoryAdapter categoryAdapter;
+
+    ProductAdapter productAdapter;
+
     APIService apiService;
-    List<Category> categories;
+    List<Category> categories = new ArrayList<>();
+    List<Products> products = new ArrayList<>();
 
     View view;
+
+    private ViewPager viewPager;
+    private CircleIndicator circleIndicator;
+    private List<Images> imagesList;
+
+    private Handler handler = new Handler();
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            if(viewPager.getCurrentItem() == imagesList.size()-1){
+                viewPager.setCurrentItem(0, true);
+            }else{
+                viewPager.setCurrentItem(viewPager.getCurrentItem()+1, true);
+            }
+        }
+    };
 
     public HomeFragment() {
         // Required empty public constructor
@@ -101,6 +120,34 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
         AnhXa();
+        getCategories();
+        loadActiveProduct();
+
+        imagesList = getListImages();
+        ImagesViewPageAdapter adapter = new ImagesViewPageAdapter(imagesList);
+        viewPager.setAdapter(adapter);
+
+        circleIndicator.setViewPager(viewPager);
+        adapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
+        handler.postDelayed(runnable, 3000);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                handler.removeCallbacks(runnable);
+                handler.postDelayed(runnable, 3000);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         return view;
     }
 
@@ -110,38 +157,49 @@ public class HomeFragment extends Fragment {
     }
 
     private void AnhXa(){
-        drawerLayout = view.findViewById(R.id.drawerLayout);
         toolbar = view.findViewById(R.id.toolBarHome);
-        viewFlipper = view.findViewById(R.id.viewFlipperHome);
-        recyclerView = view.findViewById(R.id.rcNewProduct);
-        navigationView = view.findViewById(R.id.navigation);
-        listView = view.findViewById(R.id.listView);
-
+        viewPager = view.findViewById(R.id.viewPagerHome);
+        rcCategory = view.findViewById(R.id.rcCategory);
+        rcHotProduct = view.findViewById(R.id.rcHotProduct);
+        bottomNavigationView = view.findViewById(R.id.bottomNavigationView);
+        circleIndicator = view.findViewById(R.id.circle_indicator);
     }
 
+    private List<Images> getListImages() {
+
+        List<Images> list = new ArrayList<>();
+        list.add(new Images(R.drawable.ban1));
+        list.add(new Images(R.drawable.ban2));
+        list.add(new Images(R.drawable.ban1));
+        list.add(new Images(R.drawable.ban2));
+        list.add(new Images(R.drawable.ban1));
+
+        return list;
+
+    }
     private void getCategories(){
         apiService = RetrofitClient.getRetrofit().create(APIService.class);
         apiService.getCategoryAll().enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
                 if(response.isSuccessful()){
-
                     categories = response.body();
-
-//                    Category category = new Category(1,"Juice","Juice", "@drawable/juice.png");
-//                    categories.add(category);
                     Log.d("API",categories.toString());
                     categoryAdapter = new CategoryAdapter(getActivity().getApplicationContext(), categories);
-                    recyclerView.setHasFixedSize(true);
+                    rcCategory.setHasFixedSize(true);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext()
                             ,LinearLayoutManager.HORIZONTAL, false);
-                    recyclerView.setLayoutManager(layoutManager);
+                    rcCategory.setLayoutManager(layoutManager);
 
                     categoryAdapter.notifyDataSetChanged();
-                    recyclerView.setAdapter(categoryAdapter);
+                    rcCategory.setAdapter(categoryAdapter);
 
                 }else{
                     int status_code = response.code();
+                    switch (status_code){
+                        case 204:
+                            Toast.makeText(getActivity().getApplicationContext(), "There is no category", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
@@ -150,5 +208,49 @@ public class HomeFragment extends Fragment {
                 Log.d("logg", t.getMessage());
             }
         });
+    }
+
+    public void loadActiveProduct(){
+        apiService = RetrofitClient.getRetrofit().create(APIService.class);
+        apiService.getAllActiveProduct().enqueue(new Callback<List<Products>>() {
+            @Override
+            public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
+                if(response.isSuccessful()){
+                   try {
+                       products = response.body();
+                       productAdapter = new ProductAdapter(getActivity().getApplicationContext(), products, R.layout.item_product_col);
+                       rcHotProduct.setHasFixedSize(true);
+                       GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 2);
+                       rcHotProduct.setLayoutManager(gridLayoutManager);
+                       productAdapter.notifyDataSetChanged();
+                       rcHotProduct.setAdapter(productAdapter);
+                   }catch (Exception e){
+                       e.printStackTrace();
+                   }
+                }else{
+                    int status_code = response.code();
+                    switch (status_code){
+                        case 204:
+                            Toast.makeText(getActivity().getApplicationContext(), "There is no product", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Products>> call, Throwable t) {
+                Log.d("logg", t.getMessage());
+            }
+        });
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        handler.removeCallbacks(runnable);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        handler.postDelayed(runnable, 3000);
     }
 }

@@ -1,15 +1,23 @@
 package vn.tp.trinken.Model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
+import java.util.Date;
+
+import retrofit2.http.Field;
 
 public class Category implements Serializable {
+    @SerializedName("id")
     private int id;
-    private String name;
-    private String description;
-    private String images;
+    @SerializedName("categoryName")
+    private String categoryName;
 
-    public Category() {
-    }
+    private Boolean active;
+    private String image;
+
+    private Date createdAt;
+    private Date updatedAt;
 
     public int getId() {
         return id;
@@ -19,34 +27,57 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public String getDescription() {
-        return description;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
-    public String getImages() {
-        return images;
+    public String getImage() {
+        return image;
     }
 
-    public void setImages(String images) {
-        this.images = images;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public Category(int id, String name, String description, String images) {
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Category(int id, String categoryName, Boolean active, String image, Date createdAt, Date updatedAt) {
         this.id = id;
-        this.name = name;
-        this.description = description;
-        this.images = images;
+        this.categoryName = categoryName;
+        this.active = active;
+        this.image = image;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
+
+    public Category() {
+    }
+
+
 }

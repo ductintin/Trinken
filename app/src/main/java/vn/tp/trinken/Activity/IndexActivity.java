@@ -3,6 +3,7 @@ package vn.tp.trinken.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -24,22 +25,27 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
     CartFragment cartFragment = new CartFragment();
     NotificationFragment notificationFragment = new NotificationFragment();
     ProfileFragment profileFragment = new ProfileFragment();
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.Theme_Trinken_Home);
         setContentView(R.layout.activity_index);
+        AnhXa();
 
-        bottomNavigationView
-                = findViewById(R.id.bottomNavigationView);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         bottomNavigationView
                 .setOnItemSelectedListener(this);
-        bottomNavigationView.setSelectedItemId(R.id.person);
+        bottomNavigationView.setSelectedItemId(R.id.home);
     }
 
-
+    private void AnhXa(){
+        toolbar = findViewById(R.id.toolBarHome);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
