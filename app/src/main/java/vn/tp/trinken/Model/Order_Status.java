@@ -4,33 +4,23 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
+
+import lombok.Builder;
+
+import lombok.Data;
+
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Order_Status implements Serializable {
+
     @SerializedName("id")
     private int status_id;
-    @SerializedName("order_status_name")
+
+    @SerializedName("orderStatusName")
     private String status_name;
-
-    public Order_Status(int status_id, String status_name) {
-        this.status_id = status_id;
-        this.status_name = status_name;
-    }
-
-    public Order_Status() {
-    }
-
-    public int getStatus_id() {
-        return status_id;
-    }
-
-    public void setStatus_id(int status_id) {
-        this.status_id = status_id;
-    }
-
-    public String getStatus_name() {
-        return status_name;
-    }
-
-    public void setStatus_name(String status_name) {
-        this.status_name = status_name;
-    }
 }

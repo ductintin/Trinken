@@ -6,26 +6,33 @@ import java.io.Serializable;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Orders implements Serializable {
 
     @SerializedName("id")
     private int order_id;
-    @SerializedName("order_date")
+
+    @SerializedName("orderDate")
     private Date order_date;
-    @SerializedName("total_amount")
+
+    @SerializedName("totalAmount")
     private int total_amount;
-    @SerializedName("payment_method_id")
-    private int payment_method_id;
-    @SerializedName("order_status_id")
-    private int status_id;
+
+    @SerializedName("customer")
+    private Users customer;
+
+    @SerializedName("paymentmethod")
+    private Payment_Methods payment_methods;
+
+    @SerializedName("orderStatus")
+    private Order_Status order_status;
 
     private Date cancelAt;
 
