@@ -27,6 +27,7 @@ import retrofit2.Response;
 import vn.tp.trinken.*;
 import vn.tp.trinken.Activity.*;
 import vn.tp.trinken.API.*;
+import vn.tp.trinken.Contants.SharedPrefManager;
 import vn.tp.trinken.Model.*;
 public class LoginActivity extends AppCompatActivity {
     Button btnSignup;
@@ -42,30 +43,35 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        AnhXa();
+        if(SharedPrefManager.getInstance(this).isLoggedIn()){
+            finish();
+            startActivity(new Intent(this,HomeActivity.class));
+        }else {
+            AnhXa();
+            btnSignup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
+                    startActivity(intent);
+                }
+            });
 
-        btnSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
-                startActivity(intent);
-            }
-        });
+            btnLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    doLogin();
+                }
+            });
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                doLogin();
-            }
-        });
+            signup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
 
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private void AnhXa(){

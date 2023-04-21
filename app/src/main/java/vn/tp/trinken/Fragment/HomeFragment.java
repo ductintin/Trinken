@@ -31,7 +31,6 @@ import retrofit2.Response;
 import vn.tp.trinken.API.APIService;
 import vn.tp.trinken.API.RetrofitClient;
 import vn.tp.trinken.Adapter.CategoryAdapter;
-import vn.tp.trinken.Model.Category;
 import vn.tp.trinken.R;
 
 import vn.tp.trinken.Adapter.*;

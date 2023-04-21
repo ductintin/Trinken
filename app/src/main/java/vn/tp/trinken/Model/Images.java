@@ -1,17 +1,15 @@
 package vn.tp.trinken.Model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Images {
     private int imagesId;
 
-    public Images(int imagesId) {
-        this.imagesId = imagesId;
-    }
-
-    public int getImagesId() {
-        return imagesId;
-    }
-
-    public void setImagesId(int imagesId) {
-        this.imagesId = imagesId;
-    }
 }
