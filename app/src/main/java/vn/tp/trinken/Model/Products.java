@@ -55,5 +55,8 @@ public class Products implements Serializable {
     @SerializedName("categories")
     private List<Categories> categories;
 
+    @SerializedName("discount")
+    private Discounts discount;
+
 
 }

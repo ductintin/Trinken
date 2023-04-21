@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         if(SharedPrefManager.getInstance(this).isLoggedIn()){
             finish();
-            startActivity(new Intent(this,HomeActivity.class));
+            startActivity(new Intent(this,IndexActivity.class));
         }else {
             AnhXa();
             btnSignup.setOnClickListener(new View.OnClickListener() {
