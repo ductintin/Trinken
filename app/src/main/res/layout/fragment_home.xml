@@ -10,39 +10,43 @@
         android:layout_height="match_parent"
         >
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ScrollView
+                android:id="@+id/scrollView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_above="@id/toolBarHome"
+                android:layout_below="@id/bottomNavigationView"
 
-                <ScrollView
-                    android:id="@+id/scrollView"
+                >
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_above="@id/toolBarHome"
-                    android:layout_below="@id/bottomNavigationView"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    >
-
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="50dp"
+                        android:fontFamily="@font/font1"
+                        android:text="@string/app_slogan"
+                        android:textColor="@color/dark_green"
+                        android:textSize="40sp"
+                        android:textStyle="bold"
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="50dp"
-                            android:fontFamily="@font/font1"
-                            android:text="@string/app_slogan"
-                            android:textColor="@color/dark_green"
-                            android:textSize="40sp"
-                            android:textStyle="bold"
+                        />
 
-                            />
-
-                        <!--<androidx.appcompat.widget.SearchView
+                    <!--<androidx.appcompat.widget.SearchView
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_alignParentTop="true"
@@ -55,97 +59,96 @@
 
                         </androidx.appcompat.widget.SearchView>-->
 
-                        <androidx.viewpager.widget.ViewPager
-                            android:id="@+id/viewPagerHome"
-                            android:layout_width="match_parent"
-                            android:layout_height="200dp"
-                            android:layout_marginTop="20dp">
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/viewPagerHome"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="20dp">
 
-                        </androidx.viewpager.widget.ViewPager>
-                        <me.relex.circleindicator.CircleIndicator
-                            android:id="@+id/circle_indicator"
+                    </androidx.viewpager.widget.ViewPager>
+
+                    <me.relex.circleindicator.CircleIndicator
+                        android:id="@+id/circle_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="5dp"
+                        android:translationY="-40dp"
+                        app:ci_drawable="@color/black"></me.relex.circleindicator.CircleIndicator>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:translationY="-40dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="20dp"
-                            android:layout_margin="5dp"
-                            android:layout_gravity="center_horizontal"
-                            app:ci_drawable="@color/black"
-                            android:translationY="-40dp">
-                        </me.relex.circleindicator.CircleIndicator>
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="20dp"
+                            android:text="Categories"
+                            android:textColor="@color/dark_green"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:translationY="-40dp"
-                            >
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginTop="20dp"
-                                android:text="Categories"
-                                android:textColor="@color/dark_green"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
-
-                            <androidx.core.widget.NestedScrollView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                >
-
-                                <androidx.recyclerview.widget.RecyclerView
-                                    android:id="@+id/rcNewProduct"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginTop="10dp">
-
-                                </androidx.recyclerview.widget.RecyclerView>
-                            </androidx.core.widget.NestedScrollView>
-
-                        </LinearLayout>
-
-                        <LinearLayout
+                        <androidx.core.widget.NestedScrollView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:translationY="-40dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginTop="20dp"
-                                android:text="Hot products"
-                                android:textColor="@color/dark_green"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
+                            >
 
                             <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/rcHotProduct"
+                                android:id="@+id/rcCategory"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp">
 
                             </androidx.recyclerview.widget.RecyclerView>
-
-
-                        </LinearLayout>
+                        </androidx.core.widget.NestedScrollView>
 
                     </LinearLayout>
 
-                </ScrollView>
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:translationY="-40dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="20dp"
+                            android:text="Hot products"
+                            android:textColor="@color/dark_green"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rcHotProduct"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

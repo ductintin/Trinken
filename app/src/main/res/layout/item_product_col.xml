@@ -10,7 +10,7 @@
     android:layout_marginRight="10dp"
     android:id="@id/parent">
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardDish"
+        android:id="@+id/cardProduct"
         android:layout_width="154dp"
         android:layout_height="200dp"
         android:layout_margin="5dp"
@@ -89,6 +89,7 @@
                     </TextView>
 
                     <ImageButton
+                        android:id="@+id/imgbtnAddProduct"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/plus_icon"
