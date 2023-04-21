@@ -19,7 +19,7 @@ import vn.tp.trinken.R;
 import vn.tp.trinken.Model.*;
 import vn.tp.trinken.API.*;
 import vn.tp.trinken.Adapter.*;
-import vn.tp.trinken.Contants.*;
+//import vn.tp.trinken.Contants.*;
 import vn.tp.trinken.Fragment.*;
 import android.graphics.Color;
 import android.os.Bundle;
