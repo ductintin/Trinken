@@ -16,10 +16,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Brands implements Serializable {
 
-    @SerializedName("brand_id")
+    @SerializedName("id")
     private int brand_id;
 
-    @SerializedName("brand_name")
+    @SerializedName("brandName")
     private String brand_name;
 
     private String image;

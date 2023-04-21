@@ -27,4 +27,5 @@ public class Assets implements Serializable {
 
     @SerializedName("product")
     private Products product;
+
 }

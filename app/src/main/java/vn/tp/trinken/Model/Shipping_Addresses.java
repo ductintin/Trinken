@@ -33,9 +33,11 @@ public class Shipping_Addresses implements Serializable {
 
     private boolean is_deleted;
 
+    private boolean active;
+
+
     private Date createdAt;
 
     private Date updatedAt;
-
 
 }

@@ -5,7 +5,15 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Products implements Serializable {
 
     @SerializedName("id")
@@ -46,5 +54,6 @@ public class Products implements Serializable {
 
     @SerializedName("categories")
     private List<Categories> categories;
+
 
 }

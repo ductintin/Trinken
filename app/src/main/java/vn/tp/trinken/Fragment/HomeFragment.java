@@ -1,7 +1,9 @@
 package vn.tp.trinken.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -61,7 +63,7 @@ public class HomeFragment extends Fragment {
     ProductAdapter productAdapter;
 
     APIService apiService;
-    List<Category> categories = new ArrayList<>();
+    List<Categories> categories = new ArrayList<>();
     List<Products> products = new ArrayList<>();
 
     View view;
@@ -102,6 +104,11 @@ public class HomeFragment extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
     }
 
     @Override
@@ -178,9 +185,9 @@ public class HomeFragment extends Fragment {
     }
     private void getCategories(){
         apiService = RetrofitClient.getRetrofit().create(APIService.class);
-        apiService.getCategoryAll().enqueue(new Callback<List<Category>>() {
+        apiService.getCategoryAll().enqueue(new Callback<List<Categories>>() {
             @Override
-            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+            public void onResponse(Call<List<Categories>> call, Response<List<Categories>> response) {
                 if(response.isSuccessful()){
                     categories = response.body();
                     Log.d("API",categories.toString());
@@ -203,7 +210,7 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Category>> call, Throwable t) {
+            public void onFailure(Call<List<Categories>> call, Throwable t) {
                 Log.d("logg", t.getMessage());
             }
         });

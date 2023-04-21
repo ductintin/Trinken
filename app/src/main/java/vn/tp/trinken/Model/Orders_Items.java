@@ -26,6 +26,7 @@ public class Orders_Items implements Serializable {
 
     @SerializedName("quantity")
     private int quantity;
+    
     @SerializedName("price")
     private int price;
 

@@ -30,5 +30,4 @@ public class Categories implements Serializable {
 
     private Date updatedAt;
 
-
 }
