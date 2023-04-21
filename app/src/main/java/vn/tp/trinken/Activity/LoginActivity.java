@@ -108,15 +108,13 @@ public class LoginActivity extends AppCompatActivity {
                         if(!obj.getBoolean("error")){
                             JSONObject userJson = obj.getJSONObject("user");
 
-                            Users user = new Users(
-                                    userJson.getInt("user_id")
-                            );
+                            int user_id = userJson.getInt("user_id");
 
                             String last_login = userJson.getString("last_login");
 
 
                             Bundle bundle = new Bundle();
-                            bundle.putSerializable("User",user);
+                            bundle.putSerializable("User",user_id);
                             Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
                             if(last_login == "null"){
                                 intent = new Intent(LoginActivity.this,WelcomeActivity.class);

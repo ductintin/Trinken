@@ -14,12 +14,14 @@ import android.widget.Toast;
 
 import vn.tp.trinken.R;
 import vn.tp.trinken.Model.*;
+import vn.tp.trinken.Dto.*;
 public class SignupProfileActivity extends AppCompatActivity {
 
     EditText edtFirstname, edtLastname, edtPhone, edtAddress;
     Button btnConfirm;
     RadioGroup radioGroupGender;
     RadioButton radioButtonGender;
+    int userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +29,7 @@ public class SignupProfileActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        int userId = bundle.getInt("user");
+        userId = bundle.getInt("user");
 
         AnhXa();
 
@@ -49,8 +51,8 @@ public class SignupProfileActivity extends AppCompatActivity {
                 String address = edtAddress.getText().toString().trim();
                 String gender = radioButtonGender.getText().toString().trim();
 
-                Users user = new Users(userId, firstName, lastName, phoneNumber, address, gender);
-                doSignupProfile(user);
+                UserDto userDto = new UserDto(userId, firstName, lastName, phoneNumber, address, gender);
+                doSignupProfile(userDto);
             }
         });
 
@@ -65,8 +67,8 @@ public class SignupProfileActivity extends AppCompatActivity {
         radioGroupGender = findViewById(R.id.radioGroupGender);
     }
 
-    private void doSignupProfile(Users user){
-        String [] users = user.toString().split(" ");
+    private void doSignupProfile(UserDto userDto){
+        String [] users = userDto.toString().split(" ");
         for (int i = 0; i < 5; i++) {
             if(TextUtils.isEmpty(users[i])){
 

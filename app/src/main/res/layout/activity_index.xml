@@ -7,14 +7,6 @@
     android:layout_height="match_parent">
 
 
-    <!--<include
-        android:id="@+id/include"
-        layout="@layout/toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></include>-->
-
-<!--    -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="0dp"

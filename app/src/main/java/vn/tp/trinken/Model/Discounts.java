@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class Discounts implements Serializable {
-    @SerializedName("discount_id")
+    @SerializedName("id")
     private int discount_id;
     @SerializedName("discount_code")
     private String discount_code;

@@ -4,43 +4,37 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
 public class Orders_Items implements Serializable {
-    @SerializedName("order_detail_id")
-    private int order_detail_id;
-    @SerializedName("order_id")
-    private int order_id;
-    @SerializedName("product_id")
-    private int product_id;
-    @SerializedName("quantity")
+
+    private int id;
     private int quantity;
-    @SerializedName("price")
-    private int price;
+    private double price;
+    private int product_id;
+    private int order_id;
+
+    public Orders_Items(int id, int quantity, double price, int product_id, int order_id) {
+        this.id = id;
+        this.quantity = quantity;
+        this.price = price;
+        this.product_id = product_id;
+        this.order_id = order_id;
+    }
 
     public Orders_Items() {
     }
 
-    public int getOrder_detail_id() {
-        return order_detail_id;
+    public int getId() {
+        return id;
     }
 
-    public void setOrder_detail_id(int order_detail_id) {
-        this.order_detail_id = order_detail_id;
-    }
-
-    public int getOrder_id() {
-        return order_id;
-    }
-
-    public void setOrder_id(int order_id) {
-        this.order_id = order_id;
-    }
-
-    public int getProduct_id() {
-        return product_id;
-    }
-
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getQuantity() {
@@ -51,19 +45,27 @@ public class Orders_Items implements Serializable {
         this.quantity = quantity;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public Orders_Items(int order_detail_id, int order_id, int product_id, int quantity, int price) {
-        this.order_detail_id = order_detail_id;
-        this.order_id = order_id;
+    public int getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(int product_id) {
         this.product_id = product_id;
-        this.quantity = quantity;
-        this.price = price;
+    }
+
+    public int getOrder_id() {
+        return order_id;
+    }
+
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
     }
 }

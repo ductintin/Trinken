@@ -15,7 +15,7 @@ import vn.tp.trinken.Model.*;
 public interface APIService {
 
     @GET("category/get-all")
-    Call<List<Category>> getCategoryAll();
+    Call<List<Categories>> getCategoryAll();
 
     @GET("product/get-all-active")
     Call<List<Products>> getAllActiveProduct();

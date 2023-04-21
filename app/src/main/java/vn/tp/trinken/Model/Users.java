@@ -5,8 +5,14 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
 public class Users implements Serializable {
-    @SerializedName("user_id")
+    @SerializedName("id")
     private int user_id;
     @SerializedName("user_name")
     private String user_name;
@@ -18,112 +24,37 @@ public class Users implements Serializable {
     private String last_name;
     @SerializedName("email")
     private String email;
+    @SerializedName("gender")
+    private String gender;
     @SerializedName("phone_number")
     private String phone_number;
     @SerializedName("address")
     private String address;
+
+    private String image;
+    private boolean active;
+    private Date createdAt;
+    private Date updatedAt;
+    private Date lastLogin;
     @SerializedName("role_id")
     private int role_id;
 
-    public Users(int user_id, String first_name, String last_name, String phone_number, String address, String gender) {
-        this.user_id = user_id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.phone_number = phone_number;
-        this.address = address;
-        this.gender = gender;
-    }
-
-    private String image;
-    private Boolean active;
-    private Date createdAt;
-    private Date updatedAt;
-    private Date last_login;
-
-    private String gender;
-
-    public String getImage() {
-        return image;
-    }
-
-    @Override
-    public String toString() {
-        return "Users{" +
-                "first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", last_name='" + phone_number + '\'' +
-                ", last_name='" + address + '\'' +
-                ", last_name='" + gender + '\'' +
-                '}';
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public Date getLast_login() {
-        return last_login;
-    }
-
-    public void setLast_login(Date last_login) {
-        this.last_login = last_login;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public Users(int user_id, String user_name, String password, String first_name, String last_name, String email, String phone_number, String address, int role_id, String image, Boolean active, Date createdAt, Date updatedAt, Date last_login, String gender) {
+    public Users(int user_id, String user_name, String password, String first_name, String last_name, String email, String gender, String phone_number, String address, String image, boolean active, Date createdAt, Date updatedAt, Date lastLogin, int role_id) {
         this.user_id = user_id;
         this.user_name = user_name;
         this.password = password;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
+        this.gender = gender;
         this.phone_number = phone_number;
         this.address = address;
-        this.role_id = role_id;
         this.image = image;
         this.active = active;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.last_login = last_login;
-        this.gender = gender;
-    }
-
-    public Users() {
-    }
-
-    public Users(int user_id) {
-        this.user_id = user_id;
+        this.lastLogin = lastLogin;
+        this.role_id = role_id;
     }
 
     public int getUser_id() {
@@ -174,6 +105,14 @@ public class Users implements Serializable {
         this.email = email;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public String getPhone_number() {
         return phone_number;
     }
@@ -190,6 +129,46 @@ public class Users implements Serializable {
         this.address = address;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Date getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
     public int getRole_id() {
         return role_id;
     }
@@ -197,8 +176,4 @@ public class Users implements Serializable {
     public void setRole_id(int role_id) {
         this.role_id = role_id;
     }
-
-
-
-
 }

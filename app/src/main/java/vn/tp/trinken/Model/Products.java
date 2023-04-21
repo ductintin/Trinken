@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+
 public class Products implements Serializable {
 
     @SerializedName("id")
@@ -34,6 +35,25 @@ public class Products implements Serializable {
     private Brands brand;
     @SerializedName("categories")
     private List<Categories> categories;
+
+    public Products(int product_id, String product_name, double price, String description, String image, int quantity, int sold, boolean active, Date deletedAt, Date createdAt, Date updatedAt, Brands brand, List<Categories> categories) {
+        this.product_id = product_id;
+        this.product_name = product_name;
+        this.price = price;
+        this.description = description;
+        this.image = image;
+        this.quantity = quantity;
+        this.sold = sold;
+        this.active = active;
+        this.deletedAt = deletedAt;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.brand = brand;
+        this.categories = categories;
+    }
+
+    public Products() {
+    }
 
     public int getProduct_id() {
         return product_id;
@@ -138,8 +158,4 @@ public class Products implements Serializable {
     public void setCategories(List<Categories> categories) {
         this.categories = categories;
     }
-
-    public Products() {
-    }
-
 }

@@ -4,33 +4,39 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
 public class Roles implements Serializable {
-    @SerializedName("role_id")
-    private int role_id;
-    @SerializedName("role_name")
-    private String role_name;
+    @SerializedName("id")
+    private int id;
+    @SerializedName("roleName")
+    private String roleName;
+
+    public Roles(int id, String roleName) {
+        this.id = id;
+        this.roleName = roleName;
+    }
 
     public Roles() {
     }
 
-    public Roles(int role_id, String role_name) {
-        this.role_id = role_id;
-        this.role_name = role_name;
+    public int getId() {
+        return id;
     }
 
-    public int getRole_id() {
-        return role_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setRole_id(int role_id) {
-        this.role_id = role_id;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public String getRole_name() {
-        return role_name;
-    }
-
-    public void setRole_name(String role_name) {
-        this.role_name = role_name;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }

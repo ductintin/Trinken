@@ -15,19 +15,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@null"
-        app:elevation="0dp"
+        app:elevation="100dp"
         >
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolBartProductDetail"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
+                android:layout_height="?attr/actionBarSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
             </androidx.appcompat.widget.Toolbar>
 
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/toolBartProductDetail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+
+                    android:id="@+id/PDArrowBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_back">
+
+                </ImageView>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -49,11 +71,12 @@
             <ImageView
                 android:id="@+id/imgPD"
                 android:padding="20dp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="357dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/coke"
-                app:elevation="20dp">
+                app:elevation="20dp"
+                android:layout_gravity="center">
 
             </ImageView>
 
@@ -64,14 +87,33 @@
                 android:background="@drawable/bg_product_detail"
                 android:orientation="vertical"
                 >
-                <TextView
-                    android:id="@+id/tvPDPrice"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Product Price"
-                    android:textAlignment="center">
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:id="@+id/tvPDPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textAlignment="center"
+                        android:textSize="30sp"
+                        android:textColor="@color/pastel_red">
 
-                </TextView>
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$"
+                        android:textAlignment="center"
+                        android:textSize="30sp"
+                        android:textColor="@color/pastel_red">
+
+                    </TextView>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -94,13 +136,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="end">
+                        android:gravity="end"
+                        >
 
                         <Button
                             android:id="@+id/btnPDDec"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:text="-">
+                            android:text="-"
+                            android:textColor="@color/white"
+                            android:textSize="24sp"
+                            android:backgroundTint="@color/pastel_red">
 
                         </Button>
 
@@ -118,7 +164,10 @@
                             android:id="@+id/btnPDInc"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:text="+">
+                            android:text="+"
+                            android:textColor="@color/white"
+                            android:textSize="24sp"
+                            android:backgroundTint="@color/pastel_red">
 
                         </Button>
                     </LinearLayout>
@@ -150,7 +199,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:elevation="30dp"
-        android:padding="20dp">
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -164,15 +213,31 @@
                 android:textAlignment="center">
 
             </TextView>
-            <TextView
-                android:id="@+id/tvPDTotal"
-                android:layout_width="226dp"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/muli_bold"
-                android:text="Total price"
-                android:textAlignment="center">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tvPDTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textColor="@color/pastel_red">
 
-            </TextView>
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textColor="@color/pastel_red">
+
+                </TextView>
+            </LinearLayout>
 
         </LinearLayout>
 

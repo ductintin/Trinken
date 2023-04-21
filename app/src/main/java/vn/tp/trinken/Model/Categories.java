@@ -5,11 +5,15 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 public class Categories implements Serializable {
-    @SerializedName("id")
-    private int category_id;
-    @SerializedName("name")
-    private String category_name;
+    private int id;
+
+    private String categoryName;
 
     private String image;
 
@@ -19,16 +23,32 @@ public class Categories implements Serializable {
 
     private Date updatedAt;
 
-    public Categories() {
-    }
-
-    public Categories(int category_id, String category_name, String image, boolean active, Date createdAt, Date updatedAt) {
-        this.category_id = category_id;
-        this.category_name = category_name;
+    public Categories(int id, String categoryName, String image, boolean active, Date createdAt, Date updatedAt) {
+        this.id = id;
+        this.categoryName = categoryName;
         this.image = image;
         this.active = active;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    public Categories() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public String getImage() {
@@ -61,21 +81,5 @@ public class Categories implements Serializable {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public int getCategory_id() {
-        return category_id;
-    }
-
-    public void setCategory_id(int category_id) {
-        this.category_id = category_id;
-    }
-
-    public String getCategory_name() {
-        return category_name;
-    }
-
-    public void setCategory_name(String category_name) {
-        this.category_name = category_name;
     }
 }

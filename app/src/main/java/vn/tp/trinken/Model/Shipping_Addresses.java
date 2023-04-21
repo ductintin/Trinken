@@ -6,56 +6,33 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Shipping_Addresses implements Serializable {
-    @SerializedName("address_id")
+    @SerializedName("id")
     private int address_id;
-    @SerializedName("user_id")
-    private int user_id;
+
     @SerializedName("name")
     private String name;
     @SerializedName("phone_number")
     private String phone_number;
     @SerializedName("address")
     private String address;
-    private boolean is_deleted;
+    private boolean active;
 
     private Date createdAt;
 
-    public boolean isIs_deleted() {
-        return is_deleted;
-    }
+    private Date updatedAt;
+    @SerializedName("user_id")
+    private int user_id;
 
-    public void setIs_deleted(boolean is_deleted) {
-        this.is_deleted = is_deleted;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public Shipping_Addresses(int address_id, int user_id, String name, String phone_number, String address, boolean is_deleted, Date createdAt, Date updatedAt) {
+    public Shipping_Addresses(int address_id, String name, String phone_number, String address, boolean active, Date createdAt, Date updatedAt, int user_id) {
         this.address_id = address_id;
-        this.user_id = user_id;
         this.name = name;
         this.phone_number = phone_number;
         this.address = address;
-        this.is_deleted = is_deleted;
+        this.active = active;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.user_id = user_id;
     }
-
-    private Date updatedAt;
 
     public Shipping_Addresses() {
     }
@@ -66,14 +43,6 @@ public class Shipping_Addresses implements Serializable {
 
     public void setAddress_id(int address_id) {
         this.address_id = address_id;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
     }
 
     public String getName() {
@@ -100,11 +69,35 @@ public class Shipping_Addresses implements Serializable {
         this.address = address;
     }
 
-    public Shipping_Addresses(int address_id, int user_id, String name, String phone_number, String address) {
-        this.address_id = address_id;
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
         this.user_id = user_id;
-        this.name = name;
-        this.phone_number = phone_number;
-        this.address = address;
     }
 }
