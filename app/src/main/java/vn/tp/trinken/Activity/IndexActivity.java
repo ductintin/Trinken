@@ -10,13 +10,18 @@ import androidx.fragment.app.FragmentTransaction;
 
 import vn.tp.trinken.*;
 import vn.tp.trinken.Fragment.*;
+import vn.tp.trinken.Model.*;
+import vn.tp.trinken.Contants.*;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
+import java.text.ParseException;
 
 public class IndexActivity extends AppCompatActivity implements NavigationBarView
         .OnItemSelectedListener{
@@ -29,19 +34,35 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
     ProfileFragment profileFragment = new ProfileFragment();
     Toolbar toolbar;
 
+    User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.Theme_Trinken_Home);
         setContentView(R.layout.activity_index);
-        AnhXa();
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
-        bottomNavigationView
-                .setOnItemSelectedListener(this);
-        bottomNavigationView.setSelectedItemId(R.id.home);
+        if(SharedPrefManager.getInstance(this).isLoggedIn()){
+            try {
+                user = SharedPrefManager.getInstance(this).getUser();
+                Log.d("User ne", user.toString());
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            AnhXa();
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+            bottomNavigationView
+                    .setOnItemSelectedListener(this);
+            bottomNavigationView.setSelectedItemId(R.id.home);
+        }else{
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+
+
     }
 
     private void AnhXa(){

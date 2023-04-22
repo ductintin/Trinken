@@ -116,6 +116,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                         tvPrice.setText(String.valueOf(product.getPrice()));
                         tvProductName.setText(product.getProduct_name());
                         tvProductDescription.setText(product.getDescription());
+                        tvTotal.setText(String.valueOf(product.getPrice()));
                         price = Double.parseDouble(tvPrice.getText().toString().trim());
 
                     }catch (Exception e){

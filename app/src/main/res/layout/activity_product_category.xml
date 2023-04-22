@@ -7,29 +7,63 @@
     tools:context=".Activity.ProductCategoryActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout2"
+        android:id="@+id/appBarLayoutPC"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@null"
-        app:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@null"
+        app:elevation="200dp"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolBartProductCategory"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
+                android:layout_height="?attr/actionBarSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
             </androidx.appcompat.widget.Toolbar>
 
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/toolBartProductCategory"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+
+                    android:id="@+id/PCArrowBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_back">
+
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/tvPC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CategoryName"
+                    android:textSize="30sp"
+                    android:fontFamily="@font/muli_bold"
+                    android:textColor="@color/dark_green"
+                    android:textAlignment="center">
+
+                </TextView>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -38,20 +72,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutPC">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvCategoryProduct"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="CategoryName">
-
-            </TextView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcProductCategory"
