@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@null"
-        app:elevation="100dp"
+        app:elevation="200dp"
         >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -75,7 +75,6 @@
                 android:layout_height="357dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/coke"
-                app:elevation="20dp"
                 android:layout_gravity="center">
 
             </ImageView>
