@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Users implements Serializable {
+public class User implements Serializable {
     @SerializedName("id")
     private int user_id;
 
