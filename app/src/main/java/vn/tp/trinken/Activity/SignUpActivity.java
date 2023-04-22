@@ -118,7 +118,6 @@ public class SignUpActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = new JSONObject((response.errorBody().string()));
                         String message= jsonObject.getString("message");
-                        Log.d("Hello", message);
                         Toast.makeText(SignUpActivity.this, message, Toast.LENGTH_SHORT).show();
 
                     } catch (Exception e) {

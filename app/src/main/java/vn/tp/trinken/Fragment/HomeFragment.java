@@ -1,6 +1,10 @@
 package vn.tp.trinken.Fragment;
 
+import static android.content.Intent.getIntent;
+import static android.content.Intent.getIntentOld;
+
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -68,6 +72,8 @@ public class HomeFragment extends Fragment {
 
     View view;
 
+    Boolean isLoginScreen;
+
     private ViewPager viewPager;
     private CircleIndicator circleIndicator;
     private List<Images> imagesList;
@@ -125,6 +131,10 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
+        Intent intent= new Intent();
+        if (intent.hasExtra("isLoginScreen")) {
+            isLoginScreen = intent.getBooleanExtra("isLoginScreen", true);
+        }
         AnhXa();
         getCategories();
         loadActiveProduct();
@@ -153,6 +163,7 @@ public class HomeFragment extends Fragment {
             public void onPageScrollStateChanged(int state) {
 
             }
+
         });
         return view;
     }
@@ -259,4 +270,6 @@ public class HomeFragment extends Fragment {
         super.onResume();
         handler.postDelayed(runnable, 3000);
     }
+
+
 }

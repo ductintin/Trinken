@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Users implements Serializable {
+public class User implements Serializable {
     @SerializedName("id")
     private int user_id;
 
@@ -50,6 +50,7 @@ public class Users implements Serializable {
 
     private Date updatedAt;
 
+    @SerializedName("lastLogin")
     private Date last_login;
 
     private String gender;

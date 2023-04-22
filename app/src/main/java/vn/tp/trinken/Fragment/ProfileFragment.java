@@ -7,7 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import vn.tp.trinken.API.SharedPreferences;
+import vn.tp.trinken.Contants.SharedPrefManager;
 import vn.tp.trinken.R;
 
 /**
@@ -25,6 +28,10 @@ public class ProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    //
+    Button btnLogout;
+    View view;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -61,6 +68,17 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        view = inflater.inflate(R.layout.fragment_profile, container, false);
+        Anhxa();
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPrefManager.getInstance(getActivity().getApplicationContext()).logout();
+            }
+        });
+        return view;
+    }
+    private void Anhxa(){
+        btnLogout = view.findViewById(R.id.btn_Logout);
     }
 }

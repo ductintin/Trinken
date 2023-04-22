@@ -3,6 +3,7 @@ package vn.tp.trinken.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -21,7 +22,7 @@ public class SignupProfileActivity extends AppCompatActivity {
     Button btnConfirm;
     RadioGroup radioGroupGender;
     RadioButton radioButtonGender;
-    int userId;
+    User user = new User();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +30,9 @@ public class SignupProfileActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        userId = bundle.getInt("user");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            user = bundle.getSerializable("User",User.class);
+        }
 
         AnhXa();
 
@@ -51,7 +54,7 @@ public class SignupProfileActivity extends AppCompatActivity {
                 String address = edtAddress.getText().toString().trim();
                 String gender = radioButtonGender.getText().toString().trim();
 
-                UserDto userDto = new UserDto(userId, firstName, lastName, phoneNumber, address, gender);
+                UserDto userDto = new UserDto(user.getUser_id(), firstName, lastName, phoneNumber, address, gender);
                 doSignupProfile(userDto);
             }
         });
