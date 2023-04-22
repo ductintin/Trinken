@@ -26,7 +26,7 @@ public class Orders implements Serializable {
     private int total_amount;
 
     @SerializedName("customer")
-    private Users customer;
+    private User customer;
 
     @SerializedName("paymentmethod")
     private Payment_Methods payment_methods;

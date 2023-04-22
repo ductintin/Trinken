@@ -93,7 +93,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             product_name = (TextView) itemView.findViewById(R.id.tvProductName);
             product_card = (CardView) itemView.findViewById(R.id.cardProduct);
             product_price = (TextView) itemView.findViewById(R.id.tvProductPrice);
-            add_product = (ImageButton) itemView.findViewById(R.id.imgbtnAddProduct);
+            //add_product = (ImageButton) itemView.findViewById(R.id.imgbtnAddProduct);
             product_id = 0;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

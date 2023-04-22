@@ -14,11 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.util.Date;
 
 import retrofit2.Call;
@@ -45,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         if(SharedPrefManager.getInstance(this).isLoggedIn()){
             finish();
-            startActivity(new Intent(this,HomeActivity.class));
+            startActivity(new Intent(this,IndexActivity.class));
         }else {
             AnhXa();
             btnSignup.setOnClickListener(new View.OnClickListener() {
@@ -109,29 +112,39 @@ public class LoginActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     try{
                         JSONObject obj = new JSONObject(response.body().toString());
-                        Toast.makeText(LoginActivity.this, ""+obj, Toast.LENGTH_SHORT).show();
-                        Log.d("User", obj.toString());
+                        String json = obj.getJSONObject("user").toString();
+                        Toast.makeText(LoginActivity.this, ""+json, Toast.LENGTH_SHORT).show();
                         if(!obj.getBoolean("error")){
-                            JSONObject userJson = obj.getJSONObject("user");
-
-                            int user_id = userJson.getInt("user_id");
-
-                            String last_login = userJson.getString("last_login");
-
-
+                            Gson gson = new Gson();
+                            User user= gson.fromJson(json, User.class);
+                            Log.d("User", user.toString());
+                            SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
                             Bundle bundle = new Bundle();
-                            bundle.putSerializable("User",user_id);
-                            Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
-                            if(last_login == "null"){
-                                intent = new Intent(LoginActivity.this,WelcomeActivity.class);
+                            bundle.putSerializable("User",user);
+                            Intent intent = new Intent();
+                            if(user.getLast_login()== null){
+                                intent = new Intent(LoginActivity.this,SignupProfileActivity.class);
+                                startActivity(intent);
+                            }else{
+                                intent = new Intent(LoginActivity.this, IndexActivity.class);
+                                intent.putExtra("isLogginScreen",false);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
                             }
-                            intent.putExtras(bundle);
-                            startActivity(intent);
+
                         }else{
                             int status_code = response.code();
                             Log.d("Failed", obj.toString());
                         }
                     }catch (JSONException e){
+                        throw new RuntimeException(e);
+                    }
+                }else{
+                    try {
+                        JSONObject jsonObject = new JSONObject((response.errorBody().string()));
+                        String message= jsonObject.getString("message");
+                        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                    }catch (Exception e){
                         throw new RuntimeException(e);
                     }
                 }
@@ -141,6 +154,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(Call<JsonElement> call, Throwable t) {
                 Log.d("logging", t.getMessage());
             }
+
+
         });
 
 

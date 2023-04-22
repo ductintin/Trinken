@@ -50,6 +50,7 @@ public class User implements Serializable {
 
     private Date updatedAt;
 
+    @SerializedName("lastLogin")
     private Date last_login;
 
     private String gender;

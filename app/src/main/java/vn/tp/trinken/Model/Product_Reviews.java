@@ -21,7 +21,7 @@ public class Product_Reviews implements Serializable {
     private Products products;
 
     @SerializedName("customer")
-    private Users customer;
+    private User customer;
 
     @SerializedName("rating")
     private int rating;

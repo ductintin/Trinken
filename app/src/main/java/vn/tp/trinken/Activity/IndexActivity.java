@@ -10,6 +10,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import vn.tp.trinken.*;
 import vn.tp.trinken.Fragment.*;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -90,5 +92,6 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);
     }
+
 
 }
