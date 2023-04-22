@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import vn.tp.trinken.API.SharedPreferences;
 import vn.tp.trinken.Contants.SharedPrefManager;
 import vn.tp.trinken.R;
 

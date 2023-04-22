@@ -40,10 +40,10 @@
             android:name=".Activity.SignUpActivity"
             android:exported="true" />
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -235,6 +235,7 @@ public class HomeFragment extends Fragment {
                 if(response.isSuccessful()){
                    try {
                        products = response.body();
+
                        productAdapter = new ProductAdapter(getActivity().getApplicationContext(), products, R.layout.item_product_col);
                        rcHotProduct.setHasFixedSize(true);
                        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 2);

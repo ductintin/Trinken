@@ -1,20 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <LinearLayout
+        android:id="@+id/layoutDiscountRow"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:background="@drawable/bg_discount_tag_row"
+        android:backgroundTint="@color/pastel_red"
+        android:gravity="center"
+        android:elevation="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:textColor="@color/white">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvProductDiscountRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:textColor="@color/white">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="%"
+            android:textColor="@color/white">
+
+        </TextView>
+
+
+    </LinearLayout>
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewProductRow"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
+        android:backgroundTint="@color/pastel_white"
+        app:cardCornerRadius="8dp"
         app:cardElevation="10dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardCornerRadius="8dp"
-        android:backgroundTint="@color/pastel_white">
-
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <LinearLayout
@@ -25,13 +66,15 @@
             >
 
             <ImageView
-                android:id="@+id/image_cate"
+                android:id="@+id/imgProductRow"
                 android:layout_width="120dp"
-                android:layout_height="80dp"
+                android:layout_height="match_parent"
+                android:padding="10dp"
                 android:src="@color/dark_green"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/coke">
 
             </ImageView>
 
@@ -39,44 +82,97 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingLeft="20dp">
+                android:paddingLeft="20dp"
+                android:weightSum="4"
+                android:paddingRight="10dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/product_name"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/poppins_bold">
-
-                </TextView>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/product_description">
-
-                </TextView>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_weight="1">
 
                     <TextView
-                        android:layout_width="202dp"
+                        android:id="@+id/tvProductNameRow"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="@string/product_name"
+                        android:textColor="@color/black"
+                        >
+
+                    </TextView>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvProductDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Desc"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:maxLength="50"
+                    android:ellipsize="end"
+                    >
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvProductPriceSale"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Price sale"
+                    android:layout_weight="1"
+                    android:textAlignment="textEnd"
+                    android:paddingRight="10dp" >
+
+                </TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_weight="1"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
                         android:text="@string/product_star"
                         android:textColor="@color/black">
 
                     </TextView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/product_price"
-                        android:padding="5dp"
-                        android:text="@string/product_price"
-                        android:textColor="@color/pastel_white">
+                    <LinearLayout
 
-                    </TextView>
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/dark_green"
+                        android:background="@drawable/product_price"
+                        android:gravity="center"
+                       >
+
+                        <TextView
+                            android:id="@+id/tvProductPriceRow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0.8"
+                            android:textColor="@color/pastel_white">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="$"
+                            android:textColor="@color/pastel_white">
+
+                        </TextView>
+                    </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>
