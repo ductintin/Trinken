@@ -2,6 +2,7 @@ package vn.tp.trinken.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +59,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                 .into(holder.product_image);
         holder.product_id = product.getProduct_id();
         holder.product_price.setText(String.valueOf(product.getPrice()));
+
+        if(product.getDiscount()!=null){
+            holder.tvProductDiscount.setText(String.valueOf(product.getDiscount().getDiscount_value()));
+            holder.product_price.setTextSize(10);
+            holder.product_price.setPaintFlags(holder.product_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.tvProductPriceDiscount.setText(String.valueOf(product.getPrice()*(100-product.getDiscount().getDiscount_value())));
+        }else{
+            holder.layoutProductDiscount.setVisibility(View.INVISIBLE);
+            holder.tvProductPriceDiscount.setVisibility(View.INVISIBLE);
+
+        }
         holder.product_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +97,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         TextView product_name;
         CardView product_card;
         TextView product_price;
-        ImageButton add_product;
+        ImageView add_product;
+        TextView tvProductDiscount;
+        TextView tvProductPriceDiscount;
+        LinearLayout layoutProductDiscount;
         int product_id;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -93,7 +109,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             product_name = (TextView) itemView.findViewById(R.id.tvProductName);
             product_card = (CardView) itemView.findViewById(R.id.cardProduct);
             product_price = (TextView) itemView.findViewById(R.id.tvProductPrice);
-            //add_product = (ImageButton) itemView.findViewById(R.id.imgbtnAddProduct);
+
+            add_product = (ImageView) itemView.findViewById(R.id.imgAddProductToCart);
+            tvProductDiscount = (TextView) itemView.findViewById(R.id.tvProductDiscount);
+            tvProductPriceDiscount = (TextView) itemView.findViewById(R.id.tvProductPriceDiscount);
+            layoutProductDiscount = (LinearLayout) itemView.findViewById(R.id.layoutDiscount);
+
             product_id = 0;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -29,6 +29,42 @@
 
             >
 
+            <LinearLayout
+                android:id="@+id/layoutDiscount"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_discount_tag"
+                android:backgroundTint="@color/dark_green"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textColor="@color/white">
+
+                </TextView>
+                <TextView
+                    android:id="@+id/tvProductDiscount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:textColor="@color/white">
+
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="%"
+                    android:textColor="@color/white">
+
+                </TextView>
+
+
+            </LinearLayout>
+
 
             <ImageView
                 android:id="@+id/imageProduct"
@@ -80,6 +116,16 @@
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
+                        ></TextView>
+                    <TextView
+                        android:id="@+id/tvProductPriceDiscount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Price"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center"
                         ></TextView>
 
                     <TextView
@@ -99,6 +145,7 @@
                     android:gravity="end">
 
                     <ImageView
+                        android:id="@+id/imgAddProductToCart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleX="1.5"

@@ -23,14 +23,16 @@ public class SharedPrefManager {
     private static final String KEY_CART = "keycartitems";
     private static final String KEY_FIRSTNAME = "keyfirstname";
     private static final String KEY_LASTNAME = "keylastname";
-    private static final String KEY_ROLEID = "keyphone";
-    private static final String KEY_PHONE= "keyroleid";
+    private static final String KEY_ROLE = "keyrole";
+    private static final String KEY_PHONE= "keyphone";
     private static final String KEY_LASTLOGIN = "keylastlogin";
     private static final String KEY_CREATEDAT = "keycreatedat";
     private static final String KEY_UPDATEDAT = "keyupdatedat";
     private static final String KEY_ADDRESS = "keyaddress";
 
     Gson gson = new Gson();
+    Type typeDate = new TypeToken< ArrayList < Date >>() {}.getType();
+    Type typeRole = new TypeToken< ArrayList < Roles >>() {}.getType();
 
     private static SharedPrefManager mInstance;
     private static Context ctx;
@@ -68,7 +70,7 @@ public class SharedPrefManager {
     }
     public User getUser(){
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
-        Type type = new TypeToken< ArrayList < Date >>() {}.getType();
+
 
         return new User(
                         sharedPreferences.getInt(KEY_ID,-1),
@@ -87,6 +89,7 @@ public class SharedPrefManager {
                 gson.fromJson(sharedPreferences.getString(KEY_LASTLOGIN,null), type),
                 gson.fromJson(sharedPreferences.getString(KEY_ROLEID,null), (Type) Roles.class)
                 );
+
     }
     public void logout(){
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);

@@ -44,9 +44,11 @@ public class WelcomeActivity extends AppCompatActivity {
         sliderModalArrayList = new ArrayList<>();
 
         // on below 3 lines we are adding data to our array list.
+
         sliderModalArrayList.add(new SliderModal("Trinken", "DISCOVERY","", "delivery",  "YOUR FAVORITE DRINK"));
         sliderModalArrayList.add(new SliderModal("Trinken", "CHOOSE","", "welcome_img2",  "HE DRINK YOU LOVE"));
         sliderModalArrayList.add(new SliderModal("Trinken", "DELIVERY","", "shipper","ENJOY THE DRINK"));
+
 
         // below line is use to add our array list to adapter class.
         adapter = new SliderAdapter(WelcomeActivity.this, sliderModalArrayList);
