@@ -45,7 +45,7 @@ public class SharedPrefManager {
         }
         return mInstance;
     }
-    public void userLogin(Users user){
+    public void userLogin(User user){
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
@@ -54,7 +54,7 @@ public class SharedPrefManager {
         editor.putString(KEY_EMAIL, user.getEmail());
         editor.putString(KEY_GENDER, user.getGender());
         editor.putString(KEY_IMAGES, user.getImage());
-        editor.putString(KEY_ROLE, String.valueOf(user.getRoles()));
+        editor.putString(KEY_ROLEID, gson.toJson(user.getRoles()));
         editor.putString(KEY_FIRSTNAME, user.getFirst_name());
         editor.putString(KEY_LASTNAME, user.getLast_name());
         editor.putString(KEY_PHONE, user.getPhone_number());
@@ -68,27 +68,28 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_USERNAME,null) !=null;
     }
-    public Users getUser(){
+    public User getUser(){
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
 
 
-        return new Users(
-                sharedPreferences.getInt(KEY_ID,-1),
-                sharedPreferences.getString(KEY_USERNAME,null),
-                null,
+        return new User(
+                        sharedPreferences.getInt(KEY_ID,-1),
+                        sharedPreferences.getString(KEY_USERNAME,null),
                 sharedPreferences.getString(KEY_FIRSTNAME,null),
                 sharedPreferences.getString(KEY_LASTNAME,null),
                 sharedPreferences.getString(KEY_EMAIL,null),
+                sharedPreferences.getString(KEY_GENDER,null),
                 sharedPreferences.getString(KEY_PHONE,null),
                 sharedPreferences.getString(KEY_ADDRESS,null),
-                gson.fromJson(sharedPreferences.getString(KEY_ROLE,null), typeRole),
+                null,
                 sharedPreferences.getString(KEY_IMAGES,null),
                 true,
-                gson.fromJson(sharedPreferences.getString(KEY_CREATEDAT,null), typeDate),
-                gson.fromJson(sharedPreferences.getString(KEY_UPDATEDAT,null), typeDate),
-                gson.fromJson(sharedPreferences.getString(KEY_LASTLOGIN,null), typeDate),
-                sharedPreferences.getString(KEY_GENDER,null)
-        );
+                gson.fromJson(sharedPreferences.getString(KEY_CREATEDAT,null), type),
+                gson.fromJson(sharedPreferences.getString(KEY_UPDATEDAT,null), type),
+                gson.fromJson(sharedPreferences.getString(KEY_LASTLOGIN,null), type),
+                gson.fromJson(sharedPreferences.getString(KEY_ROLEID,null), (Type) Roles.class)
+                );
+
     }
     public void logout(){
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);

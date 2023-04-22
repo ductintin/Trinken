@@ -109,10 +109,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             product_name = (TextView) itemView.findViewById(R.id.tvProductName);
             product_card = (CardView) itemView.findViewById(R.id.cardProduct);
             product_price = (TextView) itemView.findViewById(R.id.tvProductPrice);
+
             add_product = (ImageView) itemView.findViewById(R.id.imgAddProductToCart);
             tvProductDiscount = (TextView) itemView.findViewById(R.id.tvProductDiscount);
             tvProductPriceDiscount = (TextView) itemView.findViewById(R.id.tvProductPriceDiscount);
             layoutProductDiscount = (LinearLayout) itemView.findViewById(R.id.layoutDiscount);
+
             product_id = 0;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

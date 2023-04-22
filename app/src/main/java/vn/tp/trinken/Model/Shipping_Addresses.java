@@ -20,7 +20,7 @@ public class Shipping_Addresses implements Serializable {
     private int address_id;
 
     @SerializedName("user")
-    private Users users;
+    private User user;
 
     @SerializedName("name")
     private String name;
