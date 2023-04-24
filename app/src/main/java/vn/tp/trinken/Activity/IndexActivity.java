@@ -34,6 +34,8 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
     ProfileFragment profileFragment = new ProfileFragment();
     Toolbar toolbar;
 
+
+    Boolean isLogginScreen = false;
     User user;
 
     @Override
@@ -41,8 +43,9 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
         super.onCreate(savedInstanceState);
         setTheme(R.style.Theme_Trinken_Home);
         setContentView(R.layout.activity_index);
-
-
+        Intent intent = getIntent();
+        isLogginScreen = intent.getBooleanExtra("isLogginScreen",true);
+        AnhXa();
         if(SharedPrefManager.getInstance(this).isLoggedIn()){
             try {
                 user = SharedPrefManager.getInstance(this).getUser();
@@ -112,6 +115,16 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isLogginScreen == true) {
+            // Nếu chưa đăng nhập, không cho phép quay lại
+            finishAffinity();
+        }
+        // Nếu đã đăng nhập, cho phép quay lại bình thường
+            super.onBackPressed();
     }
 
 

@@ -10,6 +10,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import vn.tp.trinken.Model.*;
 public interface APIService {
@@ -36,5 +37,7 @@ public interface APIService {
     @POST("user/signup")
     Call<JsonElement> signup(@Body SignUp signUp);
 
+    @PUT("user/logout/userid={id}")
+    Call<JsonElement> logout(@Path("id") Integer userId);
 
 }

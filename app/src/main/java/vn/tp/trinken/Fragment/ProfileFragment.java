@@ -4,12 +4,21 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.gson.JsonElement;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import vn.tp.trinken.API.APIService;
+import vn.tp.trinken.API.RetrofitClient;
 import vn.tp.trinken.Contants.SharedPrefManager;
+import vn.tp.trinken.Model.User;
 import vn.tp.trinken.R;
 
 /**
@@ -31,6 +40,7 @@ public class ProfileFragment extends Fragment {
     //
     Button btnLogout;
     View view;
+    APIService apiService;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -72,12 +82,29 @@ public class ProfileFragment extends Fragment {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPrefManager.getInstance(getActivity().getApplicationContext()).logout();
+                User user = SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser();
+                Log.d("a",user.toString());
+                doLogout(user.getUser_id());
             }
         });
         return view;
     }
     private void Anhxa(){
         btnLogout = view.findViewById(R.id.btn_Logout);
+    }
+
+    public void doLogout(Integer id){
+        apiService = RetrofitClient.getRetrofit().create(APIService.class);
+        apiService.logout(id).enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                if(response.isSuccessful()){
+                    SharedPrefManager.getInstance(getActivity().getApplicationContext()).logout();
+                }
+            }
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+            }
+        });
     }
 }
