@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -31,8 +34,11 @@ public class SharedPrefManager {
     private static final String KEY_ADDRESS = "keyaddress";
 
     Gson gson = new Gson();
-    Type typeDate = new TypeToken< ArrayList < Date >>() {}.getType();
-    Type typeRole = new TypeToken< ArrayList < Roles >>() {}.getType();
+    Gson gson2 = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+    //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//    Type typeDate = new TypeToken< ArrayList < Date >>() {}.getType();
+//    Type typeRole = new TypeToken< ArrayList < Roles >>() {}.getType();
 
     private static SharedPrefManager mInstance;
     private static Context ctx;
@@ -54,7 +60,7 @@ public class SharedPrefManager {
         editor.putString(KEY_EMAIL, user.getEmail());
         editor.putString(KEY_GENDER, user.getGender());
         editor.putString(KEY_IMAGES, user.getImage());
-        editor.putString(KEY_ROLEID, gson.toJson(user.getRoles()));
+        editor.putString(KEY_ROLE, gson.toJson(user.getRoles()));
         editor.putString(KEY_FIRSTNAME, user.getFirst_name());
         editor.putString(KEY_LASTNAME, user.getLast_name());
         editor.putString(KEY_PHONE, user.getPhone_number());
@@ -84,10 +90,10 @@ public class SharedPrefManager {
                 null,
                 sharedPreferences.getString(KEY_IMAGES,null),
                 true,
-                gson.fromJson(sharedPreferences.getString(KEY_CREATEDAT,null), type),
-                gson.fromJson(sharedPreferences.getString(KEY_UPDATEDAT,null), type),
-                gson.fromJson(sharedPreferences.getString(KEY_LASTLOGIN,null), type),
-                gson.fromJson(sharedPreferences.getString(KEY_ROLEID,null), (Type) Roles.class)
+                formatter.parse(sharedPreferences.getString(KEY_CREATEDAT,"")),
+                gson2.fromJson(sharedPreferences.getString(KEY_UPDATEDAT,null),Date.class),
+                gson2.fromJson(sharedPreferences.getString(KEY_LASTLOGIN,null), Date.class),
+                gson.fromJson(sharedPreferences.getString(KEY_ROLE,null), (Type) Roles.class)
                 );
 
     }
