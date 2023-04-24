@@ -8,27 +8,20 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.util.Date;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import vn.tp.trinken.*;
-import vn.tp.trinken.Activity.*;
 import vn.tp.trinken.API.*;
 import vn.tp.trinken.Contants.SharedPrefManager;
 import vn.tp.trinken.Model.*;
@@ -49,6 +42,20 @@ public class LoginActivity extends AppCompatActivity {
         if(SharedPrefManager.getInstance(this).isLoggedIn()){
             finish();
             startActivity(new Intent(this,IndexActivity.class));
+//            try {
+//                User user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+//                Log.d("Text",user.toString());
+//                if(user.getLast_login()!=null){
+//                    finish();
+//                    startActivity(new Intent(this,IndexActivity.class));
+//                }else{
+//                    finish();
+//                    startActivity(new Intent(this,SignupProfileActivity.class));
+//                }
+//            } catch (ParseException e) {
+//                throw new RuntimeException(e);
+//            }
+
         }else {
             AnhXa();
             btnSignup.setOnClickListener(new View.OnClickListener() {

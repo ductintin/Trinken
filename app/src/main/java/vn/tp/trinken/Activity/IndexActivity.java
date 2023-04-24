@@ -2,16 +2,12 @@ package vn.tp.trinken.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import vn.tp.trinken.*;
+import vn.tp.trinken.Contants.SharedPrefManager;
 import vn.tp.trinken.Fragment.*;
 import vn.tp.trinken.Model.*;
-import vn.tp.trinken.Contants.*;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -61,8 +57,8 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
                     .setOnItemSelectedListener(this);
             bottomNavigationView.setSelectedItemId(R.id.home);
         }else{
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+            Intent intents = new Intent(this, LoginActivity.class);
+            startActivity(intents);
         }
 
 
