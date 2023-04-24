@@ -55,4 +55,7 @@ public class User implements Serializable {
 
     private String gender;
 
+    @SerializedName("cart")
+    private Cart cart;
+
 }

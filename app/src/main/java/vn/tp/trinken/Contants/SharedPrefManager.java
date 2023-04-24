@@ -9,10 +9,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import vn.tp.trinken.Model.*;
 import vn.tp.trinken.Activity.*;
@@ -23,7 +24,7 @@ public class SharedPrefManager {
     private static final String KEY_GENDER = "keygender";
     private static final String KEY_ID = "keyid";
     private static final String KEY_IMAGES = "keyimages";
-    private static final String KEY_CART = "keycartitems";
+    private static final String KEY_CART = "keycart";
     private static final String KEY_FIRSTNAME = "keyfirstname";
     private static final String KEY_LASTNAME = "keylastname";
     private static final String KEY_ROLE = "keyrole";
@@ -34,12 +35,8 @@ public class SharedPrefManager {
     private static final String KEY_ADDRESS = "keyaddress";
 
     Gson gson = new Gson();
-    Gson gson2 = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-    //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//    Type typeDate = new TypeToken< ArrayList < Date >>() {}.getType();
-//    Type typeRole = new TypeToken< ArrayList < Roles >>() {}.getType();
 
+    SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", new Locale("en", "VN"));
     private static SharedPrefManager mInstance;
     private static Context ctx;
     private SharedPrefManager(Context context){
@@ -68,32 +65,33 @@ public class SharedPrefManager {
         editor.putString(KEY_CREATEDAT, String.valueOf(user.getCreatedAt()));
         editor.putString(KEY_UPDATEDAT, String.valueOf(user.getUpdatedAt()));
         editor.putString(KEY_LASTLOGIN, String.valueOf(user.getLast_login()));
+        editor.putString(KEY_CART, gson.toJson(user.getCart()));
+
         editor.apply();
     }
     public boolean isLoggedIn(){
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_USERNAME,null) !=null;
     }
-    public User getUser(){
+    public User getUser() throws ParseException {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
-
-
         return new User(
-                        sharedPreferences.getInt(KEY_ID,-1),
-                        sharedPreferences.getString(KEY_USERNAME,null),
+                sharedPreferences.getInt(KEY_ID,-1),
+                sharedPreferences.getString(KEY_USERNAME,null),
+                "",
                 sharedPreferences.getString(KEY_FIRSTNAME,null),
                 sharedPreferences.getString(KEY_LASTNAME,null),
                 sharedPreferences.getString(KEY_EMAIL,null),
-                sharedPreferences.getString(KEY_GENDER,null),
                 sharedPreferences.getString(KEY_PHONE,null),
                 sharedPreferences.getString(KEY_ADDRESS,null),
-                null,
+                gson.fromJson(sharedPreferences.getString(KEY_ROLE,null), Roles.class),
                 sharedPreferences.getString(KEY_IMAGES,null),
                 true,
-                formatter.parse(sharedPreferences.getString(KEY_CREATEDAT,"")),
-                gson2.fromJson(sharedPreferences.getString(KEY_UPDATEDAT,null),Date.class),
-                gson2.fromJson(sharedPreferences.getString(KEY_LASTLOGIN,null), Date.class),
-                gson.fromJson(sharedPreferences.getString(KEY_ROLE,null), (Type) Roles.class)
+                dateFormat.parse(sharedPreferences.getString(KEY_CREATEDAT,"")),
+                dateFormat.parse(sharedPreferences.getString(KEY_UPDATEDAT,"")),
+                dateFormat.parse(sharedPreferences.getString(KEY_LASTLOGIN,"")),
+                sharedPreferences.getString(KEY_GENDER,null),
+                gson.fromJson(sharedPreferences.getString(KEY_CART,null), Cart.class)
                 );
 
     }

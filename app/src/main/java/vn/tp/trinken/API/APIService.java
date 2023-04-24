@@ -24,6 +24,9 @@ public interface APIService {
     @GET("product/get-product-by-id/{id}")
     Call<Products> getProductById(@Path("id") int id);
 
+    @GET("product/get-product-by-category/active={active}/cateid={id}")
+    Call<List<Products>> getProductByCategory(@Path("active") boolean active, @Path("id") int cate_id);
+
     @FormUrlEncoded
     @POST("user/login")
     Call<JsonElement> login(@Field("username") String username, @Field("password") String password);
@@ -36,4 +39,5 @@ public interface APIService {
 
     @PUT("user/logout/userid={id}")
     Call<JsonElement> logout(@Path("id") Integer userId);
+
 }

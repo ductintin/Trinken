@@ -119,9 +119,11 @@ public class LoginActivity extends AppCompatActivity {
                             User user= gson.fromJson(json, User.class);
                             Log.d("User", user.toString());
                             SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("User",user);
                             bundle.putBoolean("isLogginScreen",true);
+
                             Intent intent = new Intent();
                             if(user.getLast_login()== null){
                                 intent = new Intent(LoginActivity.this,SignupProfileActivity.class);
