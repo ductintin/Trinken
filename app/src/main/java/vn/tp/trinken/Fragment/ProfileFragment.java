@@ -12,6 +12,8 @@ import android.widget.Button;
 
 import com.google.gson.JsonElement;
 
+import java.text.ParseException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -82,9 +84,15 @@ public class ProfileFragment extends Fragment {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User user = SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser();
-                Log.d("a",user.toString());
-                doLogout(user.getUser_id());
+                User user = null;
+                try {
+                    user = SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser();
+                    Log.d("a",user.toString());
+                    doLogout(user.getUser_id());
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+
             }
         });
         return view;

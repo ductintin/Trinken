@@ -53,6 +53,8 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }
+
+            Log.d("User ne", user.getRoles().toString());
             AnhXa();
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayUseLogoEnabled(true);
@@ -61,7 +63,7 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
                     .setOnItemSelectedListener(this);
             bottomNavigationView.setSelectedItemId(R.id.home);
         }else{
-            Intent intent = new Intent(this, LoginActivity.class);
+            intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
 

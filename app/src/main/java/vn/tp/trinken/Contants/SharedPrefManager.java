@@ -54,17 +54,17 @@ public class SharedPrefManager {
 
         editor.putInt(KEY_ID, user.getUser_id());
         editor.putString(KEY_USERNAME, user.getUser_name());
-        editor.putString(KEY_EMAIL, user.getEmail());
-        editor.putString(KEY_GENDER, user.getGender());
-        editor.putString(KEY_IMAGES, user.getImage());
-        editor.putString(KEY_ROLE, gson.toJson(user.getRoles()));
-        editor.putString(KEY_FIRSTNAME, user.getFirst_name());
-        editor.putString(KEY_LASTNAME, user.getLast_name());
-        editor.putString(KEY_PHONE, user.getPhone_number());
-        editor.putString(KEY_ADDRESS, user.getAddress());
-        editor.putString(KEY_CREATEDAT, String.valueOf(user.getCreatedAt()));
-        editor.putString(KEY_UPDATEDAT, String.valueOf(user.getUpdatedAt()));
-        editor.putString(KEY_LASTLOGIN, String.valueOf(user.getLast_login()));
+        editor.putString(KEY_EMAIL, user.getEmail()==null?"":user.getEmail());
+        editor.putString(KEY_GENDER, user.getGender()==null?"":user.getGender());
+        editor.putString(KEY_IMAGES, user.getImage()==null?"": user.getImage());
+        editor.putString(KEY_ROLE, user.getRoles()==null?"":gson.toJson(user.getRoles()));
+        editor.putString(KEY_FIRSTNAME, user.getFirst_name()==null?"": user.getFirst_name());
+        editor.putString(KEY_LASTNAME, user.getLast_name()==null?"":user.getLast_name());
+        editor.putString(KEY_PHONE, user.getPhone_number()==null?"":user.getPhone_number());
+        editor.putString(KEY_ADDRESS, user.getAddress()==null?"":user.getAddress());
+        editor.putString(KEY_CREATEDAT, user.getCreatedAt()==null?"":String.valueOf(user.getCreatedAt()));
+        editor.putString(KEY_UPDATEDAT, user.getCreatedAt()==null?"":String.valueOf(user.getUpdatedAt()));
+        editor.putString(KEY_LASTLOGIN, user.getLast_login()==null?"":String.valueOf(user.getLast_login()));
         editor.putString(KEY_CART, gson.toJson(user.getCart()));
 
         editor.apply();
