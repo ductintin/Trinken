@@ -27,15 +27,7 @@ public class SignupProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_profile);
-
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            user = bundle.getSerializable("User",User.class);
-        }
-
         AnhXa();
-
         radioGroupGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -43,8 +35,6 @@ public class SignupProfileActivity extends AppCompatActivity {
                 Toast.makeText(SignupProfileActivity.this, "Gioi tinh" + radioButtonGender.getText(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,12 +43,8 @@ public class SignupProfileActivity extends AppCompatActivity {
                 String phoneNumber = edtPhone.getText().toString().trim();
                 String address = edtAddress.getText().toString().trim();
                 String gender = radioButtonGender.getText().toString().trim();
-
-                UserDto userDto = new UserDto(user.getUser_id(), firstName, lastName, phoneNumber, address, gender);
-                doSignupProfile(userDto);
             }
         });
-
     }
 
     private void AnhXa(){
