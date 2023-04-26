@@ -3,6 +3,8 @@ package vn.tp.trinken.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import vn.tp.trinken.*;
 import vn.tp.trinken.Contants.SharedPrefManager;
@@ -23,11 +25,7 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
         .OnItemSelectedListener{
 
     BottomNavigationView bottomNavigationView;
-    HomeFragment homeFragment = new HomeFragment();
-    SearchFragment searchFragment = new SearchFragment();
-    CartFragment cartFragment = new CartFragment();
-    NotificationFragment notificationFragment = new NotificationFragment();
-    ProfileFragment profileFragment = new ProfileFragment();
+
     Toolbar toolbar;
 
 
@@ -68,10 +66,24 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
         toolbar = findViewById(R.id.toolBarHome);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
     }
+    private void initFragment() {
+
+        HomeFragment firstFragment = new HomeFragment();
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+
+        ft.replace(R.id.flFragment, firstFragment);
+
+        ft.commit();
+
+    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.home:
+                HomeFragment homeFragment = new HomeFragment();
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.flFragment, homeFragment)
@@ -79,6 +91,7 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
                 return true;
 
             case R.id.search:
+                SearchFragment searchFragment = new SearchFragment();
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.flFragment, searchFragment)
@@ -86,18 +99,24 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
                 return true;
 
             case R.id.cart:
+                CartFragment cartFragment = new CartFragment();
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.flFragment, cartFragment)
                         .commit();
+                return true;
 
             case R.id.notification:
+                NotificationFragment notificationFragment = new NotificationFragment();
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.flFragment, notificationFragment)
                         .commit();
+                return true;
+
 
             case R.id.person:
+                ProfileFragment profileFragment = new ProfileFragment();
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.flFragment, profileFragment)

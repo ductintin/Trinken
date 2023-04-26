@@ -18,6 +18,8 @@ import com.google.gson.JsonElement;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,20 +44,6 @@ public class LoginActivity extends AppCompatActivity {
         if(SharedPrefManager.getInstance(this).isLoggedIn()){
             finish();
             startActivity(new Intent(this,IndexActivity.class));
-//            try {
-//                User user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
-//                Log.d("Text",user.toString());
-//                if(user.getLast_login()!=null){
-//                    finish();
-//                    startActivity(new Intent(this,IndexActivity.class));
-//                }else{
-//                    finish();
-//                    startActivity(new Intent(this,SignupProfileActivity.class));
-//                }
-//            } catch (ParseException e) {
-//                throw new RuntimeException(e);
-//            }
-
         }else {
             AnhXa();
             btnSignup.setOnClickListener(new View.OnClickListener() {
@@ -125,18 +113,18 @@ public class LoginActivity extends AppCompatActivity {
                             Gson gson = new Gson();
                             User user= gson.fromJson(json, User.class);
                             Log.d("User", user.toString());
-                            SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
 
                             Bundle bundle = new Bundle();
-                            bundle.putSerializable("User",user);
-                            bundle.putBoolean("isLogginScreen",true);
-
-                            Intent intent = new Intent();
                             if(user.getLast_login()== null){
-                                intent = new Intent(LoginActivity.this,SignupProfileActivity.class);
+                                bundle.putInt("userid",user.getUser_id());
+                                Intent intent = new Intent(LoginActivity.this,SignupProfileActivity.class);
+                                intent.putExtras(bundle);
                                 startActivity(intent);
                             }else{
-                                intent = new Intent(LoginActivity.this, IndexActivity.class);
+                                SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+                                bundle.putSerializable("User",user);
+                                bundle.putBoolean("isLogginScreen",true);
+                                Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                             }

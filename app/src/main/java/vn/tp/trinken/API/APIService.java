@@ -3,15 +3,22 @@ package vn.tp.trinken.API;
 import com.google.gson.JsonElement;
 
 import java.util.List;
+import java.util.Map;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Path;
+import vn.tp.trinken.Dto.ProfileDto;
 import vn.tp.trinken.Model.*;
 public interface APIService {
 
@@ -38,6 +45,9 @@ public interface APIService {
     Call<JsonElement> signup(@Body SignUp signUp);
 
     @PUT("user/logout/userid={id}")
-    Call<JsonElement> logout(@Path("id") Integer userId);
+    Call<Void> logout(@Path("id") Integer userId);
 
+    @Multipart
+    @PUT("user/profile/{id}")
+    Call<JsonElement> updateProfile(@Path("id") Integer userId, @PartMap Map<String,RequestBody> profile);
 }
