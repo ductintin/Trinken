@@ -109,8 +109,8 @@ public class SignupProfileActivity extends AppCompatActivity {
             return;
         }
         if(TextUtils.isEmpty(profileDto.getAddress())){
-            edtPhone.setError("Please enter address");
-            edtPhone.requestFocus();
+            edtAddress.setError("Please enter address");
+            edtAddress.requestFocus();
             return;
         }
         if(radioGroupGender.getCheckedRadioButtonId()==-1){
