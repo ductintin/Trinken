@@ -220,6 +220,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
 
+
             }
 
             @Override
