@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import vn.tp.trinken.Model.*;
@@ -60,14 +61,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         holder.product_id = product.getProduct_id();
         holder.product_price.setText(String.valueOf(product.getPrice()));
 
+        DecimalFormat df = new DecimalFormat("#.##");
+
         if(product.getDiscount()!=null){
             holder.tvProductDiscount.setText(String.valueOf(product.getDiscount().getDiscount_value()));
             holder.product_price.setTextSize(10);
             holder.product_price.setPaintFlags(holder.product_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            holder.tvProductPriceDiscount.setText(String.valueOf(product.getPrice()*(100-product.getDiscount().getDiscount_value())));
+            holder.tvProductPriceDiscount.setText(df.format(product.getPrice()*(100-product.getDiscount().getDiscount_value())/100));
         }else{
-            holder.layoutProductDiscount.setVisibility(View.INVISIBLE);
-            holder.tvProductPriceDiscount.setVisibility(View.INVISIBLE);
+            holder.layoutProductDiscount.setVisibility(View.GONE);
+            holder.tvProductPriceDiscount.setVisibility(View.GONE);
 
         }
         holder.product_card.setOnClickListener(new View.OnClickListener() {

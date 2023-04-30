@@ -18,7 +18,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Path;
-import vn.tp.trinken.Dto.ProfileDto;
+import vn.tp.trinken.Dto.*;
 import vn.tp.trinken.Model.*;
 public interface APIService {
 
@@ -33,6 +33,12 @@ public interface APIService {
 
     @GET("product/get-product-by-category/active={active}/cateid={id}")
     Call<List<Products>> getProductByCategory(@Path("active") boolean active, @Path("id") int cate_id);
+
+    @POST("cartitem/add")
+    Call<JsonElement> addCartItem(@Body CartItemDto cartItemDto);
+
+    @GET("cartitem/get-all/{cartId}")
+    Call<List<CartItem>> getCartItem(@Path("cartId") int cartId);
 
     @FormUrlEncoded
     @POST("user/login")

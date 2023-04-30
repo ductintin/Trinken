@@ -58,11 +58,11 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
                 && date.before(product.getDiscount().getEnd_date()) && date.after(product.getDiscount().getStart_date())){
             holder.tvProductDiscount.setText(String.valueOf(product.getDiscount().getDiscount_value()));
             holder.tvProductPriceDiscount.setText(String.valueOf(product.getPrice()));
-            holder.tvProductPriceDiscount.setPaintFlags(holder.tvProductPriceDiscount.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);;
-            holder.tvProductPrice.setText(String.valueOf(product.getPrice()*(100-product.getDiscount().getDiscount_value())));
+            holder.tvProductPriceDiscount.setPaintFlags(holder.tvProductPriceDiscount.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.tvProductPrice.setText(String.valueOf(product.getPrice()*(100-product.getDiscount().getDiscount_value())/100));
         }else{
-            holder.linearLayoutProductDiscountRow.setVisibility(View.INVISIBLE);
-            holder.tvProductPriceDiscount.setVisibility(View.INVISIBLE);
+            holder.linearLayoutProductDiscountRow.setVisibility(View.GONE);
+            holder.tvProductPriceDiscount.setVisibility(View.GONE);
             holder.tvProductPrice.setText(String.valueOf(product.getPrice()));
         }
         holder.product_id = product.getProduct_id();
