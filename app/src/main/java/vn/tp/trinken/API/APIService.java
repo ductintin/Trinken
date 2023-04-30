@@ -44,6 +44,10 @@ public interface APIService {
     Call<List<CartItem>> getCartItem(@Path("cartId") int cartId);
 
     @FormUrlEncoded
+    @PUT("cartitem/update-quantity/{id}")
+    Call<Void>updateCartItem(@Path("id") Integer id, @Field("count") Integer count );
+
+    @FormUrlEncoded
     @POST("user/login")
     Call<JsonElement> login(@Field("username") String username, @Field("password") String password);
 

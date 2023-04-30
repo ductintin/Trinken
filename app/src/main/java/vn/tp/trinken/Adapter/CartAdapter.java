@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -25,9 +26,14 @@ import org.greenrobot.eventbus.EventBus;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import vn.tp.trinken.Model.Products;
+import vn.tp.trinken.Model.User;
 import vn.tp.trinken.R;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,6 +46,8 @@ import vn.tp.trinken.Contants.*;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
     Context context;
     List<CartItem> cartItems;
+
+    APIService apiService;
 
     int cardId;
 
@@ -84,6 +92,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
 
 
         holder.tvCProductAmount.setText(String.valueOf(quantity));
+        holder.tvCProductTotal.setText(String.valueOf(cartItem.getPrice()*Integer.parseInt(holder.tvCProductAmount.getText().toString())));
 
         holder.btnCProductDec.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,12 +100,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
                 if(cartItem.getQuantity()>1){
                     Toast.makeText(context.getApplicationContext(), "Giam 1", Toast.LENGTH_SHORT).show();
                     holder.tvCProductAmount.setText(String.valueOf(quantity-1));
-                    CartItemDto cartItemDto = new CartItemDto();
-                    cartItemDto.setCartId(cardId);
-                    cartItemDto.setProductId(cartItem.getProduct().getProduct_id());
-                    cartItemDto.setQuantity(Integer.parseInt(String.valueOf(holder.tvCProductAmount.getText())));
-                    updateCartItem(cartItemDto);
+                    updateCartItem(cartItem, Integer.parseInt(holder.tvCProductAmount.getText().toString()));
                     EventBus.getDefault().postSticky(new TotalCart());
+                    try {
+                        setListenerList();
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
 
 
                 }else{
@@ -110,20 +120,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
             public void onClick(View v) {
 
                 holder.tvCProductAmount.setText(String.valueOf(quantity+1));
-                CartItemDto cartItemDto = new CartItemDto();
-                cartItemDto.setCartId(cardId);
-                Toast.makeText(context.getApplicationContext(), "he" + String.valueOf(cardId), Toast.LENGTH_SHORT).show();
-                Log.d("Sp luong", String.valueOf(Integer.parseInt(String.valueOf(holder.tvCProductAmount.getText()))));
-                cartItemDto.setProductId(cartItem.getProduct().getProduct_id());
-                cartItemDto.setQuantity(Integer.parseInt(String.valueOf(holder.tvCProductAmount.getText())));
-                updateCartItem(cartItemDto);
+                updateCartItem(cartItem, Integer.parseInt(holder.tvCProductAmount.getText().toString()));
                 EventBus.getDefault().postSticky(new TotalCart());
+                try {
+                    setListenerList();
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
 
 
             }
         });
 
-        holder.tvCProductTotal.setText(String.valueOf(cartItem.getPrice()));
+
 
 
         holder.tvCProductAmount.addTextChangedListener(new TextWatcher() {
@@ -176,7 +185,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
     }
 
     private boolean checkValidDiscount(Discounts discount){
-        if(discount!=null&&discount.getStatus()!=0){
+        if(discount!=null && discount.getStatus()!=0){
             Date date = new Date();
             if(date.before(discount.getEnd_date())&&date.after(discount.getStart_date())){
                 return true;
@@ -185,23 +194,44 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
         return false;
     }
 
-    private void updateCartItem(CartItemDto cartItemDto){
+    private void updateCartItem(CartItem cartItem, Integer count) {
         APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
-        apiService.addCartItem(cartItemDto).enqueue(new Callback<JsonElement>() {
+        apiService.updateCartItem(cartItem.getId(),count).enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                if(response.isSuccessful()){
-                    Toast.makeText(context, "Update successfully!", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<Void> call, Response<Void> response) {
 
-                }
             }
 
             @Override
-            public void onFailure(Call<JsonElement> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
 
             }
         });
+    }
 
+    public void setListenerList() throws ParseException {
+        User user = SharedPrefManager.getInstance(context.getApplicationContext()).getUser();
+        this.cartItems = getCartItem(user.getCart().getId());
+        notifyDataSetChanged();
+        CartAdapter cartAdapter =new CartAdapter( context, cartItems,cardId);
+        cartAdapter.notifyDataSetChanged();
+    }
 
+    private List<CartItem> getCartItem(int cartId) {
+        Log.d("cart id ne", String.valueOf(cartId));
+        apiService = RetrofitClient.getRetrofit().create(APIService.class);
+        apiService.getCartItem(cartId).enqueue(new Callback<List<CartItem>>() {
+            @Override
+            public void onResponse(Call<List<CartItem>> call, Response<List<CartItem>> response) {
+                if (response.isSuccessful()) {
+                    cartItems = response.body();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<CartItem>> call, Throwable t) {
+                Log.d("Loi o cartfragment ", t.getMessage());
+            }
+        });
+        return cartItems;
     }
 }
