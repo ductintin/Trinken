@@ -51,5 +51,11 @@ public class SharedPrefManager {
         editor.apply();
         ctx.startActivity(new Intent(ctx,LoginActivity.class));
     }
+    public void remove(){
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
 
 }

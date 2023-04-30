@@ -131,7 +131,7 @@ public class SignupProfileActivity extends AppCompatActivity {
                             User user = gson.fromJson(json, User.class);
 //                        Log.d("User", user.toString());
                             SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
-                            Intent intent = new Intent(SignupProfileActivity.this, IndexActivity.class);
+                            Intent intent = new Intent(SignupProfileActivity.this, WelcomeActivity.class);
                             startActivity(intent);
                         } else {
                             int statusCode = response.code();

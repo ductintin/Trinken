@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -27,6 +28,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -71,6 +73,8 @@ public class ProfileFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private static final String KEY_USER = "user";
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -82,11 +86,13 @@ public class ProfileFragment extends Fragment {
     ImageView imgProfile;
     TextView txtUsername , txtEmail, txtFullname, txtPhone, txtAddress, txtGender;
 
+    EditText edtPassword, edtNewPassword , edtReNewPassword ;
+
     View view;
     APIService apiService;
     Boolean fileExist = false;
 
-    User user;
+    User user = new User();
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -121,6 +127,21 @@ public class ProfileFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
+//    @Override
+//    public void onSaveInstanceState(@NonNull Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        outState.putParcelable(KEY_USER, (Parcelable) user);
+//    }
+//    @Override
+//    public void onViewStateRestored(Bundle savedInstanceState) {
+//        super.onViewStateRestored(savedInstanceState);
+//
+//        if (savedInstanceState != null) {
+//            user = savedInstanceState.getParcelable(KEY_USER);
+//            // Sử dụng đối tượng người dùng đã khôi phục được ở đây
+//        }
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -159,6 +180,12 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
+        btnEditPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showEditPassword();
+            }
+        });
         return view;
     }
     private void Anhxa(){
@@ -176,7 +203,7 @@ public class ProfileFragment extends Fragment {
     private void loadProfile() throws ParseException {
         User user = SharedPrefManager.getInstance(getContext().getApplicationContext()).getUser();
         if(user.getImage()!= null){
-            Glide.with(getContext()).load(user.getImage()).placeholder(R.drawable.ban2).into(imgProfile);
+            Glide.with(getContext()).load(user.getImage()).placeholder(R.drawable.avatar).into(imgProfile);
         }
         txtUsername.setText(user.getUser_name());
         txtFullname.setText(user.getFirst_name()+" "+user.getLast_name());
@@ -228,7 +255,7 @@ public class ProfileFragment extends Fragment {
         user = SharedPrefManager.getInstance(getContext()).getUser();
 //        Log.d("Test User",user.getFirst_name());
         if(user.getImage()!=null){
-            Glide.with(getContext()).load(user.getImage()).placeholder(R.drawable.ban2).into(imgAvatar);
+            Glide.with(getContext()).load(user.getImage()).placeholder(R.drawable.avatar).into(imgAvatar);
         }
         edtUsername.setText(user.getUser_name());
         edtEmail.setText(user.getEmail());
@@ -262,6 +289,84 @@ public class ProfileFragment extends Fragment {
         dialog.show();
 
 
+    }
+
+    private void showEditPassword(){
+        Dialog dialog =new Dialog(getContext());
+        //We have added a title in the custom layout. So let's disable the default title.
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //The user will be able to cancel the dialog bu clicking anywhere outside the dialog.
+        dialog.setCancelable(true);
+        //Mention the name of the layout of your custom dialog.
+        dialog.setContentView(R.layout.edit_password_dialog);
+
+        edtPassword =dialog.findViewById(R.id.edtPassword);
+        edtNewPassword = dialog.findViewById(R.id.edtNewPassword);
+        edtReNewPassword = dialog.findViewById(R.id.edtRePassword);
+        Button btnConfirm= dialog.findViewById(R.id.btnConfirm2);
+
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    user = SharedPrefManager.getInstance(getContext()).getUser();
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+                ChangePassword(user.getUser_id(),edtPassword.getText().toString().trim(), edtNewPassword.getText().toString().trim(),edtReNewPassword.getText().toString().trim());
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void ChangePassword(int id, String password,String newPassword, String reNewPassword){
+        if(TextUtils.isEmpty(password)){
+            edtPassword.setError("Please enter password");
+            edtPassword.requestFocus();
+            return;
+        }
+        if(TextUtils.isEmpty(newPassword)){
+            edtNewPassword.setError("Please enter password");
+            edtNewPassword.requestFocus();
+            return;
+        }
+        if(TextUtils.isEmpty(reNewPassword)){
+            edtReNewPassword.setError("Please confirm new password");
+            edtReNewPassword.requestFocus();
+            return;
+        }
+        apiService = RetrofitClient.getRetrofit().create(APIService.class);
+        apiService.changePassword(id,password, newPassword, reNewPassword).enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                if(response.isSuccessful()){
+
+                    try {
+                        JSONObject obj = new JSONObject(response.body().toString());
+                        if(!obj.getBoolean("error")){
+                            Toast.makeText(getContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }else{
+                    try {
+                        JSONObject obj = new JSONObject(response.errorBody().string());
+                        Toast.makeText(getContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+
+            }
+        });
     }
 
     //load anh
@@ -402,12 +507,16 @@ public class ProfileFragment extends Fragment {
                             User user1 = gson.fromJson(json, User.class);
 //                          Log.d("User", user.toString());
                             Toast.makeText(getContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                            SharedPrefManager.getInstance(getContext().getApplicationContext()).remove();
                             SharedPrefManager.getInstance(getContext().getApplicationContext()).userLogin(user1);
+                            user =SharedPrefManager.getInstance(getContext().getApplicationContext()).getUser();
                         } else {
                             int statusCode = response.code();
                             Toast.makeText(getContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    } catch (ParseException e) {
                         throw new RuntimeException(e);
                     }
                 }else{
@@ -429,6 +538,7 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+
 
 
 }
