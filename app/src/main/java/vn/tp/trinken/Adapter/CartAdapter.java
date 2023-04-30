@@ -144,8 +144,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
 
 
 
-
-
     }
 
     @Override
