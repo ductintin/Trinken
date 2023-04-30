@@ -12,7 +12,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/btn_Logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/orange"
+            android:text="Logout"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:cornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        </Button>
+
         <LinearLayout
+            android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -42,7 +58,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
                                 android:paddingTop="5dp"
-                                android:src="@drawable/ban2"
+                                android:src="@drawable/avatar"
                                 android:textAlignment="gravity">
 
                             </de.hdodenhof.circleimageview.CircleImageView>
@@ -155,11 +171,12 @@
                         android:id="@+id/textView20"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:paddingTop="10dp"
                         android:text="Đơn hàng"
-                        android:textSize="17sp"
-                        android:textStyle="bold"
                         android:textColor="@color/orange"
-                        android:paddingTop="10dp"/>
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -168,8 +185,7 @@
 
                         <HorizontalScrollView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            >
+                            android:layout_height="wrap_content">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -181,53 +197,94 @@
                                     android:layout_width="120dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Tất cả"
-                                    android:textAlignment="center"
                                     android:paddingTop="7dp"
-                                    android:paddingBottom="4dp"/>
+                                    android:paddingBottom="4dp"
+                                    android:text="Tất cả"
+                                    android:textAlignment="center" />
 
                                 <TextView
                                     android:id="@+id/textView27"
                                     android:layout_width="120dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Đang chờ xác nhận"
-                                    android:textAlignment="center"
                                     android:paddingTop="7dp"
-                                    android:paddingBottom="4dp"/>
+                                    android:paddingBottom="4dp"
+                                    android:text="Đang chờ xác nhận"
+                                    android:textAlignment="center" />
 
                                 <TextView
                                     android:id="@+id/textView24"
                                     android:layout_width="120dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Đang giao"
-                                    android:textAlignment="center"
                                     android:paddingTop="7dp"
-                                    android:paddingBottom="4dp"/>
+                                    android:paddingBottom="4dp"
+                                    android:text="Đang giao"
+                                    android:textAlignment="center" />
 
                                 <TextView
                                     android:id="@+id/textView28"
                                     android:layout_width="120dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Đã hoàn thành"
-                                    android:textAlignment="center"
                                     android:paddingTop="7dp"
-                                    android:paddingBottom="4dp"/>
+                                    android:paddingBottom="4dp"
+                                    android:text="Đã hoàn thành"
+                                    android:textAlignment="center" />
 
                                 <TextView
                                     android:id="@+id/textView23"
                                     android:layout_width="120dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Đã hủy"
-                                    android:textAlignment="center"
                                     android:paddingTop="7dp"
-                                    android:paddingBottom="4dp"/>
+                                    android:paddingBottom="4dp"
+                                    android:text="Đã hủy"
+                                    android:textAlignment="center" />
 
                             </LinearLayout>
                         </HorizontalScrollView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/constraintLayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="0dp"
+                            app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <TextView
+                                android:id="@+id/txtCount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="360dp"
+                                android:text="Count:"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
+
+                            <TextView
+                                android:id="@+id/txtOrderCount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:text="1"
+                                app:layout_constraintStart_toEndOf="@+id/txtCount"
+                                tools:layout_editor_absoluteY="0dp" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="436dp" />
+
 
                     </LinearLayout>
 
@@ -235,22 +292,6 @@
             </ScrollView>
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_Logout"
-            android:layout_width="116dp"
-            android:layout_height="36dp"
-            android:layout_marginEnd="40dp"
-            android:backgroundTint="@color/dark_green"
-            android:text="Logout"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            app:cornerRadius="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-        </Button>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

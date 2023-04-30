@@ -50,4 +50,8 @@ public interface APIService {
     @Multipart
     @PUT("user/profile/{id}")
     Call<JsonElement> updateProfile(@Path("id") Integer userId, @PartMap Map<String,RequestBody> profile);
+
+    @FormUrlEncoded
+    @PUT("user/{id}/change-password")
+    Call<JsonElement> changePassword(@Path("id") Integer id, @Field("password") String password, @Field("newPassword") String newPassword, @Field("rePassword") String rePassword);
 }
