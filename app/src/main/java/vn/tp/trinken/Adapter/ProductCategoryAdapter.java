@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -53,17 +54,18 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
         holder.tvProductDesc.setText(product.getDescription());
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
+        DecimalFormat df = new DecimalFormat("0.00");
         //check discount available
         if(product.getDiscount()!=null&&product.getDiscount().getStatus()!=0
                 && date.before(product.getDiscount().getEnd_date()) && date.after(product.getDiscount().getStart_date())){
             holder.tvProductDiscount.setText(String.valueOf(product.getDiscount().getDiscount_value()));
             holder.tvProductPriceDiscount.setText(String.valueOf(product.getPrice()));
             holder.tvProductPriceDiscount.setPaintFlags(holder.tvProductPriceDiscount.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            holder.tvProductPrice.setText(String.valueOf(product.getPrice()*(100-product.getDiscount().getDiscount_value())/100));
+            holder.tvProductPrice.setText(df.format(product.getPrice()*(100-product.getDiscount().getDiscount_value())/100));
         }else{
             holder.linearLayoutProductDiscountRow.setVisibility(View.GONE);
             holder.tvProductPriceDiscount.setVisibility(View.GONE);
-            holder.tvProductPrice.setText(String.valueOf(product.getPrice()));
+            holder.tvProductPrice.setText(df.format(product.getPrice()));
         }
         holder.product_id = product.getProduct_id();
 

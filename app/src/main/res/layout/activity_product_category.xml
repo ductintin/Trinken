@@ -64,15 +64,65 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <LinearLayout
+        android:id="@+id/layoutFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutPC"
+        android:padding="10dp"
+        android:gravity="start">
+
+        <ImageView
+            android:id="@+id/PCFilterPrice"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/filter"
+            android:layout_marginRight="30dp">
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/PCFilterId"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/download"
+            android:layout_marginRight="30dp">
+
+        </ImageView>
+        <ImageView
+            android:id="@+id/PCFilterName"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/descending"
+            android:layout_marginRight="30dp">
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/PCFilterSold"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/sort_down">
+
+        </ImageView>
+
+
+
+
+
+    </LinearLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayoutPC">
+        app:layout_constraintTop_toBottomOf="@+id/layoutFilter">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,8 +133,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcProductCategory"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </androidx.recyclerview.widget.RecyclerView>
+                android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
 
 
         </LinearLayout>
