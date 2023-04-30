@@ -32,6 +32,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcCartItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp">
@@ -42,27 +43,69 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:weightSum="2"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:elevation="30dp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:background="@color/white">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Total">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="226dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/muli_bold"
+                android:text="Total"
+                android:textAlignment="center">
 
-        </TextView>
+            </TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tvCartTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textSize="40dp"
+                    android:textColor="@color/pastel_red">
+
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textColor="@color/pastel_red">
+
+                </TextView>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Payment">
+            android:id="@+id/btnCartBuy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/orange"
+            android:textColor="@color/white"
+            app:cornerRadius = "20dp"
+            android:text="Buy"
+            >
 
         </Button>
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
