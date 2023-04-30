@@ -34,6 +34,9 @@ public interface APIService {
     @GET("product/get-product-by-category/active={active}/cateid={id}")
     Call<List<Products>> getProductByCategory(@Path("active") boolean active, @Path("id") int cate_id);
 
+    @GET("product/get-product-by-category/active={active}/cateid={id}/sort={sort}")
+    Call<List<Products>> filterProductByPrice(@Path("active") boolean active, @Path("id") int cate_id, @Path("sort") int sort);
+
     @POST("cartitem/add")
     Call<JsonElement> addCartItem(@Body CartItemDto cartItemDto);
 
