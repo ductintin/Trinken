@@ -113,16 +113,12 @@ public class CartFragment extends Fragment {
             Log.d("cart id ow day ne", String.valueOf(user.getCart().getId()));
             getCartItem(cartId);
 
-            setCartTotal();
-
             btnCartBuy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                 }
             });
-
-
         }
 
         return view;
@@ -136,6 +132,7 @@ public class CartFragment extends Fragment {
             public void onResponse(Call<List<CartItem>> call, Response<List<CartItem>> response) {
                 if(response.isSuccessful()){
                     cartItems = response.body();
+                    setCartTotal();
                     Log.d("cartitem ne", cartItems.toString());
                     cartAdapter = new CartAdapter(getActivity().getApplicationContext(), cartItems, cartId);
                     rcCartItem.setHasFixedSize(true);
@@ -165,12 +162,12 @@ public class CartFragment extends Fragment {
     }
 
     private void setCartTotal(){
+        // chưa xet discount
         double total = 0;
         DecimalFormat df = new DecimalFormat("0.00");
         for (CartItem cartItem:cartItems) {
-            total += cartItem.getPrice();
+            total += cartItem.getPrice()*cartItem.getQuantity();
         }
-
         tvCartTotal.setText(df.format(total));
     }
 

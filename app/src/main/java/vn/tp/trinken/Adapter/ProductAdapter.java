@@ -127,4 +127,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             });
         }
     }
+    public void setListenerList(List<Products> products){
+        this.products = products;
+        notifyDataSetChanged();
+    }
 }

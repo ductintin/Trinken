@@ -44,6 +44,10 @@ public interface APIService {
     Call<List<CartItem>> getCartItem(@Path("cartId") int cartId);
 
     @FormUrlEncoded
+    @PUT("cartitem/update-quantity/{id}")
+    Call<Void>updateCartItem(@Path("id") Integer id, @Field("count") Integer count );
+
+    @FormUrlEncoded
     @POST("user/login")
     Call<JsonElement> login(@Field("username") String username, @Field("password") String password);
 
@@ -59,4 +63,8 @@ public interface APIService {
     @Multipart
     @PUT("user/profile/{id}")
     Call<JsonElement> updateProfile(@Path("id") Integer userId, @PartMap Map<String,RequestBody> profile);
+
+    @FormUrlEncoded
+    @PUT("user/{id}/change-password")
+    Call<JsonElement> changePassword(@Path("id") Integer id, @Field("password") String password, @Field("newPassword") String newPassword, @Field("rePassword") String rePassword);
 }
