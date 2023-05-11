@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="20dp"
     android:orientation="vertical"
-    app:layoutDescription="@xml/edit_profile_dialog_scene">
+    app:layoutDescription="add_product_dialog_scene">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,37 +19,29 @@
             android:layout_margin="5dp"
             android:orientation="vertical">
 
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgAvatar"
+            <Spinner
+                android:id="@+id/spinner_categories"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:paddingTop="15dp"
-                android:src="@drawable/avatar"
-                android:textAlignment="gravity"></de.hdodenhof.circleimageview.CircleImageView>
+                android:layout_height="50dp"
+                android:spinnerMode="dropdown">
 
-            <Button
-                android:id="@+id/btnImgFile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/gray"
-                android:text="Chọn File"
-                android:textColor="@color/orange"
-                android:textSize="15sp" />
+            </Spinner>
+
+
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:boxStrokeColor="@color/orange"
-                android:hint="Username"
+                android:hint="Tên sản phẩm"
                 app:helperText="*"
                 app:counterEnabled="true"
                 app:counterMaxLength="20"
                 app:helperTextTextColor="@color/pastel_red"
                 app:endIconMode="clear_text">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtUsername"
+                    android:id="@+id/edtProductName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/green"
@@ -63,14 +55,14 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:boxStrokeColor="@color/orange"
-                android:hint="Email"
+                android:hint="Giá"
                 app:helperText="*"
                 app:counterEnabled="true"
                 app:counterMaxLength="20"
                 app:helperTextTextColor="@color/pastel_red"
                 app:endIconMode="clear_text">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtEmail"
+                    android:id="@+id/edtProductPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     >
@@ -82,7 +74,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="First name"
+                android:hint="Mô tả"
                 android:orientation="horizontal"
                 app:boxStrokeColor="@color/orange"
                 app:counterEnabled="true"
@@ -92,7 +84,7 @@
                 app:helperTextTextColor="@color/pastel_red">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtFirstname"
+                    android:id="@+id/edtProductDesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -104,7 +96,7 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:boxStrokeColor="@color/orange"
-                android:hint="Last name"
+                android:hint="Số lượng kho"
                 app:helperText="*"
                 app:counterEnabled="true"
                 app:counterMaxLength="20"
@@ -114,7 +106,7 @@
 
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtLastname"
+                    android:id="@+id/edtProductQuantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     >
@@ -125,88 +117,28 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+
+            <ImageView
+                android:id="@+id/imgNewProduct"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Phone number"
-                app:boxStrokeColor="@color/orange"
-                app:helperText="*"
-                app:counterEnabled="true"
-                app:counterMaxLength="20"
-                app:helperTextTextColor="@color/pastel_red">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone|number"
-                    >
+                android:layout_height="100dp"
+                android:paddingTop="15dp"
+                android:src="@drawable/avatar"
+                android:textAlignment="gravity">
 
-                </com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:boxStrokeColor="@color/orange"
-                android:hint="Address"
-                app:helperText="*"
-                app:counterEnabled="true"
-                app:counterMaxLength="20"
-                app:helperTextTextColor="@color/pastel_red"
-                app:endIconMode="clear_text"
-                android:orientation="horizontal">
-
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
-
-                </com.google.android.material.textfield.TextInputEditText>
-
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Gender"-->
-<!--                android:textColor="@color/green">-->
-
-<!--            </TextView>-->
-
-<!--            <RadioGroup-->
-<!--                android:id="@+id/radioGroupGender"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:checkedButton="@+id/radioButtonMale"-->
-<!--                >-->
-
-<!--                <RadioButton-->
-<!--                    android:id="@+id/radioButtonMale"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:text="Male">-->
-
-<!--                </RadioButton>-->
-<!--                <RadioButton-->
-<!--                    android:id="@+id/radioButtonFemale"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:text="Female">-->
-
-<!--                </RadioButton>-->
-<!--            </RadioGroup>-->
-
-
-
+            </ImageView>
 
             <Button
-                android:id="@+id/btnConfirm"
+                android:id="@+id/btnImgFileProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/gray"
+                android:text="Chọn File"
+                android:textColor="@color/orange"
+                android:textSize="15sp" />
+            <Button
+                android:id="@+id/btnConfirmAddProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/dark_green"
@@ -219,12 +151,6 @@
 
             </Button>
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                />
 
         </LinearLayout>
 

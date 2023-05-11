@@ -8,6 +8,7 @@ import java.util.Map;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -24,6 +25,9 @@ public interface APIService {
 
     @GET("category/get-all")
     Call<List<Categories>> getCategoryAll();
+
+    @GET("category/get-all-active")
+    Call<List<Categories>> getAllActiveCategory();
 
     @GET("product/get-all-active")
     Call<List<Products>> getAllActiveProduct();
@@ -43,9 +47,16 @@ public interface APIService {
     @GET("cartitem/get-all/{cartId}")
     Call<List<CartItem>> getCartItem(@Path("cartId") int cartId);
 
+
+    @DELETE("cartitem/delete/{cartItemId}")
+    Call<JsonElement> deleteCartItem(@Path("cartItemId") int cartItemId);
+
+
+
     @FormUrlEncoded
     @PUT("cartitem/update-quantity/{id}")
     Call<Void>updateCartItem(@Path("id") Integer id, @Field("count") Integer count );
+
 
     @FormUrlEncoded
     @POST("user/login")

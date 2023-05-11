@@ -39,7 +39,7 @@ public class ProductCategoryActivity extends AppCompatActivity {
     TextView tvCategory;
     ImageView imgPCArrowBack;
 
-    ImageView PCFilterId, PCFilterPrice, PCFilterSold, PCFilterName;
+    TextView PCFilterId, PCFilterPrice, PCFilterSold, PCFilterName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Theme_Trinken_Home);
@@ -63,76 +63,34 @@ public class ProductCategoryActivity extends AppCompatActivity {
             });
 
             PCFilterPrice.setOnClickListener(new View.OnClickListener() {
-                int count = 0;
                 @Override
                 public void onClick(View v) {
-                    count++;
-                    if (count == 1) {
-                        // First click action
-                        filterProduct(categoryId, 0);
-                    } else if (count == 2) {
-                        // Second click action
-                        filterProduct(categoryId, 1);
-                        count = 0; // Reset count for next double click
-                    }
+                    filterProduct(categoryId, 0);
                 }
             });
 
             PCFilterId.setOnClickListener(new View.OnClickListener() {
-                int count = 0;
+
                 @Override
                 public void onClick(View v) {
-                    count++;
-                    if (count == 1) {
-                        // First click action
-                        Glide.with(getApplicationContext()).load(R.drawable.list).into(PCFilterId);
-                        filterProduct(categoryId, 2);
-                    } else if (count == 2) {
-                        // Second click action
-                        Glide.with(getApplicationContext()).load(R.drawable.download).into(PCFilterId);
-                        filterProduct(categoryId, 3);
-
-                        count = 0; // Reset count for next double click
-                    }
+                    filterProduct(categoryId, 2);
                 }
             });
 
             PCFilterName.setOnClickListener(new View.OnClickListener() {
-                int count = 0;
                 @Override
                 public void onClick(View v) {
-                    count++;
-                    if (count == 1) {
-                        // First click action
-                        Glide.with(getApplicationContext()).load(R.drawable.increases).into(PCFilterName);
-                        filterProduct(categoryId, 4);
-                    } else if (count == 2) {
-                        // Second click action
-                        Glide.with(getApplicationContext()).load(R.drawable.descending).into(PCFilterName);
-                        filterProduct(categoryId, 5);
-                        count = 0; // Reset count for next double click
-                    }
+                    filterProduct(categoryId, 4);
                 }
             });
 
 
 
             PCFilterSold.setOnClickListener(new View.OnClickListener() {
-                int count = 0;
+
                 @Override
                 public void onClick(View v) {
-                    count++;
-                    if (count == 1) {
-                        // First click action
-                        Glide.with(getApplicationContext()).load(R.drawable.sort_up).into(PCFilterSold);
-                        filterProduct(categoryId, 6);
-                    } else if (count == 2) {
-                        // Second click action
-                        Glide.with(getApplicationContext()).load(R.drawable.sort_down).into(PCFilterSold);
-                        filterProduct(categoryId, 7);
-
-                        count = 0; // Reset count for next double click
-                    }
+                    filterProduct(categoryId, 6);
                 }
             });
         }
