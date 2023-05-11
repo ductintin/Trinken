@@ -11,7 +11,7 @@
     android:id="@id/parent">
     <androidx.cardview.widget.CardView
         android:id="@+id/cardProduct"
-        android:layout_width="154dp"
+        android:layout_width="160dp"
         android:layout_height="200dp"
         android:elevation="20dp"
         android:layout_margin="5dp"

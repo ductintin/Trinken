@@ -1,6 +1,8 @@
 package vn.tp.trinken.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Paint;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +32,7 @@ import retrofit2.Response;
 import vn.tp.trinken.Model.Products;
 import vn.tp.trinken.Model.User;
 import vn.tp.trinken.R;
+import vn.tp.trinken.Fragment.*;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -50,6 +54,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
     APIService apiService;
 
     int cardId;
+
+
+
 
     public CartAdapter(Context context, List<CartItem> cartItems, int cardId) {
         this.context = context;
@@ -75,25 +82,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
                 .load(cartItem.getProduct().getImage())
                 .placeholder(R.drawable.coke)
                 .into(holder.imgProduct);
+        DecimalFormat df = new DecimalFormat("0.00");
         if(checkValidDiscount(cartItem.getProduct().getDiscount())){
-
-            DecimalFormat df = new DecimalFormat("0.00");
             holder.tvCProductPrice.setText(df.format(cartItem.getProduct().getPrice()*(100-cartItem.getProduct().getDiscount().getDiscount_value())/100));
             holder.tvCProductPriceDiscount.setText(String.valueOf(cartItem.getProduct().getPrice()));
-
             holder.tvCProductPriceDiscount.setPaintFlags(holder.tvCProductPriceDiscount.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);;
-
-
         }else{
-
             holder.tvCProductPriceDiscount.setVisibility(View.GONE);
             holder.tvCProductPrice.setText(String.valueOf(cartItem.getProduct().getPrice()));
         }
-
-
         holder.tvCProductAmount.setText(String.valueOf(quantity));
-        holder.tvCProductTotal.setText(String.valueOf(cartItem.getPrice()*Integer.parseInt(holder.tvCProductAmount.getText().toString())));
-
+        holder.tvCProductTotal.setText(df.format(cartItem.getPrice()*Integer.parseInt(holder.tvCProductAmount.getText().toString())));
         holder.btnCProductDec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,9 +107,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
                         throw new RuntimeException(e);
                     }
 
-
                 }else{
-                    Toast.makeText(context.getApplicationContext(), "Khong the giam", Toast.LENGTH_SHORT).show();
+                    deleteDialog(cartItem.getId());
                 }
             }
         });
@@ -151,6 +149,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
             }
         });
 
+        holder.cartItemClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteDialog(cartItem.getId());
+            }
+        });
+
 
 
     }
@@ -165,6 +170,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
         ImageView imgProduct;
         TextView tvCProductName, tvCProductPrice, tvCProductPriceDiscount, tvCProductTotal, tvCProductAmount;
         Button btnCProductDec, btnCProductInc;
+        ImageView cartItemClear;
+
 
 
         public MyViewHolder(@NonNull View itemView) {
@@ -178,6 +185,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
             tvCProductAmount = (TextView) itemView.findViewById(R.id.tvCProductAmount);
             btnCProductDec = (Button) itemView.findViewById(R.id.btnCProductDec);
             btnCProductInc = (Button) itemView.findViewById(R.id.btnCProductInc);
+            cartItemClear = (ImageView) itemView.findViewById(R.id.cartItemClear);
 
         }
 
@@ -233,5 +241,54 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
             }
         });
         return cartItems;
+    }
+
+    private void deleteCartItem(int cartItemId){
+        apiService = RetrofitClient.getRetrofit().create(APIService.class);
+        apiService.deleteCartItem(cartItemId).enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(context, "Xóa thành công.", Toast.LENGTH_SHORT).show();
+                    try {
+                        setListenerList();
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+    private void deleteDialog(int cartItemId){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("Bạn có chắc xóa sản phẩm khỏi giỏ hàng?");
+        builder.setCancelable(false);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteCartItem(cartItemId);
+                dialog.dismiss();
+
+            }
+        });
+
+        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog flooralert = builder.create();
+        flooralert.show();
     }
 }

@@ -87,6 +87,7 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.flFragment, homeFragment)
+                        .setReorderingAllowed(true)
                         .commit();
                 return true;
 
@@ -95,6 +96,7 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.flFragment, searchFragment)
+                        .setReorderingAllowed(true)
                         .commit();
                 return true;
 
@@ -103,6 +105,7 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.flFragment, cartFragment)
+                        .setReorderingAllowed(true)
                         .commit();
                 return true;
 
@@ -111,6 +114,7 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.flFragment, notificationFragment)
+                        .setReorderingAllowed(true)
                         .commit();
                 return true;
 
@@ -120,6 +124,7 @@ public class IndexActivity extends AppCompatActivity implements NavigationBarVie
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.flFragment, profileFragment)
+                        .setReorderingAllowed(true)
                         .commit();
                 return true;
         }
