@@ -270,7 +270,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
     private void deleteDialog(int cartItemId){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage("Bạn có chắc xóa sản phẩm khỏi giỏ hàng?");
-        builder.setCancelable(false);
+        builder.setCancelable(true);
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
