@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="20dp"
     android:orientation="vertical"
-    app:layoutDescription="add_product_dialog_scene">
+    >
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,6 +28,14 @@
 
             </Spinner>
 
+            <Spinner
+                android:id="@+id/spinner_brand"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:spinnerMode="dropdown">
+
+            </Spinner>
+
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -37,7 +46,6 @@
                 android:hint="Tên sản phẩm"
                 app:helperText="*"
                 app:counterEnabled="true"
-                app:counterMaxLength="20"
                 app:helperTextTextColor="@color/pastel_red"
                 app:endIconMode="clear_text">
                 <com.google.android.material.textfield.TextInputEditText
@@ -58,7 +66,7 @@
                 android:hint="Giá"
                 app:helperText="*"
                 app:counterEnabled="true"
-                app:counterMaxLength="20"
+
                 app:helperTextTextColor="@color/pastel_red"
                 app:endIconMode="clear_text">
                 <com.google.android.material.textfield.TextInputEditText
@@ -78,7 +86,7 @@
                 android:orientation="horizontal"
                 app:boxStrokeColor="@color/orange"
                 app:counterEnabled="true"
-                app:counterMaxLength="20"
+
                 app:endIconMode="clear_text"
                 app:helperText="*"
                 app:helperTextTextColor="@color/pastel_red">
@@ -99,7 +107,6 @@
                 android:hint="Số lượng kho"
                 app:helperText="*"
                 app:counterEnabled="true"
-                app:counterMaxLength="20"
                 app:helperTextTextColor="@color/pastel_red"
                 app:endIconMode="clear_text"
                 android:orientation="horizontal">
@@ -119,7 +126,7 @@
 
 
             <ImageView
-                android:id="@+id/imgNewProduct"
+                android:id="@+id/imgDialogProduct"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:paddingTop="15dp"

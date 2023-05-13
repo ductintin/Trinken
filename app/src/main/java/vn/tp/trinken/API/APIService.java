@@ -29,8 +29,8 @@ public interface APIService {
     @GET("category/get-all-active")
     Call<List<Categories>> getAllActiveCategory();
 
-    @GET("product/get-all-active")
-    Call<List<Products>> getAllActiveProduct();
+    @GET("product/get-all-active/active={active}")
+    Call<List<Products>> getAllActiveProduct(@Path("active") boolean active);
 
     @GET("product/get-product-by-id/{id}")
     Call<Products> getProductById(@Path("id") int id);
@@ -41,6 +41,16 @@ public interface APIService {
     @GET("product/get-product-by-category/active={active}/cateid={id}/sort={sort}")
     Call<List<Products>> filterProductByPrice(@Path("active") boolean active, @Path("id") int cate_id, @Path("sort") int sort);
 
+    @PUT("product/update/productId={id}")
+    Call<JsonElement> updateProduct(@Path("id") int id, @Body ProductDto productDto);
+
+    @PUT("product/update-active/productId={id}/active={active}")
+    Call<JsonElement> updateActiveProduct(@Path("id") int id, @Path("active") boolean active);
+
+    @Multipart
+    @POST("product/create")
+    Call<JsonElement> addNewProduct(@PartMap Map<String,RequestBody> product);
+
     @POST("cartitem/add")
     Call<JsonElement> addCartItem(@Body CartItemDto cartItemDto);
 
@@ -50,6 +60,9 @@ public interface APIService {
 
     @DELETE("cartitem/delete/{cartItemId}")
     Call<JsonElement> deleteCartItem(@Path("cartItemId") int cartItemId);
+
+    @GET("brand/get-all-active/active={active}")
+    Call<List<Brands>> getAllActiveBrand(@Path("active") boolean active);
 
 
 

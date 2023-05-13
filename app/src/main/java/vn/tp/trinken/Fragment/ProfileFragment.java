@@ -28,6 +28,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -287,8 +288,16 @@ public class ProfileFragment extends Fragment {
                 dialog.dismiss();
             }
         });
-        dialog.show();
 
+        Window window = dialog.getWindow();
+        if (window != null) {
+            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+            layoutParams.copyFrom(window.getAttributes());
+            layoutParams.width = (int) (getResources().getDisplayMetrics().widthPixels*0.9);
+            layoutParams.height = (int) (getResources().getDisplayMetrics().heightPixels*0.9);
+            window.setAttributes(layoutParams);}
+
+        dialog.show();
 
     }
 
@@ -407,6 +416,7 @@ public class ProfileFragment extends Fragment {
         }
         else {
             requestPermissions(permissions(),MY_REQUEST_CODE);
+
         }
     }
     @Override

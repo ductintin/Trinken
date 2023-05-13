@@ -121,7 +121,7 @@ public class SearchFragment extends Fragment {
     }
     public void loadActiveProduct(){
         apiService = RetrofitClient.getRetrofit().create(APIService.class);
-        apiService.getAllActiveProduct().enqueue(new Callback<List<Products>>() {
+        apiService.getAllActiveProduct(true).enqueue(new Callback<List<Products>>() {
             @Override
             public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
                 if(response.isSuccessful()){

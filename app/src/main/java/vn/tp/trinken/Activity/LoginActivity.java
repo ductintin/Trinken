@@ -124,7 +124,13 @@ public class LoginActivity extends AppCompatActivity {
                                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
                                 bundle.putSerializable("User",user);
                                 bundle.putBoolean("isLogginScreen",true);
-                                Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
+                                Intent intent = new Intent();
+                                if(user.getRoles().getRole_id()==1){
+                                    intent = new Intent(LoginActivity.this, IndexAdminActivity.class);
+
+                                }else{
+                                    intent = new Intent(LoginActivity.this, IndexActivity.class);
+                                }
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                             }

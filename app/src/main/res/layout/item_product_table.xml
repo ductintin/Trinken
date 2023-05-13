@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+    <TableLayout
+        android:id="@+id/tlProduct"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:id="@+id/trProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:contentDescription="Product">
+
+                <TextView
+                    android:id="@+id/tvtrProductSTT"
+                    android:layout_width="10dp"
+                    android:layout_height="100dp"
+                    android:text="STT"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:padding="2dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/muli_bold">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvtrProductName"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Tên"
+                    android:background="@drawable/border"
+                    android:padding="2dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/muli_bold">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvtrProductPrice"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Gía"
+                    android:background="@drawable/border"
+                    android:padding="2dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/muli_bold">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvtrProductDesc"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Mô tả"
+                    android:maxLines="3"
+                    android:maxLength="40"
+                    android:ellipsize="end"
+                    android:background="@drawable/border"
+                    android:padding="2dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/muli_bold">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvtrProductCate"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Loại"
+                    android:background="@drawable/border"
+                    android:padding="2dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/muli_bold">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvtrProductBrand"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Thương hiệu"
+                    android:background="@drawable/border"
+                    android:padding="2dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/muli_bold">
+
+                </TextView>
+
+                <ImageView
+                    android:id="@+id/btnEditProduct"
+                    android:layout_width="30dp"
+                    android:layout_height="100dp"
+                    android:text="Edit"
+                    android:src="@drawable/ic_edit"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:padding="2dp"
+                    android:layout_gravity="center">
+
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/btnDeleteProduct"
+                    android:layout_width="30dp"
+                    android:layout_height="100dp"
+                    android:text="Delete"
+                    android:src="@drawable/ic_delete"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:padding="2dp"
+                    android:layout_gravity="center">
+
+                </ImageView>
+
+        </TableRow>
+    </TableLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
