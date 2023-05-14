@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content" android:orientation="vertical"
+    android:layout_width="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <TableRow android:layout_width="fill_parent"
+        android:id="@+id/tbOrderItem"
+        android:layout_height="wrap_content">
+
+        <TextView android:textColor="#FFFFFF"
+            android:id="@+id/tvIdOI"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="id" android:textStyle="bold"
+            android:gravity="left"
+            android:layout_weight="1"
+            android:typeface="monospace"
+            android:height="40sp" />
+
+        <ImageView
+            android:id="@+id/imgOIProduct"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+        </ImageView>
+
+
+        <TextView android:textColor="#FFFFFF"
+            android:id="@+id/tvOIProductName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="id" android:textStyle="bold"
+            android:gravity="left"
+            android:layout_weight="1"
+            android:typeface="monospace"
+            android:height="40sp" />
+        <TextView android:textColor="#FFFFFF"
+            android:id="@+id/tvOIPrice"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="id" android:textStyle="bold"
+            android:gravity="left"
+            android:layout_weight="1"
+            android:typeface="monospace"
+            android:height="40sp" />
+        <TextView android:textColor="#FFFFFF"
+            android:id="@+id/tvOIQuantity"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="id" android:textStyle="bold"
+            android:gravity="left"
+            android:layout_weight="1"
+            android:typeface="monospace"
+            android:height="40sp" />
+        <TextView android:textColor="#FFFFFF"
+            android:id="@+id/tvAddress"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="id" android:textStyle="bold"
+            android:gravity="left"
+            android:layout_weight="1"
+            android:typeface="monospace"
+            android:height="40sp" />
+    </TableRow>
+
+
+
+</TableLayout>

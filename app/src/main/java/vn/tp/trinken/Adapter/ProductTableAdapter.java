@@ -57,6 +57,9 @@ public class ProductTableAdapter extends RecyclerView.Adapter<ProductTableAdapte
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_product_table, parent, false);
+        getListCategory();
+        getListBrand();
+
         return new MyViewHolder(view);
     }
 
@@ -69,6 +72,9 @@ public class ProductTableAdapter extends RecyclerView.Adapter<ProductTableAdapte
             Glide.with(context).load(R.drawable.ic_delete).into(holder.btnDelete);
 
         }
+
+
+
         holder.tvSTT.setText(String.valueOf(position+1));
         holder.tvName.setText(product.getProduct_name());
         holder.tvDesc.setText(product.getDescription());
@@ -122,6 +128,21 @@ public class ProductTableAdapter extends RecyclerView.Adapter<ProductTableAdapte
         Button btnImgFileProduct, btnConfirmAddProduct;
         ImageView imgDialogProduct;
 
+        int pCateId = products.getCategories().get(0).getCategory_id();
+        int pBrandId = products.getBrand().getBrand_id();
+
+        List<String> cateName = new ArrayList<>();
+        List<String> brandName = new ArrayList<>();
+
+
+        //xử lí hiển thị cate và brand của product
+
+
+
+
+
+
+
 
         spinnerCate = dialogView.findViewById(R.id.spinner_categories);
         spinnerBrand = dialogView.findViewById(R.id.spinner_brand);
@@ -133,11 +154,26 @@ public class ProductTableAdapter extends RecyclerView.Adapter<ProductTableAdapte
         btnConfirmAddProduct = dialogView.findViewById(R.id.btnConfirmAddProduct);
         imgDialogProduct = dialogView.findViewById(R.id.imgDialogProduct);
 
-        getListCategory();
-        getListBrand();
 
-        spinnerCate.setAdapter(new ArrayAdapter<Categories>(view.getRootView().getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, categories));
-        spinnerBrand.setAdapter(new ArrayAdapter<Brands>(view.getRootView().getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, brands));
+        for(Categories category : categories){
+            cateName.add(category.getCategory_name());
+            if(category.getCategory_id()==pCateId){
+                pCateId = cateName.size()-1;
+            }
+        }
+
+        for (Brands brand: brands){
+            brandName.add(brand.getBrand_name());
+            if(brand.getBrand_id()==pBrandId){
+                pBrandId = brandName.size()-1;
+            }
+        }
+
+        spinnerCate.setAdapter(new ArrayAdapter<String>(view.getRootView().getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, cateName));
+        spinnerBrand.setAdapter(new ArrayAdapter<String>(view.getRootView().getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, brandName));
+
+        spinnerCate.setSelection(pCateId);
+        spinnerBrand.setSelection(pBrandId);
 
         DecimalFormat df = new DecimalFormat("0.00");
         tvProductName.setText(products.getProduct_name());
@@ -159,9 +195,6 @@ public class ProductTableAdapter extends RecyclerView.Adapter<ProductTableAdapte
 
             }
         });
-
-
-
 
         builder.setView(dialogView);
         builder.setCancelable(true);

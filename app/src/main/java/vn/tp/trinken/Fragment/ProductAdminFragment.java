@@ -131,6 +131,8 @@ public class ProductAdminFragment extends Fragment {
 
         AnhXa();
         getListProduct(true);
+        getListCategory();
+        getListBrand();
 
         tvStore.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
@@ -276,7 +278,6 @@ public class ProductAdminFragment extends Fragment {
             public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
                 if(response.isSuccessful()){
                     productsList = response.body();
-                    Log.d("product admin", productsList.toString());
                     productTableAdapter = new ProductTableAdapter(getActivity().getApplicationContext(), productsList);
                     rcProduct.setHasFixedSize(true);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext()
@@ -320,8 +321,7 @@ public class ProductAdminFragment extends Fragment {
         btnConfirmAddProduct = dialogView.findViewById(R.id.btnConfirmAddProduct);
         imgDialogProduct = dialogView.findViewById(R.id.imgDialogProduct);
 
-        getListCategory();
-        getListBrand();
+
 
         List<String> cateName = new ArrayList<>();
         List<String> brandName = new ArrayList<>();
