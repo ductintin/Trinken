@@ -149,7 +149,7 @@ public class CartFragment extends Fragment {
                     cartItems = (ArrayList<CartItem>) response.body();
                     setCartTotal();
                     Log.d("cartitem ne", cartItems.toString());
-                    cartAdapter = new CartAdapter(getActivity().getApplicationContext(), cartItems, cartId);
+                    cartAdapter = new CartAdapter(getActivity(), cartItems, cartId);
                     rcCartItem.setHasFixedSize(true);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext()
                             ,LinearLayoutManager.VERTICAL, false);

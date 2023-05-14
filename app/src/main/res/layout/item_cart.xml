@@ -6,6 +6,8 @@
     android:layout_height="wrap_content"
     >
 
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cartItemCard"
         android:layout_width="match_parent"
@@ -35,15 +37,17 @@
 
             <LinearLayout
                 android:layout_width="203dp"
-                android:layout_height="85dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tvCProductName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="16sp"
                     android:text="TextView"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -63,11 +67,12 @@
                     <TextView
                         android:id="@+id/tvCProductAmount"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:background="@null"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:textAlignment="center"
+                        android:layout_gravity="center"
                         android:text="0">
 
                     </TextView>
@@ -84,40 +89,88 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:weightSum="2">
-                <TextView
-                    android:id="@+id/tvCProductPriceDiscount"
+
+               >
+                <ImageView
+                    android:id="@+id/cartItemClear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_clear"
+                    android:layout_gravity="end"
+                    >
+
+                </ImageView>
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Gia"
-                    android:textAlignment="textEnd"
-                    android:textColor="#ff5e00"
-                    android:layout_weight="1"
-                    android:padding="5dp"></TextView>
+                    android:orientation="horizontal"
+                    android:gravity="end"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$"
+                        android:textAlignment="textEnd"
+                        android:textColor="#ff5e00"
+                        android:padding="5dp"></TextView>
+                    <TextView
+                        android:id="@+id/tvCProductPriceDiscount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gia"
+                        android:textAlignment="textEnd"
+                        android:textColor="#ff5e00"
 
-                <TextView
-                    android:id="@+id/tvCProductPrice"
+                        android:padding="5dp"></TextView>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Gia"
-                    android:textAlignment="textEnd"
-                    android:textColor="#ff5e00"
-                    android:layout_weight="1"
-                    android:padding="5dp"></TextView>
+                    android:orientation="horizontal"
+                    android:gravity="end">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$"
+                        android:textAlignment="textEnd"
+                        android:textColor="#ff5e00"
+                        android:padding="5dp"></TextView>
+                    <TextView
+                        android:id="@+id/tvCProductPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gia"
+                        android:textAlignment="textEnd"
+                        android:textColor="#ff5e00"
 
-                <TextView
-                    android:id="@+id/tvCProductTotal"
+                        android:padding="5dp"></TextView>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Thanh tien"
-                    android:gravity="end|bottom"
+                    android:orientation="horizontal"
+                    android:gravity="end">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$"
+                        android:textAlignment="textEnd"
+                        android:textColor="#ff5e00"
+                        android:padding="5dp"></TextView>
+                    <TextView
+                        android:id="@+id/tvCProductTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Thanh tien"
+                        android:gravity="end|bottom"
+                        android:textColor="#ff5e00"
+                        android:padding="5dp"></TextView>
+                </LinearLayout>
 
-                    android:textColor="#ff5e00"
-                    android:layout_weight="1"
-                    android:padding="5dp"
-                    ></TextView>
             </LinearLayout>
 
 

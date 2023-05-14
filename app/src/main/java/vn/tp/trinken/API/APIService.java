@@ -8,6 +8,7 @@ import java.util.Map;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -25,8 +26,11 @@ public interface APIService {
     @GET("category/get-all")
     Call<List<Categories>> getCategoryAll();
 
-    @GET("product/get-all-active")
-    Call<List<Products>> getAllActiveProduct();
+    @GET("category/get-all-active")
+    Call<List<Categories>> getAllActiveCategory();
+
+    @GET("product/get-all-active/active={active}")
+    Call<List<Products>> getAllActiveProduct(@Path("active") boolean active);
 
     @GET("product/get-product-by-id/{id}")
     Call<Products> getProductById(@Path("id") int id);
@@ -37,15 +41,35 @@ public interface APIService {
     @GET("product/get-product-by-category/active={active}/cateid={id}/sort={sort}")
     Call<List<Products>> filterProductByPrice(@Path("active") boolean active, @Path("id") int cate_id, @Path("sort") int sort);
 
+    @PUT("product/update/productId={id}")
+    Call<JsonElement> updateProduct(@Path("id") int id, @Body ProductDto productDto);
+
+    @PUT("product/update-active/productId={id}/active={active}")
+    Call<JsonElement> updateActiveProduct(@Path("id") int id, @Path("active") boolean active);
+
+    @Multipart
+    @POST("product/create")
+    Call<JsonElement> addNewProduct(@PartMap Map<String,RequestBody> product);
+
     @POST("cartitem/add")
     Call<JsonElement> addCartItem(@Body CartItemDto cartItemDto);
 
     @GET("cartitem/get-all/{cartId}")
     Call<List<CartItem>> getCartItem(@Path("cartId") int cartId);
 
+
+    @DELETE("cartitem/delete/{cartItemId}")
+    Call<JsonElement> deleteCartItem(@Path("cartItemId") int cartItemId);
+
+    @GET("brand/get-all-active/active={active}")
+    Call<List<Brands>> getAllActiveBrand(@Path("active") boolean active);
+
+
+
     @FormUrlEncoded
     @PUT("cartitem/update-quantity/{id}")
     Call<Void>updateCartItem(@Path("id") Integer id, @Field("count") Integer count );
+
 
     @FormUrlEncoded
     @POST("user/login")

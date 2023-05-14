@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -165,6 +167,17 @@ public class HomeFragment extends Fragment {
             }
 
         });
+
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.flFragment, new SearchFragment());
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
         return view;
     }
 
@@ -180,6 +193,7 @@ public class HomeFragment extends Fragment {
         rcHotProduct = view.findViewById(R.id.rcHotProduct);
         bottomNavigationView = view.findViewById(R.id.bottomNavigationView);
         circleIndicator = view.findViewById(R.id.circle_indicator);
+        searchView = view.findViewById(R.id.searchViewHome);
     }
 
     private List<Images> getListImages() {
@@ -229,15 +243,13 @@ public class HomeFragment extends Fragment {
 
     public void loadActiveProduct(){
         apiService = RetrofitClient.getRetrofit().create(APIService.class);
-        apiService.getAllActiveProduct().enqueue(new Callback<List<Products>>() {
+        apiService.getAllActiveProduct(true).enqueue(new Callback<List<Products>>() {
             @Override
             public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
                 if(response.isSuccessful()){
                    try {
                        products = response.body();
-
                        productAdapter = new ProductAdapter(getActivity().getApplicationContext(), products, R.layout.item_product_col);
-                       rcHotProduct.setHasFixedSize(true);
                        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 2);
                        rcHotProduct.setLayoutManager(gridLayoutManager);
                        productAdapter.notifyDataSetChanged();

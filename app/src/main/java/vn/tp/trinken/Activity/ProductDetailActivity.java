@@ -77,6 +77,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                 amount =Integer.parseInt(tvQuantity.getText().toString().trim());
 
 
+
                 Log.d("price chua", tvPrice.getText().toString());
                 Log.d("quantity", String.valueOf(amount));
                 Log.d("price", String.valueOf(price));
@@ -133,7 +134,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     private void addToCart() {
         CartItemDto cartItemDto = new CartItemDto();
-        double price;
+        double money;
         if(amount>0){
             cartItemDto.setCartId(cart.getId());
             cartItemDto.setProductId(product.getProduct_id());
@@ -143,11 +144,11 @@ public class ProductDetailActivity extends AppCompatActivity {
             Date date = new Date();
             if(product.getDiscount()!=null&&product.getDiscount().getStatus()!=0
                     && date.before(product.getDiscount().getEnd_date()) && date.after(product.getDiscount().getStart_date())){
-                price = (product.getPrice()*(100-product.getDiscount().getDiscount_value())/100)*amount;
+                money = (product.getPrice()*(100-product.getDiscount().getDiscount_value())/100)*amount;
             }else{
-                price = product.getPrice()*amount;
+                money = product.getPrice()*amount;
             }
-            cartItemDto.setPrice(price);
+            cartItemDto.setPrice(money);
 
         }else{
             Toast.makeText(this, "Please choose amount", Toast.LENGTH_SHORT).show();
@@ -204,7 +205,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                             tvTotal.setText(df.format(price));
 
                         }else{
-                            price = Double.parseDouble(tvPrice.getText().toString().trim());
+                            price = product.getPrice();
                             layoutProductDiscount.setVisibility(View.GONE);
                             tvPrice.setText(String.valueOf(product.getPrice()));
                             tvTotal.setText(String.valueOf(product.getPrice()));

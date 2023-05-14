@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.List;
 
 import vn.tp.trinken.Model.*;
@@ -59,19 +60,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                 .placeholder(R.drawable.coke)
                 .into(holder.product_image);
         holder.product_id = product.getProduct_id();
-        holder.product_price.setText(String.valueOf(product.getPrice()));
+
 
         DecimalFormat df = new DecimalFormat("#.##");
 
-        if(product.getDiscount()!=null){
+        if(checkValidDiscount(product.getDiscount())){
             holder.tvProductDiscount.setText(String.valueOf(product.getDiscount().getDiscount_value()));
             holder.product_price.setTextSize(10);
             holder.product_price.setPaintFlags(holder.product_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.product_price.setText(df.format(product.getPrice()));
             holder.tvProductPriceDiscount.setText(df.format(product.getPrice()*(100-product.getDiscount().getDiscount_value())/100));
         }else{
             holder.layoutProductDiscount.setVisibility(View.GONE);
             holder.tvProductPriceDiscount.setVisibility(View.GONE);
-
+            holder.product_price.setText(df.format(product.getPrice()));
         }
         holder.product_card.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,5 +132,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     public void setListenerList(List<Products> products){
         this.products = products;
         notifyDataSetChanged();
+    }
+
+    public boolean checkValidDiscount(Discounts discount){
+        Date date = new Date();
+        if(discount!=null&&discount.getStatus()!=0&&date.before(discount.getEnd_date())&&date.after(discount.getStart_date()))
+            return true;
+        return false;
+
     }
 }
