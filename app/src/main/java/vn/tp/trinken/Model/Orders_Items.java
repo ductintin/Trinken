@@ -28,7 +28,7 @@ public class Orders_Items implements Serializable {
     private int quantity;
     
     @SerializedName("price")
-    private int price;
+    private double price;
 
 
 }

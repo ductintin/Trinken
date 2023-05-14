@@ -1,10 +1,13 @@
 package vn.tp.trinken.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,7 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import vn.tp.trinken.API.APIService;
 import vn.tp.trinken.API.RetrofitClient;
-import vn.tp.trinken.Adapter.CartAdapter;
+import vn.tp.trinken.Adapter.OrderItemAdapter;
 import vn.tp.trinken.Adapter.PaymentMethodAdapter;
 import vn.tp.trinken.Contants.SharedPrefManager;
 import vn.tp.trinken.Dto.OrderDto;
@@ -38,6 +41,7 @@ import vn.tp.trinken.Model.Payment_Methods;
 import vn.tp.trinken.Model.Shipping_Addresses;
 import vn.tp.trinken.Model.User;
 import vn.tp.trinken.R;
+import vn.tp.trinken.Fragment.*;
 
 public class OrderActivity extends AppCompatActivity {
 
@@ -45,7 +49,7 @@ public class OrderActivity extends AppCompatActivity {
 
     CartItem cartItem;
 
-    CartAdapter cartAdapter;
+    OrderItemAdapter orderItemAdapter;
 
     RecyclerView rc, rcPayment;
     Button btnConfirm;
@@ -69,20 +73,29 @@ public class OrderActivity extends AppCompatActivity {
         cartItems = getIntent().getParcelableArrayListExtra("listCartItem");
         Log.d("cartItem", cartItems.toString());
         for(CartItem cartItem1:cartItems){
-            totalAmount=totalAmount+cartItem1.getQuantity()*cartItem1.getPrice();
+            totalAmount=totalAmount+cartItem1.getPrice();
         }
         AnhXa();
         getPayment();
         txtTotalAmount.setText((int) totalAmount + "$");
 //        txtPayment.setText(paymentMethodAdapter.getPayment_methods1().getPayment_method_name());
-        cartAdapter = new CartAdapter(this, cartItems);
+        /*cartAdapter = new CartAdapter(this, cartItems);
         rc.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this
                 ,LinearLayoutManager.VERTICAL, false);
 
         rc.setLayoutManager(layoutManager);
         cartAdapter.notifyDataSetChanged();
-        rc.setAdapter(cartAdapter);
+        rc.setAdapter(cartAdapter);*/
+
+        orderItemAdapter = new OrderItemAdapter(this, cartItems);
+        rc.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this
+                ,LinearLayoutManager.VERTICAL, false);
+
+        rc.setLayoutManager(layoutManager);
+        orderItemAdapter.notifyDataSetChanged();
+        rc.setAdapter(orderItemAdapter);
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +104,9 @@ public class OrderActivity extends AppCompatActivity {
                     User user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
                     OrderDto orderDto = new OrderDto();
                     addOrder(user.getCart().getId(),shipId,payId );
+
+                    Intent intent = new Intent(OrderActivity.this, IndexActivity.class);
+                    startActivity(intent);
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/POICard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        android:layout_margin="2dp"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/POIImage"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/google">
+
+            </ImageView>
+
+            <LinearLayout
+                android:layout_width="203dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvPOIProductName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="TextView"
+                    android:textAlignment="center"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/tvPOIProductAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:text="0">
+
+                    </TextView>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                >
+                <LinearLayout
+                    android:id="@+id/lnOIDiscount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="end"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$"
+                        android:textAlignment="textEnd"
+                        android:textColor="#ff5e00"
+                        android:padding="5dp"></TextView>
+                    <TextView
+                        android:id="@+id/tvPOIProductPriceDiscount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gia"
+                        android:textAlignment="textEnd"
+                        android:textColor="#ff5e00"
+
+                        android:padding="5dp"></TextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="end">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$"
+                        android:textAlignment="textEnd"
+                        android:textColor="#ff5e00"
+                        android:padding="5dp"></TextView>
+                    <TextView
+                        android:id="@+id/tvPOIProductPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gia"
+                        android:textAlignment="textEnd"
+                        android:textColor="#ff5e00"
+
+                        android:padding="5dp"></TextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="end">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$"
+                        android:textAlignment="textEnd"
+                        android:textColor="#ff5e00"
+                        android:padding="5dp"></TextView>
+                    <TextView
+                        android:id="@+id/tvPOIProductTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Thanh tien"
+                        android:gravity="end|bottom"
+                        android:textColor="#ff5e00"
+                        android:padding="5dp"></TextView>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

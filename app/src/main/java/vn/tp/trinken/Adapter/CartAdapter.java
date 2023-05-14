@@ -1,5 +1,6 @@
 package vn.tp.trinken.Adapter;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -94,6 +96,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
             holder.tvCProductPriceDiscount.setPaintFlags(holder.tvCProductPriceDiscount.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);;
         }else{
             holder.tvCProductPriceDiscount.setVisibility(View.GONE);
+            holder.ll.setVisibility(View.GONE);
             holder.tvCProductPrice.setText(String.valueOf(cartItem.getProduct().getPrice()));
         }
         holder.tvCProductAmount.setText(String.valueOf(quantity));
@@ -176,6 +179,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
         TextView tvCProductName, tvCProductPrice, tvCProductPriceDiscount, tvCProductTotal, tvCProductAmount;
         Button btnCProductDec, btnCProductInc;
         ImageView cartItemClear;
+        LinearLayout ll;
 
 
 
@@ -191,6 +195,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
             btnCProductDec = (Button) itemView.findViewById(R.id.btnCProductDec);
             btnCProductInc = (Button) itemView.findViewById(R.id.btnCProductInc);
             cartItemClear = (ImageView) itemView.findViewById(R.id.cartItemClear);
+            ll = (LinearLayout) itemView.findViewById(R.id.llCDiscount);
 
         }
 
@@ -212,7 +217,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
         apiService.updateCartItem(cartItem.getId(),count).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-
+                try {
+                    setListenerList();
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
 
             }
 
