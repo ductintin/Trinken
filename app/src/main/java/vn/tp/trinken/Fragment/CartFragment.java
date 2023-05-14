@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import vn.tp.trinken.Activity.IndexActivity;
+import vn.tp.trinken.Activity.OrderActivity;
 import vn.tp.trinken.R;
 import vn.tp.trinken.Contants.*;
 import vn.tp.trinken.Model.*;
@@ -53,7 +56,7 @@ public class CartFragment extends Fragment {
     TextView tvCartTotal;
     Button btnCartBuy;
 
-    List<CartItem> cartItems = new ArrayList<>();
+    ArrayList<CartItem> cartItems = new ArrayList<>();
 
     APIService apiService;
 
@@ -121,6 +124,18 @@ public class CartFragment extends Fragment {
             });
         }
 
+        btnCartBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(getContext().getApplicationContext(), OrderActivity.class);
+                intent1.putParcelableArrayListExtra("listCartItem", cartItems);
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelableArrayList("listCartItem", (ArrayList<? extends Parcelable>) cartItems);
+//                intent1.putExtras(bundle);
+                startActivity(intent1);
+            }
+        });
+
         return view;
     }
 
@@ -131,7 +146,7 @@ public class CartFragment extends Fragment {
             @Override
             public void onResponse(Call<List<CartItem>> call, Response<List<CartItem>> response) {
                 if(response.isSuccessful()){
-                    cartItems = response.body();
+                    cartItems = (ArrayList<CartItem>) response.body();
                     setCartTotal();
                     Log.d("cartitem ne", cartItems.toString());
                     cartAdapter = new CartAdapter(getActivity(), cartItems, cartId);

@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,6 +34,9 @@ public class Orders implements Serializable {
 
     @SerializedName("orderStatus")
     private Order_Status order_status;
+
+    @SerializedName("orderItems")
+    private List<Orders_Items> orders_items;
 
     private Date cancelAt;
 
