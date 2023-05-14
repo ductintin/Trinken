@@ -181,7 +181,7 @@ public class CartFragment extends Fragment {
         double total = 0;
         DecimalFormat df = new DecimalFormat("0.00");
         for (CartItem cartItem:cartItems) {
-            total += cartItem.getPrice()*cartItem.getQuantity();
+            total += cartItem.getPrice();
         }
         tvCartTotal.setText(df.format(total));
     }
