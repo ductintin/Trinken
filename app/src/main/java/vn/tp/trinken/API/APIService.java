@@ -64,6 +64,12 @@ public interface APIService {
     @GET("brand/get-all-active/active={active}")
     Call<List<Brands>> getAllActiveBrand(@Path("active") boolean active);
 
+    @GET("order/get-all")
+    Call<List<Orders>> getAllOrder();
+
+    @GET("order/get-all-by-status/status={status}")
+    Call<List<Orders>> getAllOrderByStatus(@Path("status") int status);
+
 
 
     @FormUrlEncoded
@@ -108,4 +114,7 @@ public interface APIService {
 //    @FormUrlEncoded
     @GET("order/get/{userId}/{statusId}")
     Call<List<Orders>> getOrder(@Path("userId") Integer id, @Path("statusId") Integer statusId);
+
+
+
 }

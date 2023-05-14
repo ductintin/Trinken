@@ -86,7 +86,7 @@
         </TableLayout>
 
         <com.anthonyfdev.dropdownview.DropDownView
-            android:id="@+id/drop_down_view"
+            android:id="@+id/drop_down_view_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:containerBackgroundColor="@color/purple_200"

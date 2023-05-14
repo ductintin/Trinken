@@ -97,7 +97,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
             holder.tvCProductPrice.setText(String.valueOf(cartItem.getProduct().getPrice()));
         }
         holder.tvCProductAmount.setText(String.valueOf(quantity));
-        holder.tvCProductTotal.setText(df.format(cartItem.getPrice()*Integer.parseInt(holder.tvCProductAmount.getText().toString())));
+        holder.tvCProductTotal.setText(df.format(cartItem.getPrice()));
         holder.btnCProductDec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -38,6 +38,9 @@ public class Orders implements Serializable {
     @SerializedName("orderItems")
     private List<Orders_Items> orders_items;
 
+    @SerializedName("shippingAddress")
+    private Shipping_Addresses shipping_address;
+
     private Date cancelAt;
 
     private Date createdAt;
