@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Parcelable;
 import android.provider.ContactsContract;
@@ -47,6 +50,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.text.ParseException;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,10 +59,14 @@ import vn.tp.trinken.API.APIService;
 import vn.tp.trinken.API.RetrofitClient;
 import vn.tp.trinken.Activity.IndexActivity;
 import vn.tp.trinken.Activity.SignupProfileActivity;
+import vn.tp.trinken.Adapter.CategoryAdapter;
+import vn.tp.trinken.Adapter.OrderAdapter;
 import vn.tp.trinken.Contants.RealPathUtil;
 import vn.tp.trinken.Contants.SharedPrefManager;
 import vn.tp.trinken.Dto.ProfileDto;
 import vn.tp.trinken.MainActivity;
+import vn.tp.trinken.Model.Categories;
+import vn.tp.trinken.Model.Orders;
 import vn.tp.trinken.Model.User;
 import vn.tp.trinken.R;
 
@@ -88,6 +96,13 @@ public class ProfileFragment extends Fragment {
     TextView txtUsername , txtEmail, txtFullname, txtPhone, txtAddress, txtGender;
 
     EditText edtPassword, edtNewPassword , edtReNewPassword ;
+
+    RecyclerView rcOrder;
+
+    TextView txt0, txt1,txt2, txt3,txt4;
+
+    OrderAdapter orderAdapter;
+    List<Orders> orders;
 
     View view;
     APIService apiService;
@@ -155,6 +170,16 @@ public class ProfileFragment extends Fragment {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+        try {
+            getOrders(0);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        txt2.setTextColor(Color.BLACK);
+        txt1.setTextColor(Color.BLACK);
+        txt0.setTextColor(Color.RED);
+        txt3.setTextColor(Color.BLACK);
+        txt4.setTextColor(Color.BLACK);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -187,6 +212,82 @@ public class ProfileFragment extends Fragment {
                 showEditPassword();
             }
         });
+
+        txt0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    getOrders(0);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+                txt2.setTextColor(Color.BLACK);
+                txt1.setTextColor(Color.BLACK);
+                txt0.setTextColor(Color.RED);
+                txt3.setTextColor(Color.BLACK);
+                txt4.setTextColor(Color.BLACK);
+            }
+        });
+        txt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    getOrders(1);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+                txt2.setTextColor(Color.BLACK);
+                txt1.setTextColor(Color.RED);
+                txt0.setTextColor(Color.BLACK);
+                txt3.setTextColor(Color.BLACK);
+                txt4.setTextColor(Color.BLACK);
+            }
+        });
+        txt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    getOrders(3);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+                txt2.setTextColor(Color.RED);
+                txt1.setTextColor(Color.BLACK);
+                txt0.setTextColor(Color.BLACK);
+                txt3.setTextColor(Color.BLACK);
+                txt4.setTextColor(Color.BLACK);
+            }
+        });
+        txt3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    getOrders(4);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+                txt2.setTextColor(Color.BLACK);
+                txt1.setTextColor(Color.BLACK);
+                txt0.setTextColor(Color.BLACK);
+                txt3.setTextColor(Color.RED);
+                txt4.setTextColor(Color.BLACK);
+            }
+        });
+        txt4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    getOrders(5);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+                txt2.setTextColor(Color.BLACK);
+                txt1.setTextColor(Color.BLACK);
+                txt0.setTextColor(Color.BLACK);
+                txt3.setTextColor(Color.BLACK);
+                txt4.setTextColor(Color.RED);
+            }
+        });
         return view;
     }
     private void Anhxa(){
@@ -200,6 +301,13 @@ public class ProfileFragment extends Fragment {
         txtGender = view.findViewById(R.id.txtGender);
         txtPhone = view.findViewById(R.id.txtPhoneNumber);
         txtAddress = view.findViewById(R.id.txtAddress);
+        //
+        txt0=view.findViewById(R.id.txt0);
+        txt1=view.findViewById(R.id.txt1);
+        txt2=view.findViewById(R.id.txt2);
+        txt3=view.findViewById(R.id.txt3);
+        txt4=view.findViewById(R.id.txt4);
+        rcOrder=view.findViewById(R.id.rcOrder);
     }
     private void loadProfile() throws ParseException {
         User user = SharedPrefManager.getInstance(getContext().getApplicationContext()).getUser();
@@ -547,6 +655,34 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onFailure(Call<JsonElement> call, Throwable t) {
 
+            }
+        });
+    }
+
+    private void getOrders(Integer statusId) throws ParseException {
+        User user1 =SharedPrefManager.getInstance(getContext()).getUser();
+        apiService = RetrofitClient.getRetrofit().create(APIService.class);
+        apiService.getOrder(user1.getUser_id(),statusId).enqueue(new Callback<List<Orders>>() {
+            @Override
+            public void onResponse(Call<List<Orders>> call, Response<List<Orders>> response) {
+                if(response.isSuccessful()){
+                    orders = response.body();
+//                    Log.d("API",orders.toString());
+                    orderAdapter = new OrderAdapter(getActivity().getApplicationContext(), orders);
+                    rcOrder.setHasFixedSize(true);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext()
+                            ,LinearLayoutManager.VERTICAL, false);
+                    rcOrder.setLayoutManager(layoutManager);
+
+                    orderAdapter.notifyDataSetChanged();
+                    rcOrder.setAdapter(orderAdapter);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Orders>> call, Throwable t) {
+                Log.d("logg", t.getMessage());
             }
         });
     }
