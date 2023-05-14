@@ -57,6 +57,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
         this.cardId = cardId;
     }
 
+    public CartAdapter(Context context, List<CartItem> cartItems) {
+        this.context = context;
+        this.cartItems = cartItems;
+    }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -199,6 +204,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder>{
         apiService.updateCartItem(cartItem.getId(),count).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+
 
             }
 

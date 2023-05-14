@@ -1,5 +1,10 @@
 package vn.tp.trinken.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -14,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Products implements Serializable {
+public class Products implements Serializable, Parcelable {
 
     @SerializedName("id")
     private int product_id;
@@ -59,4 +64,43 @@ public class Products implements Serializable {
     private Discounts discount;
 
 
+    protected Products(Parcel in) {
+        product_id = in.readInt();
+        product_name = in.readString();
+        price = in.readDouble();
+        description = in.readString();
+        image = in.readString();
+        quantity = in.readInt();
+        sold = in.readInt();
+        active = in.readByte() != 0;
+    }
+
+    public static final Creator<Products> CREATOR = new Creator<Products>() {
+        @Override
+        public Products createFromParcel(Parcel in) {
+            return new Products(in);
+        }
+
+        @Override
+        public Products[] newArray(int size) {
+            return new Products[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeInt(product_id);
+        parcel.writeString(product_name);
+        parcel.writeDouble(price);
+        parcel.writeString(description);
+        parcel.writeString(image);
+        parcel.writeInt(quantity);
+        parcel.writeInt(sold);
+        parcel.writeByte((byte) (active ? 1 : 0));
+    }
 }

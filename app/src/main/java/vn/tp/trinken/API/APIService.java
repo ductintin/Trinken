@@ -67,4 +67,17 @@ public interface APIService {
     @FormUrlEncoded
     @PUT("user/{id}/change-password")
     Call<JsonElement> changePassword(@Path("id") Integer id, @Field("password") String password, @Field("newPassword") String newPassword, @Field("rePassword") String rePassword);
+
+//    @POST("order/add/{cartid}")
+//    Call<JsonElement> addOrder(@Path("cartid") Integer id, @Body OrderDto orderDto);
+    @FormUrlEncoded
+    @POST("order/create/{cartid}")
+    Call<JsonElement> addOrder(@Path("cartid") Integer id, @Field("shippingId") Integer shipId, @Field("paymentId") Integer payId);
+
+    @FormUrlEncoded
+    @POST("shipping-address/create")
+    Call<JsonElement> addAddress(@Field("userId") Integer userId, @Field("name") String name, @Field("phone") String phone, @Field("address") String address);
+
+    @GET("payment-method/get-all")
+    Call<List<Payment_Methods>> getPayment();
 }
