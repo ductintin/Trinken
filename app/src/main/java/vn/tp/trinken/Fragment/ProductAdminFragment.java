@@ -131,8 +131,10 @@ public class ProductAdminFragment extends Fragment {
 
         AnhXa();
         getListProduct(true);
+
         getListCategory();
         getListBrand();
+
 
         tvStore.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
@@ -163,6 +165,7 @@ public class ProductAdminFragment extends Fragment {
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 showAddProductDialog();
             }
         });
@@ -311,6 +314,7 @@ public class ProductAdminFragment extends Fragment {
         ImageView imgDialogProduct;
 
 
+
         spinnerCate = dialogView.findViewById(R.id.spinner_categories);
         spinnerBrand = dialogView.findViewById(R.id.spinner_brand);
         tvProductName = dialogView.findViewById(R.id.edtProductName);
@@ -424,7 +428,6 @@ public class ProductAdminFragment extends Fragment {
             public void onResponse(Call<List<Categories>> call, Response<List<Categories>> response) {
                 if(response.isSuccessful()){
                     categories = response.body();
-                    Log.d("cate", categories.toString());
                 }
             }
 
@@ -442,7 +445,6 @@ public class ProductAdminFragment extends Fragment {
             public void onResponse(Call<List<Brands>> call, Response<List<Brands>> response) {
                 if(response.isSuccessful()){
                     brands = response.body();
-                    Log.d("brand", brands.toString());
                 }
             }
 

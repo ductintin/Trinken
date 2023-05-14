@@ -17,6 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import vn.tp.trinken.Activity.ProductCategoryActivity;
@@ -75,11 +78,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
         for(Orders_Items orders_items : orders.getOrders_items()){
             products=products+" "+orders_items.getProducts().getProduct_name()+",";
         }
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DecimalFormat df = new DecimalFormat("0.00");
         holder.cate_product.setText(products);
-        holder.cate_orderDate.setText("OrderDate: " +orders.getOrder_date().toString());
+        holder.cate_orderDate.setText("OrderDate: " +dateFormat.format(orders.getOrder_date()));
         holder.cate_status.setText("Status: "+orders.getOrder_status().getStatus_name());
         holder.cate_payment.setText(orders.getPayment_methods().getPayment_method_name());
-        holder.cate_totalAmount.setText("Tổng tiền: " +orders.getTotal_amount()+"$");
+        holder.cate_totalAmount.setText("Tổng tiền: " +df.format(orders.getTotal_amount())+"$");
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -24,7 +24,7 @@ public class Orders implements Serializable {
     private Date order_date;
 
     @SerializedName("totalAmount")
-    private int total_amount;
+    private double total_amount;
 
     @SerializedName("customer")
     private User customer;

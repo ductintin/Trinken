@@ -201,9 +201,8 @@ public class HomeFragment extends Fragment {
         List<Images> list = new ArrayList<>();
         list.add(new Images(R.drawable.ban1));
         list.add(new Images(R.drawable.ban2));
-        list.add(new Images(R.drawable.ban1));
-        list.add(new Images(R.drawable.ban2));
-        list.add(new Images(R.drawable.ban1));
+        list.add(new Images(R.drawable.viewpage1));
+        list.add(new Images(R.drawable.viewpage2));
 
         return list;
 

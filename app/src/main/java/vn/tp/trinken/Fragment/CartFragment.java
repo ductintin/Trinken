@@ -118,23 +118,19 @@ public class CartFragment extends Fragment {
 
             btnCartBuy.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-
-                }
-            });
-        }
-
-        btnCartBuy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent1 = new Intent(getContext().getApplicationContext(), OrderActivity.class);
-                intent1.putParcelableArrayListExtra("listCartItem", cartItems);
+                public void onClick(View view) {
+                    Intent intent1 = new Intent(getContext().getApplicationContext(), OrderActivity.class);
+                    intent1.putParcelableArrayListExtra("listCartItem", cartItems);
 //                Bundle bundle = new Bundle();
 //                bundle.putParcelableArrayList("listCartItem", (ArrayList<? extends Parcelable>) cartItems);
 //                intent1.putExtras(bundle);
-                startActivity(intent1);
-            }
-        });
+                    startActivity(intent1);
+                }
+            });
+
+        }
+
+
 
         return view;
     }
