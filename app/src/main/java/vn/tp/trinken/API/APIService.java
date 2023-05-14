@@ -104,4 +104,8 @@ public interface APIService {
 
     @GET("payment-method/get-all")
     Call<List<Payment_Methods>> getPayment();
+
+//    @FormUrlEncoded
+    @GET("order/get/{userId}/{statusId}")
+    Call<List<Orders>> getOrder(@Path("userId") Integer id, @Path("statusId") Integer statusId);
 }
