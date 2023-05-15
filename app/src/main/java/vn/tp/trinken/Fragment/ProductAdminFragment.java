@@ -87,6 +87,8 @@ public class ProductAdminFragment extends Fragment {
     List<Categories> categories = new ArrayList<>();
     List<Brands> brands = new ArrayList<>();
 
+    ImageView imgDialogProduct;
+
 
     Button btnAddProduct;
 
@@ -259,6 +261,7 @@ public class ProductAdminFragment extends Fragment {
                         mUri=uri;
                         try{
                             bitmap= MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),uri);
+                            imgDialogProduct.setImageBitmap(bitmap);
                             Log.d("Load anh:  ","cho nay ne");
                             fileExist = true;
 
@@ -311,7 +314,7 @@ public class ProductAdminFragment extends Fragment {
         Spinner spinnerCate, spinnerBrand;
         TextInputEditText tvProductName, tvProductDesc, tvProductPrice, tvProductQuantity;
         Button btnImgFileProduct, btnConfirmAddProduct;
-        ImageView imgDialogProduct;
+
 
 
 

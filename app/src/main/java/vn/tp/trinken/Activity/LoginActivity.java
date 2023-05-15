@@ -112,7 +112,6 @@ public class LoginActivity extends AppCompatActivity {
                         if(!obj.getBoolean("error")){
                             Gson gson = new Gson();
                             User user= gson.fromJson(json, User.class);
-                            Log.d("User", user.toString());
 
                             Bundle bundle = new Bundle();
                             if(user.getLast_login()== null){
