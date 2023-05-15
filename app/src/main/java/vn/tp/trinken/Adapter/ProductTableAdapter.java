@@ -236,7 +236,6 @@ public class ProductTableAdapter extends RecyclerView.Adapter<ProductTableAdapte
             public void onResponse(Call<List<Categories>> call, Response<List<Categories>> response) {
                 if(response.isSuccessful()){
                     categories = response.body();
-                    Log.d("cate", categories.toString());
                 }
             }
 
@@ -254,7 +253,6 @@ public class ProductTableAdapter extends RecyclerView.Adapter<ProductTableAdapte
             public void onResponse(Call<List<Brands>> call, Response<List<Brands>> response) {
                if(response.isSuccessful()){
                    brands = response.body();
-                   Log.d("brand", brands.toString());
                }
             }
 

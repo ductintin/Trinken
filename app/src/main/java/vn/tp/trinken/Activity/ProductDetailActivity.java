@@ -2,8 +2,11 @@ package vn.tp.trinken.Activity;
 
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import retrofit2.Call;
@@ -11,11 +14,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import vn.tp.trinken.*;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,9 +36,13 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
+import vn.tp.trinken.Adapter.CartAdapter;
+import vn.tp.trinken.Fragment.CartFragment;
 import vn.tp.trinken.Model.*;
 import vn.tp.trinken.Dto.*;
 import vn.tp.trinken.API.*;
@@ -42,7 +52,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     Toolbar toolbar;
     int productId, amount;
     double price;
-    ImageView productImage, arrowBack, addToCart;
+    ImageView productImage, arrowBack;
     TextView tvProductName, tvProductDescription, tvPrice, tvTotal, tvQuantity, tvPDPriceDiscount;
     Button btnDec, btnInc, btnBuy;
 
@@ -53,6 +63,8 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     User user;
     Cart cart;
+
+    ArrayList<CartItem> cartItems = new ArrayList<>();
 
 
     @Override
@@ -111,25 +123,69 @@ public class ProductDetailActivity extends AppCompatActivity {
                     }
                 });
 
-                addToCart.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        addToCart();
-                    }
-                });
-
                 btnBuy.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ProductDetailActivity.this);
+                        builder.setMessage("Mua ngay");
+                        builder.setCancelable(true);
+                        builder.setPositiveButton("Mua ngay", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                addToCart();
+                                dialog.dismiss();
+                                Intent intent1 = new Intent(ProductDetailActivity.this, OrderActivity.class);
+
+                                getCartItem(cart.getId());
+                                intent1.putParcelableArrayListExtra("listCartItem", cartItems);
+                                startActivity(intent1);
+
+                            }
+                        });
+
+                        builder.setNegativeButton("Thêm vào giỏ hàng", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                addToCart();
+                                dialog.dismiss();
+
+                            }
+                        });
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+
 
                     }
                 });
+
             }
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
 
 
+    }
+
+    private void getCartItem(int cartId) {
+        Log.d("cart id ne", String.valueOf(cartId));
+        apiService = RetrofitClient.getRetrofit().create(APIService.class);
+        apiService.getCartItem(cartId).enqueue(new Callback<List<CartItem>>() {
+            @Override
+            public void onResponse(Call<List<CartItem>> call, Response<List<CartItem>> response) {
+                if(response.isSuccessful()){
+                    cartItems = (ArrayList<CartItem>) response.body();
+
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CartItem>> call, Throwable t) {
+                Log.d("Loi o productDetail ", t.getMessage());
+            }
+        });
     }
 
     private void addToCart() {
@@ -243,7 +299,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         btnBuy = findViewById(R.id.btnPDBuy);
         tvTotal = findViewById(R.id.tvPDTotal);
         arrowBack = (ImageView)findViewById(R.id.PDArrowBack);
-        addToCart = (ImageView) findViewById(R.id.imageViewPDAddToCart);
         layoutProductDiscount = (LinearLayout) findViewById(R.id.layoutPDProductDiscount);
 
     }

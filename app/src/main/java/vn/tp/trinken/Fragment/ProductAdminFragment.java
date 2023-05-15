@@ -87,6 +87,8 @@ public class ProductAdminFragment extends Fragment {
     List<Categories> categories = new ArrayList<>();
     List<Brands> brands = new ArrayList<>();
 
+    ImageView imgDialogProduct;
+
 
     Button btnAddProduct;
 
@@ -131,8 +133,10 @@ public class ProductAdminFragment extends Fragment {
 
         AnhXa();
         getListProduct(true);
+
         getListCategory();
         getListBrand();
+
 
         tvStore.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
@@ -163,6 +167,7 @@ public class ProductAdminFragment extends Fragment {
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 showAddProductDialog();
             }
         });
@@ -256,6 +261,7 @@ public class ProductAdminFragment extends Fragment {
                         mUri=uri;
                         try{
                             bitmap= MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),uri);
+                            imgDialogProduct.setImageBitmap(bitmap);
                             Log.d("Load anh:  ","cho nay ne");
                             fileExist = true;
 
@@ -308,7 +314,8 @@ public class ProductAdminFragment extends Fragment {
         Spinner spinnerCate, spinnerBrand;
         TextInputEditText tvProductName, tvProductDesc, tvProductPrice, tvProductQuantity;
         Button btnImgFileProduct, btnConfirmAddProduct;
-        ImageView imgDialogProduct;
+
+
 
 
         spinnerCate = dialogView.findViewById(R.id.spinner_categories);
@@ -424,7 +431,6 @@ public class ProductAdminFragment extends Fragment {
             public void onResponse(Call<List<Categories>> call, Response<List<Categories>> response) {
                 if(response.isSuccessful()){
                     categories = response.body();
-                    Log.d("cate", categories.toString());
                 }
             }
 
@@ -442,7 +448,6 @@ public class ProductAdminFragment extends Fragment {
             public void onResponse(Call<List<Brands>> call, Response<List<Brands>> response) {
                 if(response.isSuccessful()){
                     brands = response.body();
-                    Log.d("brand", brands.toString());
                 }
             }
 

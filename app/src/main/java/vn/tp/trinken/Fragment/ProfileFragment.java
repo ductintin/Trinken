@@ -18,6 +18,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,6 +37,7 @@ import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -93,9 +95,10 @@ public class ProfileFragment extends Fragment {
     ImageView imgAvatar;
     EditText edtUsername , edtEmail, edtFirstName, edtLastName, edtPhone, edtAddress;
     ImageView imgProfile;
-    TextView txtUsername , txtEmail, txtFullname, txtPhone, txtAddress, txtGender;
+    TextView txtUsername , txtEmail, txtFullname, txtPhone, txtAddress, txtGender, tvAmountOrder;
 
     EditText edtPassword, edtNewPassword , edtReNewPassword ;
+    LinearLayout constraintLayout;
 
     RecyclerView rcOrder;
 
@@ -167,14 +170,17 @@ public class ProfileFragment extends Fragment {
         Anhxa();
         try {
             loadProfile();
+
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+
         try {
             getOrders(0);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+
         txt2.setTextColor(Color.BLACK);
         txt1.setTextColor(Color.BLACK);
         txt0.setTextColor(Color.RED);
@@ -263,6 +269,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 try {
                     getOrders(4);
+//                    Log.d("skghskg: ", orders.toString());
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
@@ -308,6 +315,9 @@ public class ProfileFragment extends Fragment {
         txt3=view.findViewById(R.id.txt3);
         txt4=view.findViewById(R.id.txt4);
         rcOrder=view.findViewById(R.id.rcOrder);
+
+        tvAmountOrder = view.findViewById(R.id.txtOrderCount);
+        constraintLayout = view.findViewById(R.id.constraintLayout);
     }
     private void loadProfile() throws ParseException {
         User user = SharedPrefManager.getInstance(getContext().getApplicationContext()).getUser();
@@ -581,31 +591,31 @@ public class ProfileFragment extends Fragment {
 
     //
     private void doSignupProfile(Integer id, ProfileDto profileDto){
-//        if(TextUtils.isEmpty(profileDto.getUserName()) || edtUsername.getText().toString().length()==0){
-//            edtUsername.setError("Please enter firstname");
-//            edtUsername.requestFocus();
-//            return;
-//        }
-//        if(TextUtils.isEmpty(profileDto.getFirstName())){
-//            edtFirstName.setError("Please enter firstname");
-//            edtFirstName.requestFocus();
-//            return;
-//        }
-//        if(TextUtils.isEmpty(profileDto.getLastName())){
-//            edtLastName.setError("Please enter lastname");
-//            edtLastName.requestFocus();
-//            return;
-//        }
-//        if(TextUtils.isEmpty((profileDto.getPhoneNumber()))){
-//            edtPhone.setError("Please enter phone");
-//            edtPhone.requestFocus();
-//            return;
-//        }
-//        if(TextUtils.isEmpty(profileDto.getAddress())){
-//            edtAddress.setError("Please enter address");
-//            edtAddress.requestFocus();
-//            return;
-//        }
+        /*if(TextUtils.isEmpty(profileDto.getUserName()) || edtUsername.getText().toString().length()==0){
+            edtUsername.setError("Please enter firstname");
+            edtUsername.requestFocus();
+            return;
+        }
+        if(TextUtils.isEmpty(profileDto.getFirstName())){
+            edtFirstName.setError("Please enter firstname");
+            edtFirstName.requestFocus();
+            return;
+        }
+        if(TextUtils.isEmpty(profileDto.getLastName())){
+            edtLastName.setError("Please enter lastname");
+            edtLastName.requestFocus();
+            return;
+        }
+        if(TextUtils.isEmpty((profileDto.getPhoneNumber()))){
+            edtPhone.setError("Please enter phone");
+            edtPhone.requestFocus();
+            return;
+        }
+        if(TextUtils.isEmpty(profileDto.getAddress())){
+            edtAddress.setError("Please enter address");
+            edtAddress.requestFocus();
+            return;
+        }*/
 
 
         if(mUri != null){
@@ -625,11 +635,11 @@ public class ProfileFragment extends Fragment {
                         if (!obj.getBoolean("error")) {
                             Gson gson = new Gson();
                             User user1 = gson.fromJson(json, User.class);
-//                          Log.d("User", user.toString());
                             Toast.makeText(getContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                             SharedPrefManager.getInstance(getContext().getApplicationContext()).remove();
                             SharedPrefManager.getInstance(getContext().getApplicationContext()).userLogin(user1);
                             user =SharedPrefManager.getInstance(getContext().getApplicationContext()).getUser();
+                            setListener();
                         } else {
                             int statusCode = response.code();
                             Toast.makeText(getContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
@@ -659,7 +669,7 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private void getOrders(Integer statusId) throws ParseException {
+    private void getOrders(int statusId) throws ParseException {
         User user1 =SharedPrefManager.getInstance(getContext()).getUser();
         apiService = RetrofitClient.getRetrofit().create(APIService.class);
         apiService.getOrder(user1.getUser_id(),statusId).enqueue(new Callback<List<Orders>>() {
@@ -667,7 +677,18 @@ public class ProfileFragment extends Fragment {
             public void onResponse(Call<List<Orders>> call, Response<List<Orders>> response) {
                 if(response.isSuccessful()){
                     orders = response.body();
+
 //                    Log.d("API",orders.toString());
+
+                    if(orders !=null){
+
+                        constraintLayout.setVisibility(View.VISIBLE);
+                        tvAmountOrder.setText(String.valueOf(orders.size()));
+                    }else{
+                        constraintLayout.setVisibility(View.GONE);
+                    }
+
+
                     orderAdapter = new OrderAdapter(getActivity().getApplicationContext(), orders);
                     rcOrder.setHasFixedSize(true);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext()
@@ -687,6 +708,8 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-
+    private void setListener() throws ParseException {
+        loadProfile();
+    }
 
 }
