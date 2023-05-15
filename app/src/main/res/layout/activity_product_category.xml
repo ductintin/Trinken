@@ -73,122 +73,95 @@
         app:layout_constraintTop_toBottomOf="@+id/appBarLayoutPC"
         android:padding="10dp"
         android:gravity="start"
-        android:weightSum="4">
+        android:weightSum="4"
+        android:orientation="vertical">
 
-        <!--<ImageView
-            android:id="@+id/PCFilterPrice"
-            android:layout_width="30dp"
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <TextView
+                   android:id="@+id/PCFilterId"
+                   android:textAlignment="center"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:text="Mới nhất"
+                   android:textSize="16sp"
+                   android:background="@drawable/border"
+                   android:padding="5dp"
+                   >
+               </TextView>
+
+               <TextView
+                   android:id="@+id/PCFilterSold"
+                   android:textAlignment="center"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:text="Bán chạy"
+                   android:textSize="16sp"
+
+                   android:padding="5dp"
+                   android:background="@drawable/border">
+
+               </TextView>
+
+               <TextView
+                   android:id="@+id/PCFilterName"
+                   android:textAlignment="center"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:text="Tên"
+                   android:textSize="16sp"
+                   android:padding="5dp"
+                   android:background="@drawable/border">
+
+               </TextView>
+               <TextView
+                   android:id="@+id/PCFilterPrice"
+                   android:textAlignment="center"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:text="Giá"
+                   android:textSize="16sp"
+                   android:padding="5dp"
+                   android:background="@drawable/border">
+
+               </TextView>
+           </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/filter"
-            android:layout_marginRight="30dp">
-
-        </ImageView>
-
-        <ImageView
-            android:id="@+id/PCFilterId"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/download"
-            android:layout_marginRight="30dp">
-
-        </ImageView>
-        <ImageView
-            android:id="@+id/PCFilterName"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/descending"
-            android:layout_marginRight="30dp">
-
-        </ImageView>
-
-        <ImageView
-            android:id="@+id/PCFilterSold"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/sort_down">
-
-        </ImageView>-->
-
-            <TextView
-                android:id="@+id/PCFilterId"
-                android:textAlignment="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Mới nhất"
-                android:textSize="16sp"
-                android:background="@drawable/border"
-                android:padding="5dp"
-                >
-            </TextView>
-
-        <TextView
-            android:id="@+id/PCFilterSold"
-            android:textAlignment="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Bán chạy"
-            android:textSize="16sp"
-
-            android:padding="5dp"
-            android:background="@drawable/border">
-
-        </TextView>
-
-        <TextView
-            android:id="@+id/PCFilterName"
-            android:textAlignment="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Tên"
-            android:textSize="16sp"
-            android:padding="5dp"
-            android:background="@drawable/border">
-
-        </TextView>
-        <TextView
-            android:id="@+id/PCFilterPrice"
-            android:textAlignment="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Giá"
-            android:textSize="16sp"
-            android:padding="5dp"
-            android:background="@drawable/border">
-
-        </TextView>
 
 
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutFilter">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcProductCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+
+
+            </LinearLayout>
+        </ScrollView>
 
 
     </LinearLayout>
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutFilter">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcProductCategory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
-
-
-        </LinearLayout>
-    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

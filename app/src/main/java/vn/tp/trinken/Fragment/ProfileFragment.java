@@ -170,6 +170,12 @@ public class ProfileFragment extends Fragment {
         Anhxa();
         try {
             loadProfile();
+
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
             getOrders(0);
         } catch (ParseException e) {
             throw new RuntimeException(e);
@@ -263,6 +269,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 try {
                     getOrders(4);
+//                    Log.d("skghskg: ", orders.toString());
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
@@ -662,7 +669,7 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private void getOrders(Integer statusId) throws ParseException {
+    private void getOrders(int statusId) throws ParseException {
         User user1 =SharedPrefManager.getInstance(getContext()).getUser();
         apiService = RetrofitClient.getRetrofit().create(APIService.class);
         apiService.getOrder(user1.getUser_id(),statusId).enqueue(new Callback<List<Orders>>() {
@@ -671,19 +678,21 @@ public class ProfileFragment extends Fragment {
                 if(response.isSuccessful()){
                     orders = response.body();
                     if(orders !=null){
-                        tvAmountOrder.setText(String.valueOf(orders.size()));
-                        orderAdapter = new OrderAdapter(getActivity().getApplicationContext(), orders);
-                        rcOrder.setHasFixedSize(true);
-                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext()
-                                ,LinearLayoutManager.VERTICAL, false);
-                        rcOrder.setLayoutManager(layoutManager);
 
-                        orderAdapter.notifyDataSetChanged();
-                        rcOrder.setAdapter(orderAdapter);
+                        constraintLayout.setVisibility(View.VISIBLE);
+                        tvAmountOrder.setText(String.valueOf(orders.size()));
                     }else{
                         constraintLayout.setVisibility(View.GONE);
                     }
 
+                    orderAdapter = new OrderAdapter(getActivity().getApplicationContext(), orders);
+                    rcOrder.setHasFixedSize(true);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext()
+                            ,LinearLayoutManager.VERTICAL, false);
+                    rcOrder.setLayoutManager(layoutManager);
+
+                    orderAdapter.notifyDataSetChanged();
+                    rcOrder.setAdapter(orderAdapter);
 
                 }
             }

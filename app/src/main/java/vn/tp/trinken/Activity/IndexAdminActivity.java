@@ -18,9 +18,20 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
+import java.text.ParseException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import vn.tp.trinken.API.APIService;
+import vn.tp.trinken.API.RetrofitClient;
+import vn.tp.trinken.Contants.SharedPrefManager;
 import vn.tp.trinken.Fragment.HomeAdminFragment;
 import vn.tp.trinken.Fragment.ProductAdminFragment;
 import vn.tp.trinken.R;
+import vn.tp.trinken.Model.User;
+import vn.tp.trinken.API.*;
 
 
 public class IndexAdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -31,6 +42,8 @@ public class IndexAdminActivity extends AppCompatActivity implements NavigationV
 
     Toolbar toolbar;
 
+    APIService apiService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +53,6 @@ public class IndexAdminActivity extends AppCompatActivity implements NavigationV
         AnhXa();
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v, "Replace", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            }
-        });
 
         HomeAdminFragment homeAdminFragment = new HomeAdminFragment();
         getSupportFragmentManager()
@@ -106,11 +112,43 @@ public class IndexAdminActivity extends AppCompatActivity implements NavigationV
                         .setReorderingAllowed(true)
                         .commit();
                 break;
+            case R.id.nav_logout:
+
+                try {
+                    User user = SharedPrefManager.getInstance(getApplication().getApplicationContext()).getUser();
+                    //Log.d("a",user.toString());
+                    doLogout(user.getUser_id());
+                    SharedPrefManager.getInstance(getApplication().getApplicationContext()).logout();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+
             default:
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void doLogout(Integer id) throws IOException {
+        apiService = RetrofitClient.getRetrofit().create(APIService.class);
+        apiService.logout(id).enqueue(new Callback<Void>() {
+
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+//        apiService.logout(id).execute();
     }
 
     @Override

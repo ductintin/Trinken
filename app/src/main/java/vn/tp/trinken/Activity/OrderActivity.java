@@ -209,9 +209,9 @@ public class OrderActivity extends AppCompatActivity {
                         shipping_addresses1=gson.fromJson(json, Shipping_Addresses.class);
                         shipId = shipping_addresses1.getAddress_id();
                         Log.d("Shippping: ",shipping_addresses1.toString());
-                        txtName.setText(shipping_addresses1.getName());
+                        txtName.setText("Tên người nhận: "+shipping_addresses1.getName());
                         Log.d("Nameee: ",txtName.getText().toString());
-                        txtPhone.setText(shipping_addresses1.getPhone_number());
+                        txtPhone.setText("Số điện thoại: "+shipping_addresses1.getPhone_number());
                         txtAddress.setText("Địa chỉ: "+shipping_addresses1.getAddress());
                         Toast.makeText(OrderActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
                     } catch (JSONException e) {

@@ -62,35 +62,68 @@ public class ProductCategoryActivity extends AppCompatActivity {
                 }
             });
 
+
             PCFilterPrice.setOnClickListener(new View.OnClickListener() {
+                int count = 0;
                 @Override
                 public void onClick(View v) {
-                    filterProduct(categoryId, 0);
+                    if(count == 0){
+                        filterProduct(categoryId, 0);
+                        count ++;
+                    }else{
+                        filterProduct(categoryId, 1);
+                        count = 0;
+                    }
+
                 }
             });
 
             PCFilterId.setOnClickListener(new View.OnClickListener() {
-
+                int count = 0;
                 @Override
                 public void onClick(View v) {
-                    filterProduct(categoryId, 2);
+
+                    if(count == 0){
+                        filterProduct(categoryId, 2);
+                        count ++;
+                    }
+                    else{
+                        filterProduct(categoryId, 3);
+                        count = 0;
+                    }
+
                 }
             });
 
             PCFilterName.setOnClickListener(new View.OnClickListener() {
+                int count = 0;
                 @Override
                 public void onClick(View v) {
-                    filterProduct(categoryId, 4);
+                    if(count == 0){
+                        filterProduct(categoryId, 4);
+                        count ++;
+                    }
+                    else{
+                        filterProduct(categoryId, 5);
+                        count = 0;
+                    }
                 }
             });
 
 
 
             PCFilterSold.setOnClickListener(new View.OnClickListener() {
-
+                int count = 0;
                 @Override
                 public void onClick(View v) {
-                    filterProduct(categoryId, 6);
+                    if(count == 0){
+                        filterProduct(categoryId, 6);
+                        count ++;
+                    }
+                    else{
+                        filterProduct(categoryId, 7);
+                        count = 0;
+                    }
                 }
             });
         }
