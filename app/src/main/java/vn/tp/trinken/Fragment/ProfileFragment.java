@@ -667,7 +667,7 @@ public class ProfileFragment extends Fragment {
             public void onResponse(Call<List<Orders>> call, Response<List<Orders>> response) {
                 if(response.isSuccessful()){
                     orders = response.body();
-                    Log.d("API",orders.toString());
+//                    Log.d("API",orders.toString());
                     orderAdapter = new OrderAdapter(getActivity().getApplicationContext(), orders);
                     rcOrder.setHasFixedSize(true);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext()
