@@ -29,6 +29,7 @@ import vn.tp.trinken.API.RetrofitClient;
 import vn.tp.trinken.Contants.SharedPrefManager;
 import vn.tp.trinken.Fragment.HomeAdminFragment;
 import vn.tp.trinken.Fragment.ProductAdminFragment;
+import vn.tp.trinken.Fragment.OrderAdminFragment;
 import vn.tp.trinken.R;
 import vn.tp.trinken.Model.User;
 import vn.tp.trinken.API.*;
@@ -99,6 +100,15 @@ public class IndexAdminActivity extends AppCompatActivity implements NavigationV
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.flFragmentAdmin, homeAdminFragment)
+                        .setReorderingAllowed(true)
+                        .commit();
+                break;
+
+            case R.id.nav_order:
+                OrderAdminFragment orderAdminFragment = new OrderAdminFragment();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.flFragmentAdmin, orderAdminFragment)
                         .setReorderingAllowed(true)
                         .commit();
                 break;
