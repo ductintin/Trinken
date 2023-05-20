@@ -70,6 +70,13 @@ public interface APIService {
     @GET("order/get-all-by-status/status={status}")
     Call<List<Orders>> getAllOrderByStatus(@Path("status") int status);
 
+    @GET("order-item/get-all-by-orderId/orderId={orderId}")
+    Call<List<Orders_Items>> getAllOrderItemByOrderId(@Path("orderId") int orderId);
+
+
+    @PUT("order/verify-order/userId={userId}/orderId={orderId}/orderStatus={orderStatus}")
+    Call<JsonElement> verifyOrder(@Path("userId") int userId,@Path("orderId") int orderId,@Path("orderStatus") int orderStatus);
+
 
 
     @FormUrlEncoded

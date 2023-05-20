@@ -96,8 +96,8 @@ public class SignUpActivity extends AppCompatActivity {
             edtRepassword.requestFocus();
             return;
         }
-        apiService = RetrofitClient.getRetrofit().create(APIService.class);
-        apiService.signup(signUp).enqueue(new Callback<JsonElement>() {
+
+       apiService.signup(signUp).enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
                 if(response.isSuccessful()){
