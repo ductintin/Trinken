@@ -104,8 +104,7 @@ public class OrderActivity extends AppCompatActivity {
                     User user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
                     OrderDto orderDto = new OrderDto();
                     addOrder(user.getCart().getId(),shipId,payId );
-
-                    Intent intent = new Intent(OrderActivity.this, IndexActivity.class);
+                    Intent intent = new Intent(OrderActivity.this,IndexActivity.class);
                     startActivity(intent);
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
